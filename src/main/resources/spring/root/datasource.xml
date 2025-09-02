@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DataSource (커넥션 풀) 설정 -->
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp2.BasicDataSource"
+		  destroy-method="close" >
+		  
+		  <!-- 데이터베이스 연결 설정 -->
+		  <!-- 로깅을 위한 설정 변경  -->
+		  <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+		  <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" />
+		  <property name="username" value="SCOTT" />
+		  <property name="password" value="TIGER" />
+		  
+		  <!-- 
+		  	커넥션 풀을 관리할 목적으로 설정
+		  		initialSize: 커넥션 풀의 크기
+		  		maxTotal: 커넥션의 최대 갯수 (DB 사용자의 제한)
+		  		maxIdle: 작업이 없는 커넥션의 갯수의 제한
+		  -->
+		  <property name="initialSize" value="2" />
+		  <property name="maxTotal" value="4" />
+		  <property name="maxIdle" value="2" />
+		  
+	</bean>
+</beans>

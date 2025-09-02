@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<!-- 필드의 값이 NULL일 경우, DB 컬럼의 데이터 타입에 알맞는 디폴트 값으로 바꿔준다. -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<!-- Mybatis가 해당 객체와 매핑하여 SQL을 생성하고 DAO 객체를 반환한다.
+		 라고 생각하기 쉽지만, 지금은 그 객체에 별칭을 주는 선언일 뿐. -->
+	
+</configuration>
