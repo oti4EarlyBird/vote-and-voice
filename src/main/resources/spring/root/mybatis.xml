@@ -15,7 +15,7 @@
 			mapperLocations: 매퍼의 위치
 		 -->
 		<property name="configLocation" value="classpath:mybatis/mapper-config.xml" />
-		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/mapper/**/*.xml" />
 		
 	</bean>
 	

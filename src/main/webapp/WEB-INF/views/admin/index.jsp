@@ -27,7 +27,7 @@
 
 <meta name="description" content="" />
 <!-- 공통적으로 쓰이는 css, font 저장 -->
-<%@ include file="commons/cssConf.jsp"%>
+<%@ include file="../commons/cssConf.jsp"%>
 
 <!-- Page CSS -->
 
@@ -37,8 +37,8 @@
 </head>
 
 <body>
-	<%@ include file="commons/aside.jsp"%>
-	<%@ include file="commons/navbar.jsp"%>
+	<%@ include file="../commons/aside.jsp"%>
+	<%@ include file="../commons/navbar.jsp"%>
 
 	<!-- Content wrapper -->
 	<div class="content-wrapper">
@@ -574,7 +574,7 @@
 			</div>
 		</div>
 		<!-- / Content -->
-		<%@ include file="commons/footer.jsp"%>
+		<%@ include file="../commons/footer.jsp"%>
 
 		<div class="content-backdrop fade"></div>
 	</div>
@@ -594,7 +594,7 @@
 			법안이란?</a>
 	</div>
 
-	<%@include file="commons/jsConf.jsp"%>
+	<%@include file="../commons/jsConf.jsp"%>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
