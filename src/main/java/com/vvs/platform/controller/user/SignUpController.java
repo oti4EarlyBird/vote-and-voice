@@ -10,7 +10,7 @@ import java.util.HashMap;
 @RequestMapping("/user")
 public class SignUpController {
 
-    // LoginController에서 공유한다고 가정
+    // LoginController에서 공유
     private static final HashMap<String, String> users = LoginController.users;
 
     // 회원가입 폼(GET)
@@ -34,19 +34,19 @@ public class SignUpController {
         // 검증
         if (userid == null || userid.isEmpty() || password == null || password.isEmpty()) {
             mav.addObject("error", "아이디와 비밀번호를 모두 입력해주세요.");
-            mav.setViewName("signup");
+            mav.setViewName("user/signup");
             return mav;
         }
 
         if (!password.equals(confirm)) {
             mav.addObject("error", "비밀번호와 확인이 일치하지 않습니다.");
-            mav.setViewName("signup");
+            mav.setViewName("user/signup");
             return mav;
         }
 
         if (users.containsKey(userid)) {
             mav.addObject("error", "이미 존재하는 아이디입니다.");
-            mav.setViewName("signup");
+            mav.setViewName("user/signup");
             return mav;
         }
 
