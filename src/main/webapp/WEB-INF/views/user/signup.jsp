@@ -49,6 +49,8 @@
   </head>
 
   <body>
+  <!-- Header -->
+  
     <!-- Content -->
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
@@ -138,7 +140,9 @@
       </div>
     </div>
     <!-- / Content -->
-
+	
+	<!-- Footer -->
+	
     <!-- Core JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/popper/popper.js"></script>
