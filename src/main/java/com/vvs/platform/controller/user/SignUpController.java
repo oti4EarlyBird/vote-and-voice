@@ -16,7 +16,7 @@ public class SignUpController {
     // 회원가입 폼(GET)
     @GetMapping("/signup")
     public ModelAndView showSignUpForm() {
-        return new ModelAndView("signup"); // signup.jsp 로 이동
+        return new ModelAndView("user/signup"); // signup.jsp 로 이동
     }
 
     // 회원가입 처리(POST)
