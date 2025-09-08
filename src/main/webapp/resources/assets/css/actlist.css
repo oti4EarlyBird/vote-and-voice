@@ -1,0 +1,29 @@
+@charset "UTF-8";
+ 
+.btn.rounded-pill btn-primary {
+	margin: 10px !important;
+}
+.btn-container {
+	margin-bottom: 10px;
+}
+.table {
+	border: none;
+}
+
+.table th, .table td {
+	border: none !important;
+	vertical-align: middle !important;
+}
+
+.table thead th {
+	background-color: #f8f9fa;
+	font-weight: 600;
+}
+
+.table tbody tr {
+	border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:last-child {
+	border-bottom: none;
+}
