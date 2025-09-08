@@ -14,7 +14,7 @@
 	</properties>
 
 	<!-- 프로젝트에서 의존하는 외부 라이브러리들을 설정 -->
-	<dependencies>
+	<dependencies> 
 		<!-- 서블릿 4.0 라이브러리 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
