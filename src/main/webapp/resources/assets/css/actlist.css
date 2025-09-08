@@ -1,6 +1,6 @@
 @charset "UTF-8";
  
-.btn rounded-pill btn-primary {
+.btn.rounded-pill btn-primary {
 	margin: 10px !important;
 }
 .btn-container {
