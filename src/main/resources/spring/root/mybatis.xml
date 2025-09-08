@@ -21,6 +21,6 @@
 	
 	<!-- @Mapper(선언시 관리 객체로 등록됨)를 사용하기 위한 설정 -->
 	<mybatis-spring:scan 
-		base-package="edu.example.springedu.dao" 
+		base-package="com.vvs.platform.dao" 
 		annotation="org.apache.ibatis.annotations.Mapper" />
 </beans>
