@@ -129,5 +129,6 @@
   <!-- Footer -->
 	<%@include file="./common/footer.jsp" %>
 	<%@include file="../commons/jsConf.jsp"%>
+
 </body>
 </html>
