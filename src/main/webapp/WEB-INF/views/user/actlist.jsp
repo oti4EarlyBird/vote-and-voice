@@ -33,7 +33,7 @@
 <body>
 
     <!-- Header -->
-
+	<%@include file="./common/nav.jsp" %>
 
     <!-- Main Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -300,7 +300,7 @@
     </div>
 
     <!-- Footer -->
-
+	<%@include file="./commons/footer.jsp" %>
 
     <!-- Core JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
