@@ -14,20 +14,7 @@
     <title>의안 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Sneat CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/core.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/theme-default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/actlist.css" />
-
-    <!-- Helpers -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+<%@ include file="../commons/cssConf.jsp"%>
 </head>
 
 <body>
@@ -300,15 +287,8 @@
     </div>
 
     <!-- Footer -->
-	<%@include file="./commons/footer.jsp" %>
-
-    <!-- Core JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/popper/popper.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
-
+	<%@include file="./common/footer.jsp" %>
+	<%@include file="../commons/jsConf.jsp"%>
+    
 </body>
 </html>
