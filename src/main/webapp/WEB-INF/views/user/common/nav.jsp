@@ -1,28 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
-	data-assets-path="resources/assets/"
-	data-template="vertical-menu-template-free">
-<head>
-<meta charset="UTF-8" />
-<!-- 반응형 웹페이지 -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-<title>Vote&Voice</title>
-<!-- Sneat 템플릿 CSS -->
-<%@ include file="../commons/cssConf.jsp"%>
-
-</head>
-<body>
-	<c:set var="loginUser" value="${sessionScope.loginUser }" />
-	<div class="layout-wrapper layout-content-navbar">
-		<div class="layout-container">
-			<div class="layout-page">
-				<!-- 상단 NavBar -->
+    pageEncoding="UTF-8"%>
+<!-- 상단 NavBar -->
 				<nav class="navbar navbar-expand-xl navbar-light bg-white shadow-sm">
 					<div class="container-fluid d-flex align-items-center">
 
@@ -75,20 +53,3 @@
 						
 					</div>
 				</nav>
-			</div>
-		</div>
-	</div>
-	<!-- 푸터 -->
-	<footer class="bg-dark text-light py-4">
-		<div class="container text-center">
-			<p class="mb-1">© 2025 내 블로그 | Powered by Sneat</p>
-			<div>
-				<a href="#" class="text-light me-3">GitHub</a> <a href="#"
-					class="text-light me-3">Instagram</a> <a href="#"
-					class="text-light">Email</a>
-			</div>
-		</div>
-	</footer>
-	<%@include file="../commons/jsConf.jsp"%>
-</body>
-</html>
