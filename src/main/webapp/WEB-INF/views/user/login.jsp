@@ -43,9 +43,12 @@
   <!-- Helpers -->
   <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
   <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+
 </head>
 
 <body>
+<!-- Header -->
+<%@include file="./common/nav.jsp" %>
   <!-- Content -->
   <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
@@ -123,14 +126,9 @@
   </div>
   <!-- / Content -->
 
-  <!-- Core JS -->
-  <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/popper/popper.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/bootstrap.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <!-- Footer -->
+	<%@include file="./common/footer.jsp" %>
+	<%@include file="../commons/jsConf.jsp"%>
 
-  <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
-  <!-- Main JS -->
-  <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>
