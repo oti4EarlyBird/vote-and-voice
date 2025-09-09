@@ -11,4 +11,6 @@ public class UserController {
 		//ModelAndView
 		return "user/index";
 	}
+	
+	
 }
