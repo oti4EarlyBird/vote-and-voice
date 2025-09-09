@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.vote-buttons {
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    gap: 10px; /* 버튼 사이 간격 */
+    margin-bottom: 20px;
+}
+
+.comment-section textarea {
+    display: block;
+    margin: 0 auto 10px auto; /* 위/아래 여백 + 가로 가운데 정렬 */
+}
+
+.comment-section #commentSubmit {
+	display: block;
+	align-items: flex-end;
+}
+
+.comment-item {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
+}
+.comment-input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+/* 찬성 댓글 스타일 */
+.comment-support {
+    border-color: #28a745; /* 초록 */
+}
+
+/* 반대 댓글 스타일 */
+.comment-oppose {
+    border-color: #dc3545; /* 빨강 */
+}
+

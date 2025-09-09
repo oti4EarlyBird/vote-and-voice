@@ -40,12 +40,14 @@ public class ActDetailController {
         comment1.put("userName", "박영희");
         comment1.put("content", "정책 내용이 구체적이네요. 찬성합니다!");
         comment1.put("createdAt", "2025-08-13 14:30");
+        comment1.put("side", "찬성");
         comments.add(comment1);
 
         Map<String, String> comment2 = new HashMap<>();
         comment2.put("userName", "이민수");
         comment2.put("content", "효과가 있을지 조금 의문입니다.");
         comment2.put("createdAt", "2025-08-13 15:05");
+        comment2.put("side", "반대");
         comments.add(comment2);
         
         mav.addObject("bill", bill);
