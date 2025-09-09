@@ -1,4 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 법안 관련 DB에 대한 마이바티스 매퍼입니다. -->
-<mapper namespace="mybatis.mapper.mapper"></mapper>
+<mapper namespace="com.vvs.platform.dao.admin.AdminBillsDAO">
+	<!-- 배치 적재: Oracle INSERT ALL -->
+  <insert id="insertBatch">
+    INSERT ALL
+    <foreach collection="list" item="it">
+      INTO bills (
+        SEQ_BILLS, BILL_TITLE, BILL_NUMBER, RELATED_URL,
+        COMMITTEE, DECISION_RESULT, DECISION_DATE, PDF_LINK
+      ) VALUES (
+        SEQ_BILLS.NEXTVAL,
+        #{it.billTitle},
+        #{it.billNumber},
+        #{it.relatedUrl},
+        #{it.committee},
+        #{it.decisionResult},
+        #{it.decisionDate, jdbcType=DATE},
+        #{it.pdfLink}
+      )
+    </foreach>
+    SELECT 1 FROM DUAL
+  </insert>
+
+  <!-- (옵션) 단건 upsert: BILL_NUMBER 기준 중복 회피 -->
+  <insert id="mergeOne">
+    MERGE INTO bills b
+    USING (SELECT #{billNumber} AS BILL_NUMBER FROM dual) s
+       ON (b.BILL_NUMBER = s.BILL_NUMBER)
+    WHEN NOT MATCHED THEN
+      INSERT (
+        SEQ_BILLS, BILL_TITLE, BILL_NUMBER, RELATED_URL,
+        COMMITTEE, DECISION_RESULT, DECISION_DATE, PDF_LINK
+      )
+      VALUES (
+        SEQ_BILLS.NEXTVAL,
+        #{billTitle},
+        #{billNumber},
+        #{relatedUrl},
+        #{committee},
+        #{decisionResult},
+        #{decisionDate, jdbcType=DATE},
+        #{pdfLink}
+      )
+  </insert>
+</mapper>
