@@ -1,18 +1,23 @@
 package com.vvs.platform.controller.user;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Component
 @RequestMapping("/user")
-public class UserMypageController {
+public class UserNoticeController {
 
-	@RequestMapping("/mypage")
-	public ModelAndView userAccount(){
+	@RequestMapping("/notice")
+	public ModelAndView notice() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("user/userAccount");
+		
+		mav.setViewName("user/userNotice");
+		
 		return mav;
+		
 	}
+	
+	
 }

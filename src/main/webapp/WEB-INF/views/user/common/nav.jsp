@@ -43,6 +43,14 @@
 									</ul></li>
 								<li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
 							</ul>
+							
+							<form class="d-flex">
+		                        <div class="input-group">
+		                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+		                          <input type="text" class="form-control" placeholder="Search..." />
+		                        </div>
+		                      </form>
+
 
 							<!-- 큰 화면용 버튼 (xl 이상일 때만 보임) -->
 							<div class="d-none d-xl-flex">
@@ -53,3 +61,5 @@
 						
 					</div>
 				</nav>
+				
+				
