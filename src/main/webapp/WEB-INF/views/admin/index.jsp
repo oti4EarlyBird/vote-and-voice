@@ -15,7 +15,7 @@
  -->
 <!-- beautify ignore:start -->
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
-	data-theme="theme-default" data-assets-path="resources/assets/"
+	data-theme="theme-default" data-assets-path="${pageContext.request.contextPath}/resources/assets/"
 	data-template="vertical-menu-template-free">
 <head>
 <meta charset="utf-8" />
@@ -27,13 +27,13 @@
 
 <meta name="description" content="" />
 <!-- 공통적으로 쓰이는 css, font 저장 -->
-<%@ include file="../commons/cssConf.jsp"%>
+<%@ include file="/WEB-INF/views/commons/cssConf.jsp"%>
 
 <!-- Page CSS -->
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script src="resources/assets/js/config.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -63,7 +63,7 @@
 							<div class="col-sm-5 text-center text-sm-left">
 								<div class="card-body pb-0 px-0 px-md-4">
 									<img
-										src="resources/assets/img/illustrations/man-with-laptop-light.png"
+										src="${pageContext.request.contextPath}/resources/assets/img/illustrations/man-with-laptop-light.png"
 										height="140" alt="View Badge User"
 										data-app-dark-img="illustrations/man-with-laptop-dark.png"
 										data-app-light-img="illustrations/man-with-laptop-light.png" />
@@ -81,7 +81,7 @@
 										class="card-title d-flex align-items-start justify-content-between">
 										<div class="avatar flex-shrink-0">
 											<img
-												src="resources/assets/img/icons/unicons/chart-success.png"
+												src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/chart-success.png"
 												alt="chart success" class="rounded" />
 										</div>
 										<div class="dropdown">
@@ -110,7 +110,7 @@
 									<div
 										class="card-title d-flex align-items-start justify-content-between">
 										<div class="avatar flex-shrink-0">
-											<img src="resources/assets/img/icons/unicons/wallet-info.png"
+											<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/wallet-info.png"
 												alt="Credit Card" class="rounded" />
 										</div>
 										<div class="dropdown">
@@ -201,7 +201,7 @@
 									<div
 										class="card-title d-flex align-items-start justify-content-between">
 										<div class="avatar flex-shrink-0">
-											<img src="resources/assets/img/icons/unicons/paypal.png"
+											<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/paypal.png"
 												alt="Credit Card" class="rounded" />
 										</div>
 										<div class="dropdown">
@@ -230,7 +230,7 @@
 									<div
 										class="card-title d-flex align-items-start justify-content-between">
 										<div class="avatar flex-shrink-0">
-											<img src="resources/assets/img/icons/unicons/cc-primary.png"
+											<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/cc-primary.png"
 												alt="Credit Card" class="rounded" />
 										</div>
 										<div class="dropdown">
@@ -411,7 +411,7 @@
 									id="navs-tabs-line-card-income" role="tabpanel">
 									<div class="d-flex p-4 pt-3">
 										<div class="avatar flex-shrink-0 me-3">
-											<img src="resources/assets/img/icons/unicons/wallet.png"
+											<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/wallet.png"
 												alt="User" />
 										</div>
 										<div>
@@ -466,7 +466,7 @@
 							<ul class="p-0 m-0">
 								<li class="d-flex mb-4 pb-1">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/paypal.png"
+										<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/paypal.png"
 											alt="User" class="rounded" />
 									</div>
 									<div
@@ -483,7 +483,7 @@
 								</li>
 								<li class="d-flex mb-4 pb-1">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/wallet.png"
+										<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/wallet.png"
 											alt="User" class="rounded" />
 									</div>
 									<div
@@ -500,7 +500,7 @@
 								</li>
 								<li class="d-flex mb-4 pb-1">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/chart.png"
+										<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/chart.png"
 											alt="User" class="rounded" />
 									</div>
 									<div
@@ -517,7 +517,7 @@
 								</li>
 								<li class="d-flex mb-4 pb-1">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/cc-success.png"
+										<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/cc-success.png"
 											alt="User" class="rounded" />
 									</div>
 									<div
@@ -534,7 +534,7 @@
 								</li>
 								<li class="d-flex mb-4 pb-1">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/wallet.png"
+										<img src="${pageContext.request.contextPath}/resources/assets/img/icons/unicons/wallet.png"
 											alt="User" class="rounded" />
 									</div>
 									<div
@@ -551,7 +551,7 @@
 								</li>
 								<li class="d-flex">
 									<div class="avatar flex-shrink-0 me-3">
-										<img src="resources/assets/img/icons/unicons/cc-warning.png"
+										<img src="/resources/assets/img/icons/unicons/cc-warning.png"
 											alt="User" class="rounded" />
 									</div>
 									<div

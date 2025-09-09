@@ -25,3 +25,6 @@ let config = {
     borderColor: '#eceef1'
   }
 };
+
+// 사용방법 
+// document.querySelector('.btn-primary').style.backgroundColor = config.colors.primary;
