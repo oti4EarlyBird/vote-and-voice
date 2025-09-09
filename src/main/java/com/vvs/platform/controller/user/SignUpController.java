@@ -1,5 +1,6 @@
 package com.vvs.platform.controller.user;
 
+
 import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
@@ -9,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 @RequestMapping("/user")
 public class SignUpController {
 
     // LoginController에서 공유
     private static final HashMap<String, String> users = LoginController.users;
- 
+
     // 회원가입 폼(GET)
     @GetMapping("/signup")
     public ModelAndView showSignUpForm() {
