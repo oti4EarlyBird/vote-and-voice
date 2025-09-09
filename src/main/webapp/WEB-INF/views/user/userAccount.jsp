@@ -84,11 +84,24 @@
 											class="form-control" type="password" id="password"
 											name="password" value="" autofocus />
 									</div>
-									<div class="mb-3 col-md-6">
-										<label for="passwordCheck" class="form-label">Password Check</label> <input
-											class="form-control" type="password" id="passwordCheck"
-											name="passwordCheck" value="" autofocus />
-									</div>
+									
+
+									<div class="form-password-toggle b-3 col-md-6">
+				                        <label class="form-label" for="basic-default-passwordCheck">Password Check</label>
+				                        <div class="input-group">
+				                          <input
+				                            type="password"
+				                            class="form-control"
+				                            id="basic-default-passwordCheck"
+				                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+				                            aria-describedby="basic-default-passwordCheck"
+				                          />
+				                          <span id="basic-default-password2" class="input-group-text cursor-pointer"
+				                            ><i class="bx bx-hide"></i
+				                          ></span>
+				                        </div>
+				                      </div>
+									
 									<div class="mb-3 col-md-6">
 										<label for="email" class="form-label">E-mail</label> <input
 											class="form-control" type="text" id="email" name="email"
