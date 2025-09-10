@@ -49,6 +49,10 @@
   </head>
 
   <body>
+
+  <!-- Header -->
+  <%@include file="./common/nav.jsp" %>
+
     <!-- Content -->
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
@@ -138,6 +142,10 @@
       </div>
     </div>
     <!-- / Content -->
+
+
+	<!-- Footer -->
+	<%@include file="./common/footer.jsp" %>
 
     <!-- Core JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
