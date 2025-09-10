@@ -11,7 +11,7 @@
 <title>의안 상세</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%-- <!-- Sneat CSS -->
+<!-- Sneat CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/vendor/css/core.css" />
 <link rel="stylesheet"
@@ -32,14 +32,13 @@
 <script
 	src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script> --%>
-<%@ include file="../commons/cssConf.jsp"%>
+	src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
 </head>
 
 <body>
 
 	<!-- Header -->
-	<%@include file="./common/nav.jsp" %>
+
 
 	<div class="container-xxl flex-grow-1 container-p-y">
 		<div class="row">
@@ -256,7 +255,7 @@
                     </div>
                     <button type="button" class="btn btn-outline-danger" id="report-btn">신고</button>
                     
-                </div> 
+                </div>
             `; 
 
             document.getElementById('commentList').appendChild(commentItem); 
@@ -351,10 +350,9 @@ reportSubmit.addEventListener('click', function() {
 </script>
 
 					<!-- Footer -->
-					<%@include file="./common/footer.jsp" %>
-					<%@include file="../commons/jsConf.jsp"%>
 
-					<%-- <!-- Core JS -->
+
+					<!-- Core JS -->
 					<script
 						src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
 					<script
@@ -366,6 +364,6 @@ reportSubmit.addEventListener('click', function() {
 					<script
 						src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
 					<script
-						src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script> --%>
+						src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>
