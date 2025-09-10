@@ -28,7 +28,7 @@
 			<button type="button" class="btn rounded-pill btn-primary">복지</button>
 			<button type="button" class="btn rounded-pill btn-primary">교육</button>
 		</div>
-
+		<br>
 		<!-- 검색 박스 -->
 		<div class="card p-3 mb-4">
 			<form class="row g-2" action="billList.jsp" method="get">
