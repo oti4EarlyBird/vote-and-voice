@@ -14,7 +14,9 @@
     <title>의안 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+
 <%@ include file="../commons/cssConf.jsp"%>
+
 </head>
 
 <body>
@@ -287,6 +289,7 @@
     </div>
 
     <!-- Footer -->
+
 	<%@include file="./common/footer.jsp" %>
 	<%@include file="../commons/jsConf.jsp"%>
     
