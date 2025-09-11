@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
+	data-assets-path="resources/assets/"
+	data-template="vertical-menu-template-free">
 <head>
 <meta charset="UTF-8">
+<!-- 반응형 웹페이지 -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <title>User Notice</title>
 <%@ include file="../commons/cssConf.jsp"%>
 </head>
@@ -22,13 +27,30 @@
 					</h4>
 
 
-
 					<!-- Bordered Table -->
 					<div class="card">
-						<h5 class="card-header">Bordered Table</h5>
+						<!-- <h5 class="card-header">Bordered Table</h5> -->
+						
 						<div class="card-body">
-							<div class="table-responsive text-nowrap">
-								<table class="table table-bordered table-hover">
+							<!-- 태그 -->
+							<div class="d-flex justify-content-between align-items-center mb-3">
+							    <div class="btn-group" role="group" aria-label="Notice Type">
+							        <a href="?category=all" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "all" || empty param.category}'>active</c:if>'">전체</a>
+							        <a href="?category=소식" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "소식"}'>active</c:if>'">소식</a>
+							        <a href="?category=공지" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "공지"}'>active</c:if>'">공지</a>
+							    </div>
+							    
+							    <!-- 오른쪽 검색창 -->
+							    <form class="d-flex" action="" method="get">
+							        <input type="hidden" name="category" value="all" />
+							        <input class="form-control form-control-sm me-2" type="search" name="keyword" placeholder="검색어 입력" value="${param.keyword}" aria-label="Search">
+							        <button class="btn btn-sm btn-primary" type="submit"><i class="tf-icons bx bx-search"></i></button>
+							    </form>
+							</div>
+							
+							<!-- 목록 -->
+							<div class="table-responsive text-nowrap mt-3">
+								<table class="table table-hover"> <!-- table-bordered -->
 									<thead>
 										<tr>
 											<th>Project</th>
@@ -40,7 +62,8 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+											<td>
+												<span class="badge bg-primary me-2">공지</span>
 												<strong>Angular Project</strong></td>
 											<td>Albert Cook</td>
 											<td>
