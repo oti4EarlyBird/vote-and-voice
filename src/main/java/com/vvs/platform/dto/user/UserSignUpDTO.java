@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class UserDTO {
+public class UserSignUpDTO {
 		private int userSeq;
 		private String userId;
 		private String name;
