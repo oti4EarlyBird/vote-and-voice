@@ -201,5 +201,13 @@ public class SignUpService {
             log.error("회원가입 시스템 오류: {} - {}", usersignupDTO.getUserId(), e.getMessage());
             throw new RuntimeException("회원가입 처리 중 오류가 발생했습니다.", e);
         }
+        //아이디 중복체크(AJAX)
+       public boolean checkUserIdDuplicate(String userId) {
+           return userSignUpDAO.checkId(userId);
+       }
+       
+       //이메일 중복 체크(AJAX)
+       public boolean checkEmailDuplicate(String email) {
+           return userSignUpDAO.checkEmail(email);
     }
 }

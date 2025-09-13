@@ -19,7 +19,7 @@
 			KEYWORD_ID
 		) values (
 			#{userId},
-			#{keywordId)
+			#{keywordId}
 		)
 	</insert>
 	

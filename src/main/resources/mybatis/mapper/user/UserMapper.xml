@@ -3,7 +3,7 @@
 <mapper namespace="com.vvs.platform.dao.user.UserSignUpDAO">
 
 	<!-- 회원가입 -->
-	<insert id="insertUser" parameterType="UserDTO">
+	<insert id="insertUser" parameterType="UserSignUpDTO">
 		<!-- 시퀀스 값 생성 --> 
 		<selectKey keyProperty="userSeq" resultType="int" order="BEFORE"> 
 	    	SELECT USER_SEQ.NEXTVAL FROM DUAL
@@ -37,13 +37,13 @@
 	</select>
 	
 	<!-- 이메일 중복 확인 -->
-	<select id="checkEmail" parameterType="string" resultType="boolean">
+	<select id="checkEmail" parameterType="String" resultType="boolean">
 		select case when count(*) > 0 then 1 else 0 end
 		from users where EMAIL = #{email}
 	</select>
 	
 	<!-- 로그인 사용자 정보 조회 -->
-	<select id="selectUserById" parameterType="String" resultType="UserDTO">
+	<select id="selectUserById" parameterType="String" resultType="UserSignUpDTO">
 		select 
 			USER_SEQ as userSeq,
 	        USER_ID as userId,
