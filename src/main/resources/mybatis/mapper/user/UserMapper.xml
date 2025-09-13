@@ -1,61 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vvs.platform.dao.user.UserSignUpDAO">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<!-- 회원가입 -->
-	<insert id="insertUser" parameterType="UserSignUpDTO">
-		<!-- 시퀀스 값 생성 --> 
-		<selectKey keyProperty="userSeq" resultType="int" order="BEFORE"> 
-	    	SELECT USER_SEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		insert into users (USER_SEQ, 
-	            USER_ID, 
-	            NAME, 
-	            PASSWORD, 
-	            EMAIL, 
-	            BIRTH_DATE, 
-	            ROLE, 
-	            ACCOUNT_STATUS, 
-	            NOTIFICATION_OPT_IN, 
-	            SIGNUP_DATE) values (#{userSeq},
-	            #{userId},
-	            #{name},
-	            #{pwd},
-	            #{email},
-	            #{birth},
-	            'USER',                    <!-- 기본값: 일반 사용자 -->
-	            'ACTIVE',                  <!-- 기본값: 활성 상태 -->
-	            'Y',                       <!-- 기본값: 알림 수신 동의 -->
-	            SYSDATE
-	            )                    
-	</insert>
-	
-	<!-- 아이디 중복 확인 -->
-	<select id="checkId" parameterType="String" resultType="boolean">
-		select case when count(*) > 0 then 1 else 0 end
-		from USERS where USER_ID = #{userId}
-	</select>
-	
-	<!-- 이메일 중복 확인 -->
-	<select id="checkEmail" parameterType="String" resultType="boolean">
-		select case when count(*) > 0 then 1 else 0 end
-		from users where EMAIL = #{email}
-	</select>
-	
-	<!-- 로그인 사용자 정보 조회 -->
-	<select id="selectUserById" parameterType="String" resultType="UserSignUpDTO">
-		select 
-			USER_SEQ as userSeq,
-	        USER_ID as userId,
-	        NAME as name,
-	        PASSWORD as pwd,
-	        EMAIL as email,
-	        BIRTH_DATE as birth,
-	        ROLE as role,
-	        ACCOUNT_STATUS as accStatus,
-	        NOTIFICATION_OPT_IN as notificationOptIn,
-	        SIGNUP_DATE as signupDate
-	    from users 
-	    where USER_ID = #{userId}
-	</select>	
+<mapper namespace="com.vvs.platform.mapper.UserMapper">
+
+    <!-- 회원 등록 -->
+    <insert id="insertUser" parameterType="com.vvs.platform.dto.user.UserSignUpDTO">
+        INSERT INTO users (
+            USER_ID, NAME, PASSWORD, EMAIL, BIRTH_DATE, ROLE, ACCOUNT_STATUS, NOTIFICATION_OPT_IN, SIGNUP_DATE
+        ) VALUES (
+            #{userId}, #{name}, #{password}, #{email},
+            TO_DATE(#{birthDate}, 'YYYY-MM-DD'),
+            'USER', 'ACTIVE', 'Y', SYSDATE
+        )
+    </insert>
+
+    <!-- user_keywords 저장 -->
+    <insert id="insertUserKeyword" parameterType="map">
+        INSERT INTO user_keywords (USER_ID, KEYWORD_ID)
+        VALUES (#{userId}, #{keywordId})
+    </insert>
+
+    <!-- 키워드 전체 조회 -->
+    <select id="getAllKeywords" resultType="com.vvs.platform.dto.user.KeywordDTO">
+        SELECT SEQ as seq, KEYWORD_CONTENT as keywordContent 
+        FROM keywords
+    </select>
+
 </mapper>

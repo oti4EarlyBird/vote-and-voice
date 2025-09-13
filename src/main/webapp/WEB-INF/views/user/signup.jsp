@@ -70,7 +70,7 @@
 							</a>
 						</div>
 						<!-- /Logo -->
-						<h4 class="mb-2">Adventure starts here 🚀</h4>
+						<h4 class="mb-2">Vote and Voice 🚀</h4>
 						<p class="mb-4">지금 회원가입하고 서비스를 시작하세요</p>
 
 						<!-- 에러 메시지 출력 -->
@@ -84,24 +84,27 @@
 
 							<div class="mb-3">
 								<label class="form-label">이름</label> <input type="text"
-									class="form-control" name="name" placeholder="이름을 입력하세요"
+									class="form-control" name="name" value="${userDTO.name}" placeholder="이름을 입력하세요"
 									required />
 							</div>
 
-							<div class="mb-3">
+						    <div class="mb-3">
 								<label class="form-label">생년월일</label> <input type="date"
-									class="form-control" name="birth" required />
-							</div>
+									class="form-control" name="birthDate" value="${userDTO.birth}" 
+									id="birthInput" />
+									<small class="text-muted">디버그: 선택된 값이 여기 표시됩니다</small>
+    								<div id="birthDebug"></div>
+							</div> 
 
 							<div class="mb-3">
 								<label class="form-label">이메일</label> <input type="email"
-									class="form-control" name="email" placeholder="이메일을 입력하세요"
+									class="form-control" name="email" value="${userDTO.email}" placeholder="이메일을 입력하세요"
 									required />
 							</div>
 
 							<div class="mb-3">
 								<label class="form-label">아이디</label> <input type="text"
-									class="form-control" name="userid" placeholder="아이디를 입력하세요"
+									class="form-control" name="userId" value="${userDTO != null ? userDTO.userId : ''}" placeholder="아이디를 입력하세요"
 									required />
 							</div>
 
@@ -118,7 +121,7 @@
 							<div class="mb-3 form-password-toggle">
 								<label class="form-label">비밀번호 확인</label>
 								<div class="input-group input-group-merge">
-									<input type="password" class="form-control" name="confirm"
+									<input type="password" class="form-control" name="passwordConfirm"
 										placeholder="비밀번호를 다시 입력하세요" required />
 									<span class="input-group-text cursor-pointer"><i
 										class="bx bx-hide"></i></span>
@@ -133,11 +136,11 @@
 											<div class="form-check">
 												<input class="form-check-input" 
 													type="checkbox"
-													name="interests" 
-													value="${keyword.keywordId}"
-													id="keyword${keyword.keywordId}" /> 
-													<label class="form-check-label" for="keyword${keyword.keywordId}">
-														${keyword.keyword} </label>
+													name="selectedKeywords" 
+													value="${keyword.seq}"
+													id="keyword${keyword.seq}" /> 
+													<label class="form-check-label" for="keyword${keyword.seq}">
+														${keyword.keywordContent} </label>
 											</div>
 										</div>
 									</c:forEach>
@@ -158,6 +161,18 @@
 			</div>
 		</div>
 	</div>
+	<!-- 가입 성공/실패 메시지 모달 -->
+	<div class="modal fade" id="messageModal" tabindex="-1" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body" id="modalMessage"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<!-- / Content -->
 
 
@@ -181,18 +196,29 @@
 
 	<!-- 가입 성공 실패 시 모달 -->
 	<script>
-	 	// 성공 시
-	  	if("${successMessage}") {
-	  	    showModal("가입 성공!");
-	  	    setTimeout(() => {
-	  	        location.href = "user/login";
-	  	    }, 2000);
-	  	}
+		function showModal(message) {
+		    document.getElementById('modalMessage').innerText = message;
+		    var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+		    myModal.show();
+		}
+	</script>
+	<c:if test="${not empty successMessage}">
+	<script>
+	    const message = '<c:out value="${successMessage}" />';
+	    showModal(message);
+	    setTimeout(function() {
+	        location.href = '${pageContext.request.contextPath}/user/login';
+	    }, 2000);
+	</script>
+	</c:if>
 	
-	  	// 실패 시  
-	  	if("${errorMessage}") {
-	  	    showModal("${errorMessage}");
-	  	}
-  	</script>
+	<c:if test="${not empty errorMessage}">
+	<script>
+	    const error = '<c:out value="${errorMessage}" />';
+	    showModal(error);
+	</script>
+</c:if>
+
+	
 </body>
 </html>

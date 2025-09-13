@@ -1,16 +1,35 @@
 package com.vvs.platform.dao.user;
+ 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.vvs.platform.dto.user.KeywordDTO;
 import com.vvs.platform.dto.user.UserSignUpDTO;
 
-@Mapper
-public interface UserSignUpDAO {
+@Repository
+public class UserSignUpDAO {
 
-		public int insertUser(UserSignUpDTO user); //회원가입
-		public boolean checkId(String userId); //아이디 중복 확인
-		public boolean checkEmail(String email); //이메일 중복 확인
-		public UserSignUpDTO selectUserById(String userId); //회원 정보 조회(로그인에 필요)
-	
+	@Autowired
+    private SqlSessionTemplate sqlSession; 
+
+    public int insertUser(UserSignUpDTO userDTO) {
+        return sqlSession.insert("com.vvs.platform.mapper.UserMapper.insertUser", userDTO);
+    }
+
+    public void insertUserKeyword(String userId, int keywordId) {
+    	Map<String, Object> param = new HashMap<>();
+    	param.put("userId", userId);
+    	param.put("keywordId", keywordId);
+    	sqlSession.insert("com.vvs.platform.mapper.UserMapper.insertUserKeyword", param);
+
+    }
+
+    public List<KeywordDTO> getAllKeywords() {
+        return sqlSession.selectList("com.vvs.platform.mapper.UserMapper.getAllKeywords");
+    }
 }
-	
