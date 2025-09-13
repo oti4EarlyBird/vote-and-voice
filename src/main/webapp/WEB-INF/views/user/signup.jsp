@@ -92,8 +92,6 @@
 								<label class="form-label">생년월일</label> <input type="date"
 									class="form-control" name="birthDate" value="${userDTO.birth}" 
 									id="birthInput" />
-									<small class="text-muted">디버그: 선택된 값이 여기 표시됩니다</small>
-    								<div id="birthDebug"></div>
 							</div> 
 
 							<div class="mb-3">

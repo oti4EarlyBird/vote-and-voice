@@ -8,9 +8,9 @@
     <!-- 회원 등록 -->
     <insert id="insertUser" parameterType="com.vvs.platform.dto.user.UserSignUpDTO">
         INSERT INTO users (
-            USER_ID, NAME, PASSWORD, EMAIL, BIRTH_DATE, ROLE, ACCOUNT_STATUS, NOTIFICATION_OPT_IN, SIGNUP_DATE
+            USER_SEQ, USER_ID, NAME, PASSWORD, EMAIL, BIRTH_DATE, ROLE, ACCOUNT_STATUS, NOTIFICATION_OPT_IN, SIGNUP_DATE
         ) VALUES (
-            #{userId}, #{name}, #{password}, #{email},
+            seq_users.NEXTVAL, #{userId}, #{name}, #{password}, #{email},
             TO_DATE(#{birthDate}, 'YYYY-MM-DD'),
             'USER', 'ACTIVE', 'Y', SYSDATE
         )
@@ -19,7 +19,7 @@
     <!-- user_keywords 저장 -->
     <insert id="insertUserKeyword" parameterType="map">
         INSERT INTO user_keywords (USER_ID, KEYWORD_ID)
-        VALUES (#{userId}, #{keywordId})
+        VALUES (#{userId}, seq_keywords.NEXTVAL)
     </insert>
 
     <!-- 키워드 전체 조회 -->
