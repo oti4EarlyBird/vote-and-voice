@@ -28,7 +28,7 @@ public class UserSignUpDAO {
     	sqlSession.insert("com.vvs.platform.mapper.UserMapper.insertUserKeyword", param);
 
     }
-
+    //전체 키워드 조회
     public List<KeywordDTO> getAllKeywords() {
         return sqlSession.selectList("com.vvs.platform.mapper.UserMapper.getAllKeywords");
     }

@@ -109,7 +109,7 @@
 							<div class="mb-3 form-password-toggle">
 								<label class="form-label">비밀번호</label>
 								<div class="input-group input-group-merge">
-									<input type="password" class="form-control" name="password"
+									<input type="password" class="form-control" id="pwd" name="password"
 										placeholder="비밀번호를 입력하세요" required /> <span
 										class="input-group-text cursor-pointer"><i
 										class="bx bx-hide"></i></span>
@@ -119,11 +119,12 @@
 							<div class="mb-3 form-password-toggle">
 								<label class="form-label">비밀번호 확인</label>
 								<div class="input-group input-group-merge">
-									<input type="password" class="form-control" name="passwordConfirm"
+									<input type="password" class="form-control" id="pwdConf" name="passwordConfirm"
 										placeholder="비밀번호를 다시 입력하세요" required />
 									<span class="input-group-text cursor-pointer"><i
 										class="bx bx-hide"></i></span>
 								</div>
+								<small id="passwordMessage" class="form-text"></small>
 							</div>
 
 							<div class="mb-3">
@@ -173,7 +174,6 @@
 	
 	<!-- / Content -->
 
-
 	<!-- Footer -->
 	<%@include file="./common/footer.jsp"%>
 
@@ -191,7 +191,29 @@
 	<!-- Main JS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
-
+	<!-- 실시간 비번 확인 메시지 -->
+	<script>
+		const pwd = document.getElementById("pwd");
+		const pwdConfirm = document.getElementById("pwdConf");
+		const message = document.getElementById("passwordMessage");
+		
+		function passwordMatch() {
+			if(pwdConfirm.value.length === 0) {
+				message.textContent="";
+				return;
+			}
+			if(pwd.value === pwdConfirm.value) {
+				message.textContent="비밀번호가 일치합니다.";
+				message.style.color="green";
+			}
+			else {
+				message.textContent="비밀번호가 일치하지 않습니다.";
+				message.style.color="red";
+			}
+		}
+		pwd.addEventListener("keyup", passwordMatch);
+		pwdConfirm.addEventListener("keyup", passwordMatch);
+	</script>
 	<!-- 가입 성공 실패 시 모달 -->
 	<script>
 		function showModal(message) {

@@ -13,7 +13,7 @@ import com.vvs.platform.service.user.SignUpService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user") 
 @RequiredArgsConstructor
 public class SignUpController {
 

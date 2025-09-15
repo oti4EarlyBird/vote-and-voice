@@ -18,9 +18,10 @@
 
     <!-- user_keywords 저장 -->
     <insert id="insertUserKeyword" parameterType="map">
-        INSERT INTO user_keywords (USER_ID, KEYWORD_ID)
-        VALUES (#{userId}, seq_keywords.NEXTVAL)
-    </insert>
+	    INSERT INTO user_keywords (USER_ID, KEYWORD_ID)
+	    VALUES (#{userId}, #{keywordId})
+	</insert>
+    
 
     <!-- 키워드 전체 조회 -->
     <select id="getAllKeywords" resultType="com.vvs.platform.dto.user.KeywordDTO">
