@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
 <html lang="ko" class="light-style customizer-hide" dir="ltr"
 	data-theme="theme-default"
 	data-assets-path="${pageContext.request.contextPath}/resources/assets/"
