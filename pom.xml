@@ -11,7 +11,7 @@
 	<properties>
 		<springframework-version>5.3.39</springframework-version>
 		<springframework-security-version>5.8.14</springframework-security-version>
-	</properties>
+	</properties> 
 
 	<!-- 프로젝트에서 의존하는 외부 라이브러리들을 설정 -->
 	<dependencies> 
