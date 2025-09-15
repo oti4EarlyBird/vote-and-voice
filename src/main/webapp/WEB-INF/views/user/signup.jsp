@@ -196,20 +196,20 @@
 	<script>
 		const pwd = document.getElementById("pwd");
 		const pwdConfirm = document.getElementById("pwdConf");
-		const message = document.getElementById("passwordMessage");
+		const msg = document.getElementById("passwordMessage");
 		
 		function passwordMatch() {
 			if(pwdConfirm.value.length === 0) {
-				message.textContent="";
+				msg.textContent="";
 				return;
 			}
 			if(pwd.value === pwdConfirm.value) {
-				message.textContent="비밀번호가 일치합니다.";
-				message.style.color="green";
+				msg.textContent="비밀번호가 일치합니다.";
+				msg.style.color="green";
 			}
 			else {
-				message.textContent="비밀번호가 일치하지 않습니다.";
-				message.style.color="red";
+				msg.textContent="비밀번호가 일치하지 않습니다.";
+				msg.style.color="red";
 			}
 		}
 		pwd.addEventListener("keyup", passwordMatch);
