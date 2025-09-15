@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+/* ===== 공통 스타일 ===== */
+
+
+/* ===== 의안 상세 스타일 ===== */
+
+
+/* ===== 투표 섹션 스타일 ===== */
+.d-flex justify-content-center mb-3 {
+	gap: 10px;
+}
+/* ===== 댓글 섹션 스타일 ===== */
+.comment-section textarea {
+    width: 100%;
+    padding-right: 80px; /* 버튼 공간 확보 */
+    margin-bottom: 10px;
+}
+
+.comment-input-container {
+    position: relative;
+    margin-bottom: 20px;
+    
+}
+
+.comment-section #commentSubmit {
+	display: block;
+    align-items: flex-end;
+}
+
+.comment-input-footer {
+    display: flex;
+    justify-content: flex-end;
+    justify-content: space-between; /* 위 코드가 바로 위 flex-end를 덮음 */
+    align-items: center;
+}
+
+.comment-item {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
+}
+
+/* 찬성 댓글 스타일 */
+.comment-support {
+    border-color: #28a745;
+}
+
+/* 반대 댓글 스타일 */
+.comment-oppose {
+    border-color: #dc3545;
+}
+
+/* ===== 신고 모달 스타일 ===== */
