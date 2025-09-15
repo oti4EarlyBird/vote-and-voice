@@ -1,65 +1,42 @@
 package com.vvs.platform.controller.user;
 
-
-import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vvs.platform.dao.user.UserSignUpDAO;
+import com.vvs.platform.dto.user.UserSignUpDTO;
+import com.vvs.platform.service.user.SignUpService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user") 
+@RequiredArgsConstructor
 public class SignUpController {
 
-    // LoginController에서 공유
-    private static final HashMap<String, String> users = LoginController.users;
+    private final SignUpService userService;
+    private final UserSignUpDAO userDAO;
 
-    // 회원가입 폼(GET)
     @GetMapping("/signup")
     public ModelAndView showSignUpForm() {
-        return new ModelAndView("user/signup"); // signup.jsp 로 이동
+        ModelAndView mav = new ModelAndView("user/signup");
+        mav.addObject("keywords", userDAO.getAllKeywords());
+        return mav;
     }
 
-    // 회원가입 처리(POST)
     @PostMapping("/signup")
-    public ModelAndView processSignUp(
-            @RequestParam("name") String name,
-            @RequestParam("birth") String birth,
-            @RequestParam("email") String email,
-            @RequestParam("userid") String userid,
-            @RequestParam("password") String password,
-            @RequestParam("confirm") String confirm
-    ) {
-        ModelAndView mav = new ModelAndView();
-
-        // 검증
-        if (userid == null || userid.isEmpty() || password == null || password.isEmpty()) {
-            mav.addObject("error", "아이디와 비밀번호를 모두 입력해주세요.");
-            mav.setViewName("user/signup");
-            return mav;
+    public ModelAndView processSignUp(UserSignUpDTO userDTO) {
+        ModelAndView mav = new ModelAndView("user/signup");
+        try {
+            userService.signUp(userDTO);
+            mav.addObject("successMessage", "회원가입이 완료되었습니다!");
+        } catch (Exception e) {
+            mav.addObject("errorMessage", "회원가입 중 오류가 발생했습니다.");
         }
-
-        if (!password.equals(confirm)) {
-            mav.addObject("error", "비밀번호와 확인이 일치하지 않습니다.");
-            mav.setViewName("user/signup");
-            return mav;
-        }
-
-        if (users.containsKey(userid)) {
-            mav.addObject("error", "이미 존재하는 아이디입니다.");
-            mav.setViewName("user/signup");
-            return mav;
-        }
-
-        // 회원가입 성공 → 임시 HashMap에 저장
-        users.put(userid, password);
-
-        // 성공 후 로그인 페이지로 리다이렉트
-        mav.setViewName("redirect:/user/login");
+        mav.addObject("keywords", userDAO.getAllKeywords());
         return mav;
     }
 }
