@@ -95,10 +95,19 @@
 									id="birthInput" />
 							</div> 
 
-							<div class="mb-3">
-								<label class="form-label">이메일</label> <input type="email"
-									class="form-control" name="email" value="${userDTO.email}" placeholder="이메일을 입력하세요"
-									required />
+							<div class="mb-3 position-relative">
+								<label class="form-label">이메일</label> 
+									<input type="email"
+										class="form-control" name="email" value="${userDTO.email}" placeholder="이메일을 입력하세요"
+										required />
+									<button type="button" id="auth" 
+									class="btn btn-sm rounded-pill btn-primary position-absolute"
+									style="bottom: 0; right:0; margin: 5px 5px;">인증</button>
+							</div>
+							<!-- 인증번호 입력칸, 처음엔 숨김 -->
+							<div class="mb-3" id="verifyCheck" style="display: none;">
+							    <label class="form-label">인증번호</label>
+							    <input type="text" class="form-control" name="verificationCode" placeholder="인증번호를 입력해주세요" required>
 							</div>
 
 							<div class="mb-3">
@@ -192,6 +201,16 @@
 	<!-- Main JS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+	<!-- 이메일 인증번호 입력칸-->
+	<script>
+		document.getElementById('auth').addEventListener('click', function() {
+		    // 이메일 인증 버튼 클릭 시 인증번호 입력칸 보이기
+		    document.getElementById('verifyCheck').style.display = 'block';
+	
+		    // AJAX로 서버에 인증번호 요청 가능
+		    
+		});
+	</script>
 	<!-- 실시간 비번 확인 메시지 -->
 	<script>
 		const pwd = document.getElementById("pwd");
