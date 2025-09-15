@@ -18,7 +18,11 @@
 		<property name="mapperLocations" value="classpath:mybatis/mapper/**/*.xml" />
 		
 	</bean>
-	
+
+	<!-- MyBatis SqlSessionTemplate -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	    <constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
 	<!-- @Mapper(선언시 관리 객체로 등록됨)를 사용하기 위한 설정 -->
 	<mybatis-spring:scan 
 		base-package="com.vvs.platform.dao" 
