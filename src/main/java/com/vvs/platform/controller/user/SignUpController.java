@@ -27,6 +27,10 @@ public class SignUpController {
     private final UserSignUpDAO userDAO;
     private final EmailSendService emailSendService;
     
+    @RequestMapping("/a")
+    public String v() {
+    	return "/user/index";
+    }
     @GetMapping("/signup")
     public ModelAndView showSignUpForm() {
         ModelAndView mav = new ModelAndView("user/signup");
