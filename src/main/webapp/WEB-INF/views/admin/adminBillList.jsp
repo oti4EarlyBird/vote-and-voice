@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -40,12 +42,19 @@
 
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">Tables /</span> Basic Tables
+							법안 게시판 리스트
 						</h4>
 
 						<!-- Basic Bootstrap Table -->
 						<div class="card">
-							<h5 class="card-header">Table Basic</h5>
+							<h5 class="card-header d-flex justify-content-between align-items-center">
+								<span><span style="color: red;"> ${fn:length(billBoardList)}</span> 개의 글이 있습니다.</span>
+								<!-- 오른쪽 정렬하기 -->
+								<button class="btn btn-primary" onclick="location.href='billWriteForm'">
+									작성
+								</button>
+							</h5>
+							
 							<div class="table-responsive text-nowrap">
 								<table class="table">
 									<thead>
@@ -60,118 +69,47 @@
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-										<tr>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>4</strong></td>
-											<td>상법 일부개정법률안</td>
-											<td>
-												2204732
-											</td>
-											<td><span class="badge bg-label-primary me-1">법사위원회</span></td>
-											<td>대안반영폐기</td>
-											<td>
-												2025-08-17
-											</td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
+										<c:forEach var="billBoard" items="${billBoardList}">
+											<tr>
+												<td>
+													<strong>${billBoard.billboardId}</strong>
+												</td>
+												<td>
+													<strong>${billBoard.title}</strong>
+												</td>
+												<td>
+													${billBoard.billNumber}
+												</td>
+												<td><span class="badge bg-label-primary me-1">${billBoard.committee}</span></td>
+												<td>${billBoard.decisionResult}</td>
+												<td>${billBoard.decisionDate}</td>
+												<td>
+													<div class="dropdown">
+														<button type="button"
+															class="btn p-0 dropdown-toggle hide-arrow"
+															data-bs-toggle="dropdown">
+															<i class="bx bx-dots-vertical-rounded"></i>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item"
+																href="${pageContext.request.contextPath}/admin/billEditForm?billboardId=${billBoard.billboardId}"
+															>
+																<i class="bx bx-edit-alt me-1"></i> 수정
+															</a>
+															<a class="dropdown-item delete-btn" href="javascript:void(0);"
+																data-billboard-id="${billBoard.billboardId}">
+																<i class="bx bx-trash me-1"></i> 삭제
+															</a>
+														</div>
 													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>4</strong></td>
-											<td>방송법 일부개정법률안</td>
-											<td>
-												2206839
-											</td>
-											<td><span class="badge bg-label-primary me-1">과방위원회</span></td>
-											<td>계류중</td>
-											<td>
-												
-											</td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>4</strong></td>
-											<td>상법 일부개정법률안</td>
-											<td>
-												2204732
-											</td>
-											<td><span class="badge bg-label-primary me-1">법사위원회</span></td>
-											<td>대안반영폐기</td>
-											<td>
-												2025-08-17
-											</td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>4</strong></td>
-											<td>노동조합법 일부개정법률안</td>
-											<td>
-												2204732
-											</td>
-											<td><span class="badge bg-label-primary me-1">법사위원회</span></td>
-											<td>계류중</td>
-											<td>
-												
-											</td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
+												</td>
+											</tr>
+										</c:forEach>
+										<c:if test="${empty billBoardList}">
+											<tr>
+												<td colspan="7" class="text-center">등록된 법안 게시글이 없습니다.</td>
+											</tr>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
@@ -188,14 +126,42 @@
 		<div class="layout-overlay layout-menu-toggle"></div>
 	</div>
 	<!-- / Layout wrapper -->
-
-	<div class="buy-now">
-		<a
-			href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-			target="_blank" class="btn btn-danger btn-buy-now">Upgrade
-			to Pro</a>
-	</div>
-
+	
 	<%@include file="../commons/jsConf.jsp"%>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+		    // 삭제 버튼 클릭 이벤트 핸들러
+		    $('.delete-btn').on('click', function(e) {
+		        e.preventDefault();
+	
+		        // data-billboard-id 속성에서 ID 값 가져오기
+		        var billboardId = $(this).data('billboardId');
+		        
+		        // 사용자에게 삭제 확인 받기
+		        if (confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
+		            // AJAX를 사용하여 삭제 요청 보내기
+		            $.ajax({
+		                url: '${pageContext.request.contextPath}/admin/billDelete', // 삭제를 처리할 컨트롤러 URL
+		                type: 'POST',
+		                data: { billboardId: billboardId },
+		                success: function(response) {
+		                    if (response.result === 'success') {
+		                        // 성공 메시지 표시 및 페이지 새로고침
+		                        alert('게시글이 성공적으로 삭제되었습니다.');
+		                        location.reload();
+		                    } else {
+		                        alert('게시글 삭제에 실패했습니다.');
+		                    }
+		                },
+		                error: function(xhr, status, error) {
+		                    alert('서버 오류로 인해 삭제에 실패했습니다.');
+		                    console.error("삭제 실패:", status, error);
+		                }
+		            });
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>
