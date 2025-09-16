@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.vvs.platform.dao.BillDAO">
+	<insert id="insertNayjnliqaexiioauy" parameterType="com.vvs.platform.dto.bill.NayjnliqaexiioauyDTO">
+		INSERT INTO NAV_JNL(
+			BILL_ID,
+	        BILL_NO,
+	        AGE,
+	        BILL_NAME,
+	        CURR_COMMITTEE_ID,
+	        CURR_COMMITTEE,
+	        PROC_DT,
+	        COMMITTEE_RESULT,
+	        LINK_URL,
+	        COMMITTEE_PROC_DT,
+	        CMT_PRESENT_DT,
+	        LAW_SUBMIT_DT,
+	        LAW_PRESENT_DT,
+	        LAW_PROC_DT,
+	        LAW_PROC_RESULT_CD,
+	        COMMITTEE_DT) 
+      	VALUES(
+      		#{billId},
+	        #{billNo},
+	        #{age},
+	        #{billName},
+	        #{currCommitteeId},
+	        #{currCommittee},
+	        <choose>
+	            <when test="procDt != null and procDt != ''">
+	                TO_DATE(#{procDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        #{committeeResult},
+	        #{linkUrl},
+	        <choose>
+	            <when test="committeeProcDt != null and committeeProcDt != ''">
+	                TO_DATE(#{committeeProcDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        <choose>
+	            <when test="cmtPresentDt != null and cmtPresentDt != ''">
+	                TO_DATE(#{cmtPresentDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        <choose>
+	            <when test="lawSubmitDt != null and lawSubmitDt != ''">
+	                TO_DATE(#{lawSubmitDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        <choose>
+	            <when test="lawPresentDt != null and lawPresentDt != ''">
+	                TO_DATE(#{lawPresentDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        <choose>
+	            <when test="lawProcDt != null and lawProcDt != ''">
+	                TO_DATE(#{lawProcDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        #{lawProcResultCd},
+	        <choose>
+	            <when test="committeeDt != null and committeeDt != ''">
+	                TO_DATE(#{committeeDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>
+      	)
+	</insert>
+
+	<insert id="insertNcocpgfiaoituanbr" parameterType="com.vvs.platform.dto.bill.NcocpgfiaoituanbrDTO">
+		INSERT INTO NCOCPGFIAOITUANBR(
+			BILL_ID,
+            PROC_DT,
+            BILL_NO,
+            BILL_NAME,
+            CURR_COMMITTEE,
+            CURR_COMMITTEE_ID,
+            PROC_RESULT_CD,
+            BILL_KIND_CD,
+            AGE,
+            MEMBER_TCNT,
+            VOTE_TCNT,
+            YES_TCNT,
+            NO_TCNT,
+            BLANK_TCNT,
+            LINK_URL
+		) VALUES(
+			#{billId},
+            <choose>
+                <when test="procDt != null and procDt != ''">
+                    TO_DATE(#{procDt}, 'YYYY-MM-DD')
+                </when>
+                <otherwise>
+                    NULL
+                </otherwise>
+            </choose>,
+            #{billNo},
+            #{billName},
+            #{currCommittee},
+            #{currCommitteeId},
+            #{procResultCd},
+            #{billKindCd},
+            #{age},
+            #{memberTcnt},
+            #{voteTcnt},
+            #{yesTcnt},
+            #{noTcnt},
+            #{blankTcnt},
+            #{linkUrl}
+		)
+	</insert>
+
+	<insert id="insertWebcastvconf" parameterType="com.vvs.platform.dto.bill.WebcastvconfDTO">
+		INSERT INTO WEBCASTVCONF(
+			ERACO,
+	        CONF_DT,
+	        CONF_PTM,
+	        CONF_NM,
+	        LINK_URL
+		) VALUES(
+			#{eraco},
+	        <choose>
+	            <when test="confDt != null and confDt != ''">
+	                TO_DATE(#{confDt}, 'YYYY-MM-DD')
+	            </when>
+	            <otherwise>
+	                NULL
+	            </otherwise>
+	        </choose>,
+	        #{confPtm},
+	        #{confNm},
+	        #{linkUrl}
+		)
+	</insert>
+
+</mapper>
+	

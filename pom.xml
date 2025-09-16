@@ -202,6 +202,13 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- 외부 API호출을 위한  RestTemplate -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${springframework-version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
