@@ -96,9 +96,20 @@
 							</div> 
 
 							<div class="mb-3">
-								<label class="form-label">이메일</label> <input type="email"
-									class="form-control" name="email" value="${userDTO.email}" placeholder="이메일을 입력하세요"
-									required />
+							    <label class="form-label">이메일</label>
+							    <div class="input-group">
+								    <input type="email" class="form-control" id="userEmail" name="email" required>
+								    <button type="button" id="sendCodeBtn" class="btn btn-sm rounded-pill btn-primary">인증</button>
+								</div>
+							</div>
+							
+							<div class="mb-3" id="verifyBox" style="display: none;">
+							    <label class="form-label">인증번호</label>
+							    <div class="input-group">
+								    <input type="text" id="verificationCode" class="form-control">
+								    <button type="button" id="verifyBtn" class="btn btn-sm rounded-pill btn-primary">확인</button>
+							    </div>
+							    <small id="verifyMessage" class="form-text"></small>
 							</div>
 
 							<div class="mb-3">
@@ -147,7 +158,7 @@
 								</div>
 							</div>
 
-							<button class="btn btn-primary d-grid w-100">회원가입 완료</button>
+							<button type="submit" class="btn btn-primary d-grid w-100">회원가입 완료</button>
 						</form>
 
 						<p class="text-center">
@@ -191,7 +202,49 @@
 		src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
 	<!-- Main JS -->
 	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script> 
+	<!-- 이메일 인증번호 입력칸-->
+	<script>
+	$(document).ready(function(){
+
+	    // 이메일 인증 버튼
+	    $('#sendCodeBtn').click(function(){
+	        let email = $('#userEmail').val();
+	        if(!email){
+	            alert("이메일을 입력해주세요.");
+	            return;
+	        }
+	        $.post('${pageContext.request.contextPath}/user/sendEmailCode', { email: email }, function(data){
+	            if(data === 'success'){
+	                $('#verifyBox').show();
+	                alert('인증번호가 전송되었습니다.');
+	            } else {
+	                alert('메일 전송 실패');
+	            }
+	        });
+	    }); 
+
+	    // 인증번호 확인 버튼
+	    $('#verifyBtn').click(function(){
+	        let email = $('#userEmail').val();
+	        let code = $('#verificationCode').val();
+	        if(!code){
+	            alert("인증번호를 입력해주세요.");
+	            return;
+	        }
+	        $.post('${pageContext.request.contextPath}/user/verifyEmailCode', { email: email, code: code }, function(data){
+	            if($.trim(data) === 'success'){
+	                $('#verifyMessage').text('인증 완료!').css('color','green');
+	            } else {
+	                $('#verifyMessage').text('인증 실패').css('color','red');
+	            }
+	        });
+	    });
+
+	});
+
+
+	</script>
 	<!-- 실시간 비번 확인 메시지 -->
 	<script>
 		const pwd = document.getElementById("pwd");
@@ -217,6 +270,10 @@
 	</script>
 	<!-- 가입 성공 실패 시 모달 -->
 	<script>
+	$('#formAuthentication').submit(function(e){
+	    console.log('폼 submit 이벤트 감지');
+	    console.log($(this).serialize());
+	});
 		function showModal(message) {
 		    document.getElementById('modalMessage').innerText = message;
 		    var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
