@@ -30,4 +30,46 @@
 	<select id="getBillTotalCount" resultType="int">
 		select count(*) from bills
 	</select>
+	
+	<insert id="insertBillBoard" parameterType="com.vvs.platform.dto.admin.AdminBillBoardDTO" useGeneratedKeys="true" keyProperty="billBoardId">
+		<selectKey keyProperty="billBoardId" resultType="int" order="BEFORE">
+			SELECT seq_billboard_id.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO bill_board (
+			seq_billboard_id,
+			bill_id,
+			title,
+			content,
+			writeday
+		) VALUES (
+			#{billBoardId},
+			#{billId},
+			#{title},
+			#{content},
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="getAllBillBoard" resultType="com.vvs.platform.dto.admin.AdminBillBoardListDTO">
+		SELECT
+            bb.seq_billboard_id AS billboardId,
+            bb.title,
+            b.bill_number AS billNumber,
+            b.committee,
+            b.decision_result AS decisionResult,
+            b.decision_date AS decisionDate
+        FROM
+            bill_board bb
+        INNER JOIN
+            bills b ON bb.bill_id = b.seq_bills
+        ORDER BY
+            bb.seq_billboard_id DESC
+	</select>
+	
+	<!-- bill_board에서 특정 게시글을 삭제하는 쿼리 추가 -->
+	<delete id="deleteBillBoard" parameterType="int">
+		DELETE FROM bill_board WHERE seq_billboard_id = #{billboardId}
+	</delete>
+	
+	<!-- 법안 게시판에서  -->
 </mapper>
