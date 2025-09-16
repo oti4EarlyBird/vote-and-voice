@@ -1,47 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 법안 관련 DB에 대한 마이바티스 매퍼입니다. -->
 <mapper namespace="com.vvs.platform.dao.admin.AdminBillsDAO">
-	<!-- 배치 적재: Oracle INSERT ALL -->
-  <insert id="insertBatch">
-    INSERT ALL
-    <foreach collection="list" item="it">
-      INTO bills (
-        SEQ_BILLS, BILL_TITLE, BILL_NUMBER, RELATED_URL,
-        COMMITTEE, DECISION_RESULT, DECISION_DATE, PDF_LINK
-      ) VALUES (
-        SEQ_BILLS.NEXTVAL,
-        #{it.billTitle},
-        #{it.billNumber},
-        #{it.relatedUrl},
-        #{it.committee},
-        #{it.decisionResult},
-        #{it.decisionDate, jdbcType=DATE},
-        #{it.pdfLink}
-      )
-    </foreach>
-    SELECT 1 FROM DUAL
-  </insert>
-
-  <!-- (옵션) 단건 upsert: BILL_NUMBER 기준 중복 회피 -->
-  <insert id="mergeOne">
-    MERGE INTO bills b
-    USING (SELECT #{billNumber} AS BILL_NUMBER FROM dual) s
-       ON (b.BILL_NUMBER = s.BILL_NUMBER)
-    WHEN NOT MATCHED THEN
-      INSERT (
-        SEQ_BILLS, BILL_TITLE, BILL_NUMBER, RELATED_URL,
-        COMMITTEE, DECISION_RESULT, DECISION_DATE, PDF_LINK
-      )
-      VALUES (
-        SEQ_BILLS.NEXTVAL,
-        #{billTitle},
-        #{billNumber},
-        #{relatedUrl},
-        #{committee},
-        #{decisionResult},
-        #{decisionDate, jdbcType=DATE},
-        #{pdfLink}
-      )
-  </insert>
+	<!-- 페이징 처리해서 출력 -->
+	<select id="getAllBills" resultType="com.vvs.platform.dto.admin.AdminBillsDTO">
+		SELECT *
+		FROM (
+		    SELECT
+		        ROWNUM AS rn,
+		        A.*
+		    FROM (
+		        SELECT
+		        	SEQ_BILLS,
+		        	BILL_TITLE,
+		        	BILL_NUMBER,
+		        	RELATED_URL,  
+		            COMMITTEE, 
+		            DECISION_RESULT,
+		            TO_CHAR(DECISION_DATE, 'YYYY-MM-DD') AS DECISION_DATE,
+		            PDF_LINK
+		        FROM bills
+		        ORDER BY seq_bills DESC
+		    ) A
+		    WHERE ROWNUM &lt;= #{pageDTO.startList} + #{pageDTO.listSize}
+		)
+		WHERE rn &gt; #{pageDTO.startList}
+	</select>
+	
+	<!-- 총 게시물 수(totalCnt)를 조회하는 쿼리 추가 -->
+	<select id="getBillTotalCount" resultType="int">
+		select count(*) from bills
+	</select>
+	
+	<insert id="insertBillBoard" parameterType="com.vvs.platform.dto.admin.AdminBillBoardDTO" useGeneratedKeys="true" keyProperty="billBoardId">
+		<selectKey keyProperty="billBoardId" resultType="int" order="BEFORE">
+			SELECT seq_billboard_id.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO bill_board (
+			seq_billboard_id,
+			bill_id,
+			title,
+			content,
+			writeday
+		) VALUES (
+			#{billBoardId},
+			#{billId},
+			#{title},
+			#{content},
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="getAllBillBoard" resultType="com.vvs.platform.dto.admin.AdminBillBoardListDTO">
+		SELECT
+            bb.seq_billboard_id AS billboardId,
+            bb.title,
+            b.bill_number AS billNumber,
+            b.committee,
+            b.decision_result AS decisionResult,
+            b.decision_date AS decisionDate
+        FROM
+            bill_board bb
+        INNER JOIN
+            bills b ON bb.bill_id = b.seq_bills
+        ORDER BY
+            bb.seq_billboard_id DESC
+	</select>
+	
+	<!-- bill_board에서 특정 게시글을 삭제하는 쿼리 추가 -->
+	<delete id="deleteBillBoard" parameterType="int">
+		DELETE FROM bill_board WHERE seq_billboard_id = #{billboardId}
+	</delete>
+	
+	<!-- 법안 게시판에서  -->
 </mapper>

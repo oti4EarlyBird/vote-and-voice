@@ -158,6 +158,7 @@
 			<version>${springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- 메일 라이브러리 -->
 		<dependency>
 		    <groupId>com.sun.mail</groupId>
@@ -170,6 +171,7 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${springframework-version}</version>
 		</dependency>
+
 		<!-- Spring Security 의존 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

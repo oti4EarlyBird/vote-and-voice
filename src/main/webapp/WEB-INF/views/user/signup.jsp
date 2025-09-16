@@ -110,6 +110,7 @@
 								    <button type="button" id="verifyBtn" class="btn btn-sm rounded-pill btn-primary">확인</button>
 							    </div>
 							    <small id="verifyMessage" class="form-text"></small>
+
 							</div>
 
 							<div class="mb-3">
@@ -202,6 +203,7 @@
 		src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
 	<!-- Main JS -->
 	<script
+
 		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script> 
 	<!-- 이메일 인증번호 입력칸-->
 	<script>
@@ -242,7 +244,6 @@
 	    });
 
 	});
-
 
 	</script>
 	<!-- 실시간 비번 확인 메시지 -->
