@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class BillController {
-
+	
 	private final AdminBillsService adminBillsService;
 
 	@GetMapping("/bill")

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vvs.platform.dao.user.LoginDAO">
+
+    <!-- 로그인: 아이디로 회원 조회 -->
+    <select id="login" parameterType="string" resultType="com.vvs.platform.dto.user.LoginDTO">
+        SELECT USER_SEQ AS userSeq,
+               USER_ID AS userid,
+               NAME AS name,
+               PASSWORD AS password,
+               EMAIL AS email,
+               TO_CHAR(BIRTH_DATE, 'YYYY-MM-DD') AS birthDate,
+               ROLE AS role,
+               ACCOUNT_STATUS   AS accountStatus,
+               NOTIFICATION_OPT_IN AS notificationOptIn,
+               TO_CHAR(SIGNUP_DATE, 'YYYY-MM-DD') AS signupDate,
+               EMAIL_VERIFICATION_CODE AS emailVerificationCode,
+               EMAIL_VERIFIED AS emailVerified
+        FROM USERS
+        WHERE USER_ID = #{userid}
+    </select>
+
+</mapper>

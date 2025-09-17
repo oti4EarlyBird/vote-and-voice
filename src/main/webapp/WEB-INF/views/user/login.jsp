@@ -125,6 +125,14 @@
     </div>
   </div>
   <!-- / Content -->
+<c:if test="${not empty sessionScope.loginUser}">
+    <span>${sessionScope.loginUser.name}님 환영합니다!</span>
+    <a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
+</c:if>
+<c:if test="${empty sessionScope.loginUser}">
+    <a href="${pageContext.request.contextPath}/user/login">로그인</a>
+    <a href="${pageContext.request.contextPath}/user/signup">회원가입</a>
+</c:if>
 
   <!-- Footer -->
 	<%@include file="./common/footer.jsp" %>
