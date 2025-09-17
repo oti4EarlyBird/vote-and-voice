@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.platform.dao.admin.AdminNoticesDAO">
+	<select id="getAllNotices" resultType="com.vvs.platform.dto.admin.AdminNoticesDTO">
+		SELECT 
+			SEQ_NOTICES AS noticeId,
+			TITLE AS title,
+			CONTENT AS content,
+			CATEGORY AS category,
+			IS_PINNED AS isPinned,
+			POST_DATE AS postDate,
+			WRITER AS writer,
+			VIEWNUM AS viewNum
+		FROM
+			NOTICES
+		ORDER BY SEQ_NOTICES DESC
+	</select>
+	<select id="getNoticesByCategory" resultType="com.vvs.platform.dto.admin.AdminNoticesDTO">
+		SELECT
+			SEQ_NOTICES AS noticeId,
+			TITLE AS title,
+			CONTENT AS content,
+			CATEGORY AS category,
+			IS_PINNED AS isPinned,
+			POST_DATE AS postDate,
+			WRITER AS writer,
+			VIEWNUM AS viewNum
+		FROM
+			NOTICES
+		WHERE CATEGORY = #{category}
+		ORDER BY SEQ_NOTICES DESC
+	</select>
+	<insert id="insertNotice" parameterType="com.vvs.platform.dto.admin.AdminNoticesDTO">
+		<selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
+			SELECT SEQ_NOTICES.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO NOTICES (
+			title,
+			content,
+			category,
+			is_pinned,
+			post_date,
+			writer,
+			viewnum
+		) VALUES (
+			#{title},
+			#{content},
+			#{category},
+			#{isPinned},
+			sysdate,
+			'관리자',
+			0
+		)
+	</insert>
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM notices WHERE seq_notices = #{noticeId}
+	</delete>
+</mapper>
