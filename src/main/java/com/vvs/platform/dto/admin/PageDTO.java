@@ -17,7 +17,10 @@ public class PageDTO {
 	    }
 	    
 	    public int startPage;  // 페이지네이션 시작 페이지 번호
-	    public int endPage;	   // 페이지네이션 끝 페이지 번호
+	    public int endPage;	   // 전체 페이지 개수
+	    
+	    public int paginationStart;
+	    public int paginationEnd;
 	    
 	    public void setTotalCnt(int totalCnt) {
 	        this.totalCnt = totalCnt;
@@ -28,5 +31,13 @@ public class PageDTO {
 	        
 	     // 현재 페이지에서의 마지막 게시물 번호
 	        this.endList = Math.min(startList + listSize, totalCnt);
+	     // 앞 뒤 2개씩 보여 주기 
+	        int start = pageNum -2;
+	        int end = pageNum + 2;
+	        if(start<1) start = 1;
+	        if(end > endPage) end = endPage;
+	        
+	        this.paginationStart = start;
+	        this.paginationEnd = end;
 	    }
 }

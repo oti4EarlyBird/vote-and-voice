@@ -106,11 +106,11 @@
 									<li class="page-item prev"><a class="page-link"
 										href="javascript:void(0);"><i
 											class="tf-icon bx bx-chevron-left"></i></a></li>
-									<li class="page-item"><a class="page-link"
+									<li class="page-item active"><a class="page-link"
 										href="javascript:void(0);">1</a></li>
 									<li class="page-item"><a class="page-link"
 										href="javascript:void(0);">2</a></li>
-									<li class="page-item active"><a class="page-link"
+									<li class="page-item"><a class="page-link"
 										href="javascript:void(0);">3</a></li>
 									<li class="page-item"><a class="page-link"
 										href="javascript:void(0);">4</a></li>
@@ -140,5 +140,22 @@
 
 	<%@include file="./common/footer.jsp"%>
 	<%@include file="../commons/jsConf.jsp"%>
+	
+	
+	<script type="text/javascript">
+		console.log("Page:", '${param.page}');
+		
+		$(document).ready(function(){
+			$('.pagination .page-item').click(function(e){
+				e.preventDefault();
+				
+				// 기존 active 제거 
+				$('.pagination .page-item.active').removeClass('active');
+				// 새로운 active 추가
+				$(this).addClass('active');
+			});
+		});
+		
+	</script>
 </body>
 </html>
