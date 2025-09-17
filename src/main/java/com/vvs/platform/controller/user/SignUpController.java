@@ -82,6 +82,7 @@ public class SignUpController {
         	else {
         		userService.signUp(userDTO);
                 mav.addObject("successMessage", "회원가입이 완료되었습니다!");
+                mav.setViewName("user/index");
                 session.removeAttribute("emailVerified");
                 session.removeAttribute("emailAuthCode");
                 session.removeAttribute("emailAuthTarget");
