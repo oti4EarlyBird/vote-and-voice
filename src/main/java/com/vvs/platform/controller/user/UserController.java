@@ -21,7 +21,7 @@ public class UserController {
 	public String index() {
 		//ModelAndView
 		log.debug("debug 로그 테스트");
-		service.webcastvconf();
+		//service.webcastvconf(); // API db 입력하느라;; 
 		
 		return "user/index";
 	}

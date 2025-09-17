@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -30,202 +32,62 @@
 					<!-- Bordered Table -->
 					<div class="card">
 						<!-- <h5 class="card-header">Bordered Table</h5> -->
-						
+
 						<div class="card-body">
 							<!-- 태그 -->
-							<div class="d-flex justify-content-between align-items-center mb-3">
-							    <div class="btn-group" role="group" aria-label="Notice Type">
-							        <a href="?category=all" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "all" || empty param.category}'>active</c:if>'">전체</a>
-							        <a href="?category=소식" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "소식"}'>active</c:if>'">소식</a>
-							        <a href="?category=공지" class="btn btn-sm btn-outline-primary <c:if test='${param.category == "공지"}'>active</c:if>'">공지</a>
-							    </div>
-							    
-							    <!-- 오른쪽 검색창 -->
-							    <form class="d-flex" action="" method="get">
-							        <input type="hidden" name="category" value="all" />
-							        <input class="form-control form-control-sm me-2" type="search" name="keyword" placeholder="검색어 입력" value="${param.keyword}" aria-label="Search">
-							        <button class="btn btn-sm btn-primary" type="submit"><i class="tf-icons bx bx-search"></i></button>
-							    </form>
+							<div
+								class="d-flex justify-content-between align-items-center mb-3">
+								<div class="btn-group" role="group" aria-label="Notice Type">
+									<a href="?category=all"
+										class="btn btn-sm btn-outline-primary <c:if test='${param.category == "all" || empty param.category}'>active</c:if>'">전체</a>
+									<a href="?category=EVENT"
+										class="btn btn-sm btn-outline-primary <c:if test='${param.category == "EVENT"}'></c:if>'">EVENT</a>
+									<a href="?category=UPDATE"
+										class="btn btn-sm btn-outline-primary <c:if test='${param.category == "UPDATE"}'></c:if>'">UPDATE</a>
+									<a href="?category=INFO"
+										class="btn btn-sm btn-outline-primary <c:if test='${param.category == "INFO"}'></c:if>'">INFO</a>
+								</div>
+
+								<!-- 오른쪽 검색창 -->
+								<form class="d-flex" action="" method="get">
+									<input type="hidden" name="category" value="all" /> <input
+										class="form-control form-control-sm me-2" type="search"
+										name="keyword" placeholder="검색어 입력" value="${param.keyword}"
+										aria-label="Search">
+									<button class="btn btn-sm btn-primary" type="submit">
+										<i class="tf-icons bx bx-search"></i>
+									</button>
+								</form>
 							</div>
-							
+
 							<!-- 목록 -->
 							<div class="table-responsive text-nowrap mt-3">
-								<table class="table table-hover"> <!-- table-bordered -->
+								<table class="table table-hover">
+									<!-- table-bordered -->
 									<thead>
-										<tr>
-											<th>Project</th>
-											<th>Client</th>
-											<th>Users</th>
-											<th>Status</th>
-											<th>Actions</th>
+										<tr style="text-align: center;">
+											<th>번호</th>
+											<th>제목</th>
+											<th>글쓴이</th>
+											<th>조회</th>
+											<th>날짜</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>
-												<span class="badge bg-primary me-2">공지</span>
-												<strong>Angular Project</strong></td>
-											<td>Albert Cook</td>
-											<td>
-												<ul
-													class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Lilian Fuller"><img
-														src="../assets/img/avatars/5.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Sophia Wilkerson"><img
-														src="../assets/img/avatars/6.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Christina Parker"><img
-														src="../assets/img/avatars/7.png" alt="Avatar"
-														class="rounded-circle" /></li>
-												</ul>
-											</td>
-											<td><span class="badge bg-label-primary me-1">Active</span></td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React
-													Project</strong></td>
-											<td>Barry Hunter</td>
-											<td>
-												<ul
-													class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Lilian Fuller"><img
-														src="../assets/img/avatars/5.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Sophia Wilkerson"><img
-														src="../assets/img/avatars/6.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Christina Parker"><img
-														src="../assets/img/avatars/7.png" alt="Avatar"
-														class="rounded-circle" /></li>
-												</ul>
-											</td>
-											<td><span class="badge bg-label-success me-1">Completed</span></td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-vuejs fa-lg text-success me-3"></i>
-												<strong>VueJs Project</strong></td>
-											<td>Trevor Baker</td>
-											<td>
-												<ul
-													class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Lilian Fuller"><img
-														src="../assets/img/avatars/5.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Sophia Wilkerson"><img
-														src="../assets/img/avatars/6.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Christina Parker"><img
-														src="../assets/img/avatars/7.png" alt="Avatar"
-														class="rounded-circle" /></li>
-												</ul>
-											</td>
-											<td><span class="badge bg-label-info me-1">Scheduled</span></td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fab fa-bootstrap fa-lg text-primary me-3"></i>
-												<strong>Bootstrap Project</strong></td>
-											<td>Jerry Milton</td>
-											<td>
-												<ul
-													class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Lilian Fuller"><img
-														src="../assets/img/avatars/5.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Sophia Wilkerson"><img
-														src="../assets/img/avatars/6.png" alt="Avatar"
-														class="rounded-circle" /></li>
-													<li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-														data-bs-placement="top" class="avatar avatar-xs pull-up"
-														title="Christina Parker"><img
-														src="../assets/img/avatars/7.png" alt="Avatar"
-														class="rounded-circle" /></li>
-												</ul>
-											</td>
-											<td><span class="badge bg-label-warning me-1">Pending</span></td>
-											<td>
-												<div class="dropdown">
-													<button type="button"
-														class="btn p-0 dropdown-toggle hide-arrow"
-														data-bs-toggle="dropdown">
-														<i class="bx bx-dots-vertical-rounded"></i>
-													</button>
-													<div class="dropdown-menu">
-														<a class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-edit-alt me-1"></i> Edit</a> <a
-															class="dropdown-item" href="javascript:void(0);"><i
-															class="bx bx-trash me-1"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-										</tr>
+										<c:forEach var="notice" items="${noticeList}">
+
+											<tr>
+												<td>${notice.seqNotices }</td>
+												<td>
+													<span class="badge bg-primary me-2">${notice.category}</span> 
+													<strong>${notice.title }</strong></td>
+												<td>${notice.writer }</td>
+												<td>${notice.viewnum }</td>
+												<td>
+													<fmt:formatDate value="${notice.postDate }" pattern="yyyy-MM-dd" />
+												</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -238,9 +100,9 @@
 							<!-- Basic Pagination -->
 							<nav aria-label="Page navigation">
 								<ul class="pagination justify-content-center">
-									<li class="page-item first"><a class="page-link"
+									<!-- <li class="page-item first"><a class="page-link"
 										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevrons-left"></i></a></li>
+											class="tf-icon bx bx-chevrons-left"></i></a></li> -->
 									<li class="page-item prev"><a class="page-link"
 										href="javascript:void(0);"><i
 											class="tf-icon bx bx-chevron-left"></i></a></li>
@@ -257,15 +119,16 @@
 									<li class="page-item next"><a class="page-link"
 										href="javascript:void(0);"><i
 											class="tf-icon bx bx-chevron-right"></i></a></li>
-									<li class="page-item last"><a class="page-link"
+									<!-- <li class="page-item last"><a class="page-link"
 										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevrons-right"></i></a></li>
+											class="tf-icon bx bx-chevrons-right"></i></a></li> -->
 								</ul>
 							</nav>
 							<!--/ Basic Pagination -->
 						</div>
 
-					</div>   <!-- .card -->
+					</div>
+					<!-- .card -->
 
 
 				</div>

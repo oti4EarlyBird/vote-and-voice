@@ -13,11 +13,11 @@ public class PageDTO {
 	    public PageDTO(int pageNum, int listSize) {
 	        this.pageNum = pageNum;
 	        this.listSize = listSize;
-	        this.startList = (pageNum - 1) * listSize;
+	        this.startList = (pageNum - 1) * listSize; 
 	    }
 	    
-	    public int startPage;
-	    public int endPage;
+	    public int startPage;  // 페이지네이션 시작 페이지 번호
+	    public int endPage;	   // 페이지네이션 끝 페이지 번호
 	    
 	    public void setTotalCnt(int totalCnt) {
 	        this.totalCnt = totalCnt;
@@ -25,5 +25,8 @@ public class PageDTO {
 	        int startPage = (pageNum - 1) / 10 * 10 + 1;
 	        this.endPage = endPage;
 	        this.startPage = startPage;
+	        
+	     // 현재 페이지에서의 마지막 게시물 번호
+	        this.endList = Math.min(startList + listSize, totalCnt);
 	    }
 }
