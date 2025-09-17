@@ -15,7 +15,7 @@
 
   <title>회원 로그인 | Vote&Voice</title>
 
-  <!-- Favicon -->
+   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/favicon/favicon.ico" />
 
   <!-- Fonts -->
@@ -42,7 +42,7 @@
 
   <!-- Helpers -->
   <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+  <%-- <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>  --%>
 
 </head>
 
@@ -97,14 +97,6 @@
                 </div>
               </div>
 
-              <!-- 카카오 로그인 버튼 -->
-              <div class="mb-3">
-                <button type="button" class="btn w-100 p-0" style="background-color:transparent; border:none;">
-                  <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_large_wide.png"
-                       alt="카카오 로그인" style="width:100%; height:38px;"/>
-                </button>
-              </div>
-
               <div class="mb-3">
                 <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
               </div>
@@ -125,10 +117,13 @@
     </div>
   </div>
   <!-- / Content -->
+<c:if test="${not empty sessionScope.loginUser}">
+    <span>${sessionScope.loginUser.name}님 환영합니다!</span>
+</c:if>
 
   <!-- Footer -->
 	<%@include file="./common/footer.jsp" %>
-	<%@include file="../commons/jsConf.jsp"%>
+	<%-- <%@include file="../commons/jsConf.jsp"%> --%>
 
 </body>
 </html>
