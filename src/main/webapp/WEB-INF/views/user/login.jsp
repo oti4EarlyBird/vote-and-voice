@@ -96,7 +96,7 @@
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                 </div>
               </div>
-
+	
               <div class="mb-3">
                 <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
               </div>
@@ -117,9 +117,6 @@
     </div>
   </div>
   <!-- / Content -->
-<c:if test="${not empty sessionScope.loginUser}">
-    <span>${sessionScope.loginUser.name}님 환영합니다!</span>
-</c:if>
 
   <!-- Footer -->
 	<%@include file="./common/footer.jsp" %>

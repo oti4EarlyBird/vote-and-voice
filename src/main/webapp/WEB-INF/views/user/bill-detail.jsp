@@ -9,7 +9,7 @@
     <hr class="boldhr">
     <p>
         번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <c:out value="${bill.num}" />
+        <c:out value="${bill.billId}" />
     </p>
     <hr>
     <p>
