@@ -75,12 +75,13 @@
 									</thead>
 									<tbody>
 										<c:forEach var="notice" items="${noticeList}">
-
+											
 											<tr>
 												<td>${notice.seqNotices }</td>
 												<td>
 													<span class="badge bg-primary me-2">${notice.category}</span> 
-													<strong>${notice.title }</strong></td>
+													<a href="<c:url value='/user/notice/detail/${notice.seqNotices}' />" style="color: #697a8d"><strong>${notice.title }</strong></a>
+												</td>
 												<td>${notice.writer }</td>
 												<td>${notice.viewnum }</td>
 												<td>
@@ -94,18 +95,30 @@
 						</div>
 						<!--/ Bordered Table -->
 
-
+						paginationStart: ${pageDTO.paginationStart}, paginationEnd: ${pageDTO.paginationEnd}
 						<!-- 페이징 -->
 						<div class="demo-inline-spacing">
 							<!-- Basic Pagination -->
 							<nav aria-label="Page navigation">
 								<ul class="pagination justify-content-center">
-									<!-- <li class="page-item first"><a class="page-link"
-										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevrons-left"></i></a></li> -->
-									<li class="page-item prev"><a class="page-link"
-										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevron-left"></i></a></li>
+									<c:if test="${pageDTO.pageNum != pageDTO.paginationStart }">
+										<li class="page-item prev"><a class="page-link"
+											href="?page=${pageDTO.paginationStart}&category=${param.category}"><i
+												class="tf-icon bx bx-chevron-left"></i></a></li>
+									</c:if>
+									<c:forEach var="i" begin="${pageDTO.paginationStart}" end="${pageDTO.paginationEnd}">
+										<li class="page-item ${i==pageDTO.pageNum?'active':''}">
+											<a class="page-link" href="?page=${i}&category=${param.category}">${i}</a></li>
+									</c:forEach>
+									<c:if test="${pageDTO.pageNum != pageDTO.paginationEnd }">
+										<li class="page-item next"><a class="page-link"
+											href="?page=${pageDTO.paginationEnd}&category=${param.category}"><i
+												class="tf-icon bx bx-chevron-right"></i></a></li>
+									</c:if>
+								
+								
+								
+<!-- 		
 									<li class="page-item active"><a class="page-link"
 										href="javascript:void(0);">1</a></li>
 									<li class="page-item"><a class="page-link"
@@ -116,12 +129,7 @@
 										href="javascript:void(0);">4</a></li>
 									<li class="page-item"><a class="page-link"
 										href="javascript:void(0);">5</a></li>
-									<li class="page-item next"><a class="page-link"
-										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevron-right"></i></a></li>
-									<!-- <li class="page-item last"><a class="page-link"
-										href="javascript:void(0);"><i
-											class="tf-icon bx bx-chevrons-right"></i></a></li> -->
+	 -->
 								</ul>
 							</nav>
 							<!--/ Basic Pagination -->
@@ -142,20 +150,6 @@
 	<%@include file="../commons/jsConf.jsp"%>
 	
 	
-	<script type="text/javascript">
-		console.log("Page:", '${param.page}');
-		
-		$(document).ready(function(){
-			$('.pagination .page-item').click(function(e){
-				e.preventDefault();
-				
-				// 기존 active 제거 
-				$('.pagination .page-item.active').removeClass('active');
-				// 새로운 active 추가
-				$(this).addClass('active');
-			});
-		});
-		
-	</script>
+
 </body>
 </html>

@@ -20,10 +20,11 @@ public class NoticeService {
 	}
 
 	// 카테고리에 맞춰 글 갯수를 가져옴
-	public int getNoticeCount(Map<String, Object> map) {
+	public int getNoticeTotalCount(Map<String, Object> map) {
 		String category = (String) map.get("category");
-	System.out.println(category);
-		return noticeDAO.getNoticeCount(category);
+	System.out.println("Service totalCOunt : " + category);
+	System.out.println(noticeDAO.getNoticeTotalCount(category));
+		return noticeDAO.getNoticeTotalCount(category);
 	}
 	
 	// 카테고리에 맞춘 페이징된 글 목록 가져옴

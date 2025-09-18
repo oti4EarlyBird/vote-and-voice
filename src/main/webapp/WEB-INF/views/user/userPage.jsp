@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -15,11 +15,22 @@
 <%@ include file="../commons/cssConf.jsp"%>
 </head>
 <body>
-<%@include file="./common/nav.jsp"%>
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<div class="layout-page">
+				<%@include file="./common/nav.jsp"%>
+				<div class="container-xxl flex-grow-1 container-p-y">
+					<h4 class="fw-bold py-3 mb-4">
+						<span class="text-muted fw-light">Community /</span>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
-<%@include file="./common/footer.jsp"%>
-<%@include file="../commons/jsConf.jsp"%>
+	<%@include file="./common/footer.jsp"%>
+	<%@include file="../commons/jsConf.jsp"%>
 </body>
 </html>

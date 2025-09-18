@@ -29,12 +29,12 @@ public class UserNoticeController {
 		ModelAndView mav = new ModelAndView();
 		
 		// 페이징 
-		PageDTO pageDTO = new PageDTO(page, 10); 	// 10개씩 보여줌 
+		PageDTO pageDTO = new PageDTO(page, 5); 	// 10개씩 보여줌 
 		Map<String, Object> map = new HashMap<>();
 		map.put("category", category);		
 		
 		// 총 게시글 수 
-		int totalCnt = noticeService.getNoticeCount(map);
+		int totalCnt = noticeService.getNoticeTotalCount(map);
 		pageDTO.setTotalCnt(totalCnt);
 		map.put("offset", pageDTO.getStartList());
 		map.put("limit", pageDTO.getListSize());
@@ -47,7 +47,11 @@ public class UserNoticeController {
 		for(NoticeDTO dto : list) {
 			System.out.println(dto.getTitle());
 		}
-		
+		System.out.println("totalCNT : " +totalCnt);
+		System.out.println(pageDTO.getPaginationStart());
+		System.out.println(pageDTO.getPaginationEnd());
+		System.out.println(pageDTO.getEndPage());
+		mav.addObject("pageDTO", pageDTO);
 		mav.addObject("noticeList",list);
 		mav.setViewName("user/userNotice");
 		return mav;

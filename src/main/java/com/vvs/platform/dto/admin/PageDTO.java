@@ -32,10 +32,17 @@ public class PageDTO {
 	     // 현재 페이지에서의 마지막 게시물 번호
 	        this.endList = Math.min(startList + listSize, totalCnt);
 	     // 앞 뒤 2개씩 보여 주기 
-	        int start = pageNum -2;
-	        int end = pageNum + 2;
-	        if(start<1) start = 1;
-	        if(end > endPage) end = endPage;
+	        int range = 2;
+	        int start = pageNum - range;
+	        int end = pageNum + range;
+	        if(start<1) {
+	        	end +=(1-start);
+	        	start = 1;
+	        }
+	        if(end > endPage) {
+	        	start -= (end-endPage);
+	        	end = endPage;
+	        }
 	        
 	        this.paginationStart = start;
 	        this.paginationEnd = end;

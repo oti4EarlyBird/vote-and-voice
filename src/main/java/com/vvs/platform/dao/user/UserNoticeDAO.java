@@ -13,7 +13,7 @@ public interface UserNoticeDAO {
 	List<NoticeDTO> selectNoticeList();
 	
 	// category에 따른 전체 글 수 
-	int getNoticeCount(String category);
+	int getNoticeTotalCount(String category);
 
 	// 카테고리에 맞춘 페이징된 글 목록 가져옴
 	List<NoticeDTO> getNoticeList(Map<String, Object> map);

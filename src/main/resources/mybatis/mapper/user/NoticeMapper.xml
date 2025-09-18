@@ -21,10 +21,10 @@
 	</select>
 	
 	<!-- category에 따른 전체 글 수   -->
-	<select id="getNoticeCount" resultType="int" parameterType="String">
+	<select id="getNoticeTotalCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM notices 
 		<where>
-			<if test="category != null and category != ''">
+			<if test="category != null and category != '' and category != 'all'">
 				category = #{category} 
 			</if>
 		</where>
