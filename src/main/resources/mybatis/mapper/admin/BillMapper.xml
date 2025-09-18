@@ -17,7 +17,8 @@
 		            COMMITTEE, 
 		            DECISION_RESULT,
 		            TO_CHAR(DECISION_DATE, 'YYYY-MM-DD') AS DECISION_DATE,
-		            PDF_LINK
+		            PDF_LINK,
+		            VIDEO_LINK
 		        FROM bills
 		        ORDER BY seq_bills DESC
 		    ) A
@@ -40,13 +41,19 @@
 			bill_id,
 			title,
 			content,
-			writeday
+			writeday,
+			viewnum,
+			startdate,
+			enddate
 		) VALUES (
 			#{billBoardId},
 			#{billId},
 			#{title},
 			#{content},
-			SYSDATE
+			SYSDATE,
+			0,
+			SYSDATE,
+			SYSDATE + 7
 		)
 	</insert>
 	
@@ -71,5 +78,24 @@
 		DELETE FROM bill_board WHERE seq_billboard_id = #{billboardId}
 	</delete>
 	
-	<!-- 법안 게시판에서  -->
+	<!-- 법안 게시판에서 상세 페이지로 영상 링크, 문서 링크 포함해서 가져오는 쿼리 추가 -->
+	<select id="getBillBoardDetailByNum" parameterType="int" resultType="com.vvs.platform.dto.admin.AdminBillBoardDTO">
+		SELECT
+            bb.seq_billboard_id AS billboardId,
+            bb.title,
+            b.bill_number AS billNumber,
+            b.committee,
+            b.decision_result AS decisionResult,
+            b.decision_date AS decisionDate,
+            b.decision_result AS decisionResult,
+            bb.content,
+            b.related_url AS relatedUrl,
+            b.pdf_link AS pdfUrl,
+            b.video_link AS videoUrl
+        FROM
+            bill_board bb
+        INNER JOIN
+            bills b ON bb.bill_id = b.seq_bills
+        WHERE bb.seq_billboard_id = #{billboardId}
+	</select>
 </mapper>

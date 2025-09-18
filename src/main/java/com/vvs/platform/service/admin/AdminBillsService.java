@@ -51,4 +51,9 @@ public class AdminBillsService {
 	public int deleteBillBoard(int billboardId) {
 		return adminBillsDAO.deleteBillBoard(billboardId);
 	}
+	
+	//법안 게시글 상세 페이지를 불러오는 메서드
+	public AdminBillBoardDTO getBillBoardDetailByNum(int billboardId) {
+		return adminBillsDAO.getBillBoardDetailByNum(billboardId);
+	}
 }

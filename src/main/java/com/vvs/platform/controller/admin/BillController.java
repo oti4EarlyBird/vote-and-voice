@@ -61,7 +61,7 @@ public class BillController {
 			mav.setViewName("error/error");
 		}
 
-		System.out.println("제목: " + dto.getTitle()); // 게시판에 그리 작성될 때 title을 서버 로그에서 확인하기 위한 로그
+		System.out.println("제목: " + dto.getTitle()); // 게시판에 글이 작성될 때 title을 서버 로그에서 확인하기 위한 로그
 
 		return mav;
 	}
@@ -83,5 +83,22 @@ public class BillController {
 		}
 
 		return response;
+	}
+	
+	//법안 게시글 상세페이지를 불러오는 리스트
+	@GetMapping("/billDetail")
+	public ModelAndView billDetail(@RequestParam("billboardId") int billboardId) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 1. 서비스에서 게시글 리스트를 가져옵니다.
+		AdminBillBoardDTO billBoardDetail = adminBillsService.getBillBoardDetailByNum(billboardId);
+		
+		// 2. ModelAndView에 "billBoardDetail"이라는 이름으로 리스트를 추가합니다.
+		// 이제 JSP에서 이 이름을 사용하여 데이터를 참조할 수 있습니다.
+		mav.addObject("billBoardDetail", billBoardDetail);
+		
+		mav.setViewName("admin/adminBillDetail");
+		
+		return mav;
 	}
 }

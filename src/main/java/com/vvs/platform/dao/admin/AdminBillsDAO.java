@@ -25,4 +25,7 @@ public interface AdminBillsDAO {
     
     //법안 게시판 리스트 페이지에서 삭제하는 메서드 추가
     public int deleteBillBoard(@Param("billboardId") int billboardId);
+    
+    //법안 게시판 상세 페이지를 만드는 메서드 추가
+    public AdminBillBoardDTO getBillBoardDetailByNum(int billboardId); 
 }

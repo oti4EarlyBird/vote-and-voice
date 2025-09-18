@@ -75,7 +75,9 @@
 													<strong>${billBoard.billboardId}</strong>
 												</td>
 												<td>
-													<strong>${billBoard.title}</strong>
+													<a href="${pageContext.request.contextPath}/admin/billDetail?billboardId=${billBoard.billboardId}">
+														<strong>${billBoard.title}</strong>
+													</a>
 												</td>
 												<td>
 													${billBoard.billNumber}
