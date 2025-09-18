@@ -78,6 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         hasVoted=true; 
         window.voteside='반대';
         updateVoteDisplay(); 
-    });   
+    });    
 });
 </script>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vvs.platform.dao.user.VoteDAO">
+
+    <!-- 투표 등록 -->
+    <insert id="insertVote" parameterType="com.vvs.platform.dto.user.VoteDTO">
+        INSERT INTO VOTE (
+            SEQ, USER_ID, BILL_ID, RESULT, VOTE_DATE
+        ) VALUES (
+            seq_votes.NEXTVAL, 
+            #{userId}, 
+            #{billId}, 
+            #{result}, 
+            SYSDATE
+        )
+    </insert>
+
+    <!-- 특정 게시글의 투표 내역 조회 -->
+    <select id="getVotesByBillId" parameterType="int" resultType="com.vvs.platform.dto.user.VoteDTO">
+        SELECT 
+            SEQ, USER_ID, BILL_ID, RESULT, VOTE_DATE
+        FROM VOTE
+        WHERE BILL_ID = #{billId}
+        ORDER BY VOTE_DATE DESC
+    </select>
+
+    <!-- 특정 사용자의 투표 여부 확인 -->
+    <select id="getVoteByUser" resultType="com.vvs.platform.dto.user.VoteDTO">
+        SELECT 
+            SEQ, USER_ID, BILL_ID, RESULT, VOTE_DATE
+        FROM VOTE
+        WHERE BILL_ID = #{billId}
+          AND USER_ID = #{userId}
+    </select>
+
+</mapper>
