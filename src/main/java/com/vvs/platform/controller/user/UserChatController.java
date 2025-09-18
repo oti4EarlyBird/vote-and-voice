@@ -6,13 +6,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/user")
-public class UserMypageController {
-
-	@RequestMapping("/mypage")
-	public ModelAndView userAccount(){
+public class UserChatController {
+	
+	@RequestMapping("/chat")
+	public ModelAndView chatList() {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("user/userAccount");
+		mav.setViewName("user/chatList");
 		return mav;
 	}
+	
 }
