@@ -60,8 +60,10 @@
 					</thead>
 					<tbody class="table-border-bottom-0">
 						<tr>
-							<td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular
-									Project</strong></td>
+							<td><i class="fab fa-angular fa-lg text-danger me-3"></i> 
+							<strong><a href="${pageContext.request.contextPath}/user/actdetail?actnum=1">
+               				 의안 제목
+           					</a></strong></td>
 							<td>Albert Cook</td>
 							<td>
 								<ul
