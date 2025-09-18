@@ -95,7 +95,7 @@
 						</div>
 						<!--/ Bordered Table -->
 
-						paginationStart: ${pageDTO.paginationStart}, paginationEnd: ${pageDTO.paginationEnd}
+						<%-- 확인 : paginationStart: ${pageDTO.paginationStart}, paginationEnd: ${pageDTO.paginationEnd} --%>
 						<!-- 페이징 -->
 						<div class="demo-inline-spacing">
 							<!-- Basic Pagination -->
