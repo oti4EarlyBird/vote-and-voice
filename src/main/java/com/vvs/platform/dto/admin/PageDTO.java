@@ -25,6 +25,7 @@ public class PageDTO {
 	    public void setTotalCnt(int totalCnt) {
 	        this.totalCnt = totalCnt;
 	        int endPage = (int) Math.ceil((double) totalCnt / listSize);
+	        if (endPage == 0) endPage = 1;  	// 전체 페이지가 0일 경우 최소 1페이지는 잇다고 보여줌 
 	        int startPage = (pageNum - 1) / 10 * 10 + 1;
 	        this.endPage = endPage;
 	        this.startPage = startPage;
