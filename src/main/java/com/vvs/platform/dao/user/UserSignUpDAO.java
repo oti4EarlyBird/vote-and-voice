@@ -32,4 +32,13 @@ public class UserSignUpDAO {
     public List<KeywordDTO> getAllKeywords() {
         return sqlSession.selectList("com.vvs.platform.mapper.SignUpMapper.getAllKeywords");
     }
+    //인증키로 사용자 조회
+    public UserSignUpDTO selectUserByAuthKey(String authKey) {
+    	return sqlSession.selectOne("com.vvs.platform.mapper.SignUpMapper.selectUserByAuthKey", authKey);
+    }
+    //인증 완료 처리
+    public int updateAuthStatus(String authKey) {
+    	return sqlSession.update("com.vvs.platform.mapper.SignUpMapper.updateAuthStatus", authKey);
+    }
 }
+    
