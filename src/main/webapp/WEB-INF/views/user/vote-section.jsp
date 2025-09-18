@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.voteside='찬성';
         updateVoteDisplay(); 
     }); 
-
+ 
     document.getElementById("voteNo")?.addEventListener('click', function(){ 
         if(hasVoted){ alert("이미 투표하셨습니다."); return; } 
         disagreeCount++; 

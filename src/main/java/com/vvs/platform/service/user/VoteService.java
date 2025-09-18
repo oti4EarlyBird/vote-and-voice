@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vvs.platform.dao.user.VoteDAO;
 import com.vvs.platform.dto.user.VoteDTO;
-
+ 
 @Service
 public class VoteService {
 

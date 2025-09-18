@@ -5,17 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.vvs.platform.dto.user.VoteDTO;
+import com.vvs.platform.service.user.VoteService;
 
 @Controller
 @RequestMapping("/user")
 @SessionAttributes("userid")
 public class ActDetailController {
+	@Autowired private VoteService voteService;
 	@RequestMapping(value="/actdetail", method=RequestMethod.GET)
 	public ModelAndView actdetail(@RequestParam("actnum") String reqActnum) {
 		ModelAndView mav = new ModelAndView(); 
@@ -57,5 +64,9 @@ public class ActDetailController {
         mav.setViewName("user/actdetail");
         return mav;
 	}
-	
+	@PostMapping("/vote")
+	@ResponseBody
+	public String vote(VoteDTO vote) {
+		return voteService.doVote(vote)?"success":"fail";
+	}
 }

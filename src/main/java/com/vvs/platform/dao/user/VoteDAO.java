@@ -10,7 +10,7 @@ import com.vvs.platform.dto.user.VoteDTO;
 @Mapper
 public interface VoteDAO {
 	//투표 저장
-	VoteDTO vote(); 
+	int insertVote(VoteDTO vote); 
 	//특정 게시글 투표 현황 조회
 	List<VoteDTO> getVotesByBillId(int billId);
 	//특정 사용자 투표 여부 조회
