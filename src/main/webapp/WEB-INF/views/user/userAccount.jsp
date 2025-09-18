@@ -13,6 +13,7 @@
 </head>
 <body>
 <%@include file="./common/nav.jsp" %>
+
 	<!-- Content wrapper -->
 	<div class="content-wrapper">
 		<!-- Content -->
@@ -35,6 +36,8 @@
 							href="pages-account-settings-connections.html"><i
 								class="bx bx-link-alt me-1"></i> Connections</a></li>
 					</ul>
+					
+					
 					<div class="card mb-4">
 						<h5 class="card-header">Profile Details</h5>
 						<!-- Account -->
@@ -67,15 +70,38 @@
 								onsubmit="return false">
 								<div class="row">
 									<div class="mb-3 col-md-6">
-										<label for="firstName" class="form-label">First Name</label> <input
-											class="form-control" type="text" id="firstName"
-											name="firstName" value="John" autofocus />
+										<label for="id" class="form-label">ID</label> <input
+											class="form-control" type="text" id="id"
+											name="id" value="John1234" autofocus />
 									</div>
 									<div class="mb-3 col-md-6">
-										<label for="lastName" class="form-label">Last Name</label> <input
-											class="form-control" type="text" name="lastName"
-											id="lastName" value="Doe" />
+										<label for="name" class="form-label">Name</label> <input
+											class="form-control" type="text" id="name"
+											name="name" value="John" autofocus />
 									</div>
+									<div class="mb-3 col-md-6">
+										<label for="password" class="form-label">Password</label> <input
+											class="form-control" type="password" id="password"
+											name="password" value="" autofocus />
+									</div>
+									
+
+									<div class="form-password-toggle b-3 col-md-6">
+				                        <label class="form-label" for="basic-default-passwordCheck">Password Check</label>
+				                        <div class="input-group">
+				                          <input
+				                            type="password"
+				                            class="form-control"
+				                            id="basic-default-passwordCheck"
+				                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+				                            aria-describedby="basic-default-passwordCheck"
+				                          />
+				                          <span id="basic-default-password2" class="input-group-text cursor-pointer"
+				                            ><i class="bx bx-hide"></i
+				                          ></span>
+				                        </div>
+				                      </div>
+									
 									<div class="mb-3 col-md-6">
 										<label for="email" class="form-label">E-mail</label> <input
 											class="form-control" type="text" id="email" name="email"
@@ -83,109 +109,12 @@
 											placeholder="john.doe@example.com" />
 									</div>
 									<div class="mb-3 col-md-6">
-										<label for="organization" class="form-label">Organization</label>
-										<input type="text" class="form-control" id="organization"
-											name="organization" value="ThemeSelection" />
+										<label for="birthday" class="form-label">Birthday</label> <input
+											class="form-control" type="date" id="birthday" name="birthday"
+											value="2025-09-09"/>
 									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="phoneNumber">Phone
-											Number</label>
-										<div class="input-group input-group-merge">
-											<span class="input-group-text">US (+1)</span> <input
-												type="text" id="phoneNumber" name="phoneNumber"
-												class="form-control" placeholder="202 555 0111" />
-										</div>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="address" class="form-label">Address</label> <input
-											type="text" class="form-control" id="address" name="address"
-											placeholder="Address" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="state" class="form-label">State</label> <input
-											class="form-control" type="text" id="state" name="state"
-											placeholder="California" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="zipCode" class="form-label">Zip Code</label> <input
-											type="text" class="form-control" id="zipCode" name="zipCode"
-											placeholder="231465" maxlength="6" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="country">Country</label> <select
-											id="country" class="select2 form-select">
-											<option value="">Select</option>
-											<option value="Australia">Australia</option>
-											<option value="Bangladesh">Bangladesh</option>
-											<option value="Belarus">Belarus</option>
-											<option value="Brazil">Brazil</option>
-											<option value="Canada">Canada</option>
-											<option value="China">China</option>
-											<option value="France">France</option>
-											<option value="Germany">Germany</option>
-											<option value="India">India</option>
-											<option value="Indonesia">Indonesia</option>
-											<option value="Israel">Israel</option>
-											<option value="Italy">Italy</option>
-											<option value="Japan">Japan</option>
-											<option value="Korea">Korea, Republic of</option>
-											<option value="Mexico">Mexico</option>
-											<option value="Philippines">Philippines</option>
-											<option value="Russia">Russian Federation</option>
-											<option value="South Africa">South Africa</option>
-											<option value="Thailand">Thailand</option>
-											<option value="Turkey">Turkey</option>
-											<option value="Ukraine">Ukraine</option>
-											<option value="United Arab Emirates">United Arab
-												Emirates</option>
-											<option value="United Kingdom">United Kingdom</option>
-											<option value="United States">United States</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="language" class="form-label">Language</label> <select
-											id="language" class="select2 form-select">
-											<option value="">Select Language</option>
-											<option value="en">English</option>
-											<option value="fr">French</option>
-											<option value="de">German</option>
-											<option value="pt">Portuguese</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="timeZones" class="form-label">Timezone</label> <select
-											id="timeZones" class="select2 form-select">
-											<option value="">Select Timezone</option>
-											<option value="-12">(GMT-12:00) International Date
-												Line West</option>
-											<option value="-11">(GMT-11:00) Midway Island, Samoa</option>
-											<option value="-10">(GMT-10:00) Hawaii</option>
-											<option value="-9">(GMT-09:00) Alaska</option>
-											<option value="-8">(GMT-08:00) Pacific Time (US &
-												Canada)</option>
-											<option value="-8">(GMT-08:00) Tijuana, Baja
-												California</option>
-											<option value="-7">(GMT-07:00) Arizona</option>
-											<option value="-7">(GMT-07:00) Chihuahua, La Paz,
-												Mazatlan</option>
-											<option value="-7">(GMT-07:00) Mountain Time (US &
-												Canada)</option>
-											<option value="-6">(GMT-06:00) Central America</option>
-											<option value="-6">(GMT-06:00) Central Time (US &
-												Canada)</option>
-											<option value="-6">(GMT-06:00) Guadalajara, Mexico
-												City, Monterrey</option>
-											<option value="-6">(GMT-06:00) Saskatchewan</option>
-											<option value="-5">(GMT-05:00) Bogota, Lima, Quito,
-												Rio Branco</option>
-											<option value="-5">(GMT-05:00) Eastern Time (US &
-												Canada)</option>
-											<option value="-5">(GMT-05:00) Indiana (East)</option>
-											<option value="-4">(GMT-04:00) Atlantic Time
-												(Canada)</option>
-											<option value="-4">(GMT-04:00) Caracas, La Paz</option>
-										</select>
-									</div>
+								
+								<!-- 
 									<div class="mb-3 col-md-6">
 										<label for="currency" class="form-label">Currency</label> <select
 											id="currency" class="select2 form-select">
@@ -196,6 +125,7 @@
 											<option value="bitcoin">Bitcoin</option>
 										</select>
 									</div>
+									 -->
 								</div>
 								<div class="mt-2">
 									<button type="submit" class="btn btn-primary me-2">Save
@@ -206,6 +136,127 @@
 						</div>
 						<!-- /Account -->
 					</div>
+					
+					<!-- 키워드  -->
+					<div class="card mb-4">
+                    <!-- Notifications -->
+                    <h5 class="card-header">Recent Devices</h5>
+                    <div class="card-body">
+                      <span
+                        >We need permission from your browser to show notifications.
+                        <span class="notificationRequest"><strong>Request Permission</strong></span></span
+                      >
+                      <div class="error"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-striped table-borderless border-bottom">
+                        <thead>
+                          <tr>
+                            <th class="text-nowrap">Type</th>
+                            <th class="text-nowrap text-center">✉️ Email</th>
+                            <th class="text-nowrap text-center">🖥 Browser</th>
+                            <th class="text-nowrap text-center">👩🏻‍💻 App</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-nowrap">New for you</td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck1" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck2" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck3" checked />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-nowrap">Account activity</td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck4" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck5" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck6" checked />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-nowrap">A new browser used to sign in</td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck7" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck8" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck9" />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-nowrap">A new device is linked</td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck10" checked />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck11" />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="checkbox" id="defaultCheck12" />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="card-body">
+                      <h6>When should we send you notifications?</h6>
+                      <form action="javascript:void(0);">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <select id="sendNotification" class="form-select" name="sendNotification">
+                              <option selected>Only when I'm online</option>
+                              <option>Anytime</option>
+                            </select>
+                          </div>
+                          <div class="mt-4">
+                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            <button type="reset" class="btn btn-outline-secondary">Discard</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /Notifications -->
+                  </div>
+					
+					
+					
+					<!-- 계정 삭제 -->
 					<div class="card">
 						<h5 class="card-header">Delete Account</h5>
 						<div class="card-body">
