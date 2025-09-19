@@ -1,5 +1,7 @@
 package com.vvs.platform.controller.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,10 @@ public class LoginController {
         LoginDTO user = loginService.login(userid, password);
 
         if (user != null) {
-            // 로그인 성공 → 세션에 유저 저장
+        	// 로그인 성공 → 세션에 유저 저장
             session.setAttribute("loginUser", user);
             mav.setViewName("user/index"); // 메인으로 이동
+            
         } else {
             // 로그인 실패 → 로그인 페이지로 이동하면서 에러 메시지 전달
             mav.addObject("error", "아이디 또는 비밀번호가 잘못되었습니다.");

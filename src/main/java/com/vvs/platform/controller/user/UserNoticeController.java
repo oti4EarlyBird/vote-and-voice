@@ -71,7 +71,7 @@ public class UserNoticeController {
 		long now = System.currentTimeMillis(); // 현재 시간을 밀리초 단위로 가져옴
 		long lastViewedTime = viewedMap .getOrDefault(noticeSeq, 0L);  // 해당 게시글의 마지막 조회 시간
 		
-		if(now - lastViewedTime > 30*60*100) { //30분
+		if(now - lastViewedTime > 30*60*100) { //3분
 			noticeService.incrementViewCount(noticeSeq);  // 조회수 증가
 			viewedMap.put(noticeSeq, now);		// 세션에 저장 
 			session.setAttribute("viewedMap", viewedMap );

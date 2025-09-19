@@ -85,8 +85,7 @@ public class NoticeListController {
 	public Map<String, String> deleteNotice(@RequestParam("noticeId") int noticeId) {
 		Map<String, String> response = new HashMap<>();
 		int result = adminNoticesService.deleteNotice(noticeId);
-		
-		if (result > 0) {
+				if (result > 0) {
 			response.put("result", "success");
 			response.put("message", "공지사항글이 성공적으로 삭제되었습니다.");
 		} else {
