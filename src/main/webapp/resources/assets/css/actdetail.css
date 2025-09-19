@@ -41,6 +41,7 @@
     padding: 1rem;
     margin-bottom: 1rem;
     background-color: #f9f9f9;
+    flex: 0 0 auto; /* flex container 안에서 정상 높이 확보 */
 }
 
 /* 찬성 댓글 스타일 */

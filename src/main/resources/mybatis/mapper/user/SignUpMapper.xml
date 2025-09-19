@@ -25,7 +25,7 @@
 
     <!-- 키워드 전체 조회 -->
     <select id="getAllKeywords" resultType="com.vvs.platform.dto.user.KeywordDTO">
-        SELECT SEQ as seq, KEYWORD_CONTENT as keywordContent 
+        SELECT SEQ_KEYWORDS as seq, KEYWORD_CONTENT as keywordContent 
         FROM keywords
     </select>
 	

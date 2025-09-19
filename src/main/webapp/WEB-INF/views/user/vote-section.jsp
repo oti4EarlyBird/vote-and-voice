@@ -93,9 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
             body: "billId=" + billId + "&result=" + result
         })
         .then(res => res.json())
-        .then(data => {
+        .then(data => { 
             if (data.success) {
                 hasVoted = true;
+                window.voteside = result === "AGREE" ? "찬성" : "반대";
                 showAlert("투표가 완료되었습니다", "success");
                 refreshVoteStats();
             } else {
@@ -115,13 +116,13 @@ document.addEventListener('DOMContentLoaded', function() {
         alertMessage.textContent = message;
         alertDiv.className = `alert alert-${type} alert-dismissible`;
         alertDiv.style.display = 'block';
-    }
+    } 
  
     // 버튼 이벤트
     document.getElementById("voteYes").addEventListener('click', () => sendVote("AGREE"));
     document.getElementById("voteNo").addEventListener('click', () => sendVote("DISAGREE"));
 
     // 초기 표시
-    updateVoteDisplay();
+    updateVoteDisplay(); 
 });
 </script>

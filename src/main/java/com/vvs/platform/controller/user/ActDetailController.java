@@ -1,6 +1,5 @@
 package com.vvs.platform.controller.user;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vvs.platform.dto.user.CommentDTO;
 import com.vvs.platform.dto.user.LoginDTO;
 import com.vvs.platform.dto.user.VoteDTO;
+import com.vvs.platform.service.user.CommentService;
 import com.vvs.platform.service.user.VoteService;
 
 @Controller
@@ -27,6 +29,7 @@ import com.vvs.platform.service.user.VoteService;
 @SessionAttributes("userid")
 public class ActDetailController {
 	@Autowired private VoteService voteService;
+	@Autowired private CommentService commentService;
 	@RequestMapping(value="/actdetail", method=RequestMethod.GET)
 	public ModelAndView actdetail(@RequestParam("actnum") String reqActnum) {
 		ModelAndView mav = new ModelAndView(); 
@@ -59,21 +62,8 @@ public class ActDetailController {
                 disagreeCount++;
             }
         }
-        // 임시 댓글 데이터
-        List<Map<String, String>> comments = new ArrayList<>();
-        Map<String, String> comment1 = new HashMap<>();
-        comment1.put("userName", "박영희");
-        comment1.put("content", "정책 내용이 구체적이네요. 찬성합니다!");
-        comment1.put("createdAt", "2025-08-13 14:30");
-        comment1.put("side", "찬성");
-        comments.add(comment1);
-
-        Map<String, String> comment2 = new HashMap<>();
-        comment2.put("userName", "이민수");
-        comment2.put("content", "효과가 있을지 조금 의문입니다.");
-        comment2.put("createdAt", "2025-08-13 15:05");
-        comment2.put("side", "반대");
-        comments.add(comment2);
+        //DB에서 댓글 불러오기
+        List<CommentDTO> comments = commentService.listAllByBillId(actnum);
         
         mav.addObject("bill", bill);
         mav.addObject("comments", comments);
@@ -82,7 +72,7 @@ public class ActDetailController {
         mav.setViewName("user/actdetail");
         
         return mav;
-	}
+    }
 	//투표 처리
 	@PostMapping("/vote")
 	@ResponseBody
@@ -132,5 +122,36 @@ public class ActDetailController {
 	    
 	    return response;
 	} 
+	// 댓글 작성
+    @PostMapping("/comment/write")
+    @ResponseBody //JSON 응답
+    public Map<String, Object> writeComment(@RequestBody CommentDTO cmt, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        LoginDTO loginUser = (LoginDTO) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            response.put("success", false);
+            response.put("message", "로그인이 필요합니다.");
+            return response;
+        }
+
+        cmt.setUserId(loginUser.getUserid());
+        int result = commentService.insertC(cmt);
+        
+        if (result > 0) {
+            //방금 저장된 댓글 다시 조회해서 반환
+            CommentDTO newComment = commentService.selectById(cmt.getSeq());
+
+            response.put("success", true);
+            response.put("message", "댓글 작성 성공");
+            response.put("comment", newComment); 
+        } else {
+            response.put("success", false);
+            response.put("message", "댓글 작성 실패");
+        }
+
+        return response;
+    }
+
 }
 
