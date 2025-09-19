@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vvs.platform.dto.user.CommReportDTO;
 import com.vvs.platform.dto.user.CommentDTO;
 import com.vvs.platform.dto.user.LoginDTO;
 import com.vvs.platform.dto.user.VoteDTO;
@@ -152,6 +153,31 @@ public class ActDetailController {
 
         return response;
     }
+    //댓글 신고
+    @PostMapping("/comment/report")
+    @ResponseBody //JSON 응답
+    public Map<String, Object> report(@RequestParam Long commentId, 
+    								@RequestParam String reason, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        LoginDTO loginUser = (LoginDTO) session.getAttribute("loginUser");
 
+        if (loginUser == null) {
+            response.put("success", false);
+            response.put("message", "로그인이 필요합니다.");
+            return response;
+        }
+        //DTO 생성
+        CommReportDTO rpt = new CommReportDTO();
+        rpt.setReporterId(loginUser.getUserid());
+        rpt.setCommentId(commentId);
+        rpt.setReportContent(reason);
+        
+        int result = commentService.insertReport(rpt); // Service 호출
+
+        response.put("success", result > 0);
+        response.put("message", result > 0 ? "신고가 접수되었습니다." : "신고 실패");
+        
+        return response;
+    }
 }
 

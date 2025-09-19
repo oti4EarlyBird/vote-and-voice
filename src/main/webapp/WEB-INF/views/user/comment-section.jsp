@@ -28,26 +28,32 @@
                         <p class="mb-1">${comment.content}</p>
                         <p class="comment-date mb-0">${comment.createdAt}</p>
                     </div>
-                    <button type="button" class="btn btn-outline-danger btn-sm report-btn">신고</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id=${comment.seq}>신고</button>
                 </div>
             </div>
         </c:forEach>
-    </div>
-</div> 
+    </div> 
+</div>
 
 <!-- 신고 모달 -->
 <jsp:include page="report-modal.jsp" />
- 
+
 <script>
-// 서버 데이터를 JavaScript 변수로 전달 
+// 서버 데이터를 JavaScript 변수로 전달
 const contextPath = '${pageContext.request.contextPath}';
 const billId = '${bill.billId}';
 
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {  
     const commentSubmit = document.getElementById('commentSubmit'); 
     const commentInput = document.getElementById('exampleFormControlTextarea1');
     const charCount = document.getElementById('charCount'); 
-    const commentList = document.getElementById('commentList');  
+    const commentList = document.getElementById('commentList'); 
+
+    // 디버깅: 현재 상태 확인
+    console.log('=== 초기 상태 확인 ===');
+    console.log('commentList:', commentList);
+    console.log('기존 댓글 수:', commentList ? commentList.children.length : 0);
+    console.log('commentList 스타일:', commentList ? window.getComputedStyle(commentList) : 'null');
 
     // 글자 수 카운트 이벤트
     commentInput?.addEventListener('input', function(){ 
@@ -72,6 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        console.log('=== 댓글 등록 시작 ===');
+        console.log('내용:', content);
+        console.log('측면:', window.voteside);
+
         // AJAX로 DB 저장 요청
         fetch(contextPath + '/user/comment/write', {
             method: 'POST',
@@ -86,7 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(res => res.json())
         .then(data => {
-             
+            console.log('=== 서버 응답 ===');
+            console.log('전체 응답:', data);
+            
             if (data.success && data.comment) { 
                 const comment = data.comment;
                 console.log('댓글 데이터:', comment);
@@ -135,11 +147,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // 맨 위에 삽입
                     commentList.insertBefore(newComment, commentList.firstChild);
+                    console.log('DOM에 삽입 완료');
+                    
+                    // 삽입 후 상태 확인
+                    console.log('삽입 후 댓글 수:', commentList.children.length);
+                    console.log('첫 번째 요소:', commentList.firstChild);
                     
                     // 스크롤을 위로
                     commentList.scrollTop = 0;
                     
                 } else {
+                    // 기존 댓글이 없는 경우 (첫 댓글)
+                    console.log('첫 번째 댓글 생성');
                     
                     const commentItem = document.createElement('div');
                     commentItem.className = 'comment-item ' + (comment.side === '찬성' ? 'comment-support' : 'comment-oppose');
@@ -163,17 +182,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         commentItem.style.borderColor = '#dc3545 !important';
                     }
-                    
-                    commentItem.innerHTML = `
+                     
+                    commentItem.innerHTML = ` 
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="flex-grow-1">
                                 <p class="mb-1"><strong>${comment.userId}</strong></p> 
                                 <p class="mb-1">${comment.content}</p>
                                 <p class="comment-date mb-0">${comment.createdAt}</p>
                             </div> 
-                            <button type="button" class="btn btn-outline-danger btn-sm report-btn">신고</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id="${comment.seq}">신고</button>
                         </div>
-                    `;
+                    `; 
                      
                     commentList.appendChild(commentItem);
                     console.log('첫 댓글 추가 완료');
@@ -182,6 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 입력 필드 초기화
                 commentInput.value = ''; 
                 charCount.textContent = '0/1000';
+                 
+                // 확인 메시지
+                setTimeout(() => {
+                    const currentCount = commentList.children.length;
+                    alert(`댓글이 추가되었습니다! (현재 총 ${currentCount}개)`);
+                }, 100);
                 
             } else {
                 alert(data.message || '댓글 작성 실패');
