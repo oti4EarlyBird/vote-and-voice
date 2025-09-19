@@ -150,7 +150,7 @@
 							</table>
 						</div>
 						<nav aria-label="Page navigation" class="mt-4">
-							<ul class="pagination justify-content-center" id="modalPagination">
+							<ul class="pagination pagination-lg justify-content-center" id="modalPagination">
 								<!-- Ajax로 로드된 페이징이 여기에 들어갑니다 -->
 							</ul>
 						</nav>

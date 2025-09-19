@@ -78,6 +78,11 @@
 		DELETE FROM bill_board WHERE seq_billboard_id = #{billboardId}
 	</delete>
 	
+	<!-- bill_board 총 게시물 수 조회 쿼리 추가 -->
+	<select id="getBillBoardTotalCount" resultType="int">
+		SELECT count(*) FROM bill_board
+	</select>
+	
 	<!-- 법안 게시판에서 상세 페이지로 영상 링크, 문서 링크 포함해서 가져오는 쿼리 추가 -->
 	<select id="getBillBoardDetailByNum" parameterType="int" resultType="com.vvs.platform.dto.admin.AdminBillBoardDTO">
 		SELECT
