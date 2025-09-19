@@ -1,0 +1,12 @@
+package com.vvs.platform.dao.user;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.vvs.platform.dto.user.CommReportDTO;
+
+@Mapper
+public interface CommReportDAO {
+	//신고 저장
+	int insertReport(CommReportDTO crt);
+
+}
