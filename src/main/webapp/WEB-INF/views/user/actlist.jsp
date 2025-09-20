@@ -63,7 +63,7 @@
 					<tbody class="table-border-bottom-0">
 						<c:forEach var="act" items="${list}">
 							<tr style="cursor:pointer"
-								onclick="location.href='${pageContext.request.contextPath}/user/actdetail/${act.billboardId}'">
+								onclick="location.href='${pageContext.request.contextPath}/user/actdetail?actnum=${act.billboardId}'">
 								<td>${act.billboardId}</td>
 								<td>${act.title}</td>
 								<td>${act.billNumber}</td>

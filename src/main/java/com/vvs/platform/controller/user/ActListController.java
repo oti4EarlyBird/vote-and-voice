@@ -51,14 +51,5 @@ public class ActListController {
 	    return mav;
 	 	}
 	 	
-	 	// 의안 상세보기
-	 	@RequestMapping(value="/user/actdetail/{billboardId}")
-	 	public ModelAndView noticeDetail(@PathVariable("billboardId") int billboardId) {
-	 		ModelAndView mav = new ModelAndView();
-	 		
-	 		mav.setViewName("user/actdetail");
-	 		return mav;
-	 	}
-	    
 }
 
