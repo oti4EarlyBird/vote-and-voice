@@ -12,4 +12,4 @@ public interface LoginDAO {
 	LoginDTO login(@Param("userid")String userid); // 아이디로 회원 찾기
 
 	List<String> getUserKeyword(String userid);
-}
+} 
