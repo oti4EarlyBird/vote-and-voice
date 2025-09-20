@@ -39,7 +39,7 @@ public class ActDetailController {
 		//임시 의안 데이터
 		Map<String, String> bill = new HashMap<>();
         bill.put("billId", String.valueOf(actnum));
-        bill.put("title", "2025년 신규 교육 정책 제안");
+        bill.put("title", "2025년 신규 교육 정책 제안"); 
         bill.put("billnum", "2206839");
         bill.put("where", "법사위원회");
         bill.put("date", "2025-08-23");
