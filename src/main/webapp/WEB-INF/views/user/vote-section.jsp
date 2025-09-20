@@ -24,13 +24,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const billId = "${bill.billId}" + ""; // 문자열로 안전하게 변환
-    let agreeCount = Number("${agreeCount}" || 0);
-    let disagreeCount = Number("${disagreeCount}" || 0);
+    let agreeCount = ${agreeCount};
+    let disagreeCount = ${disagreeCount};
     console.log("초기 찬성표:", agreeCount, "초기 반대표:", disagreeCount);
 
     let hasVoted = false;
-	
-    document.getElementById('voteCount').textContent = `찬성 ${agreeCount} | 반대 ${disagreeCount}`;
     
     // 차트 초기화
     const ctx = document.getElementById('voteChart').getContext('2d');
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateVoteDisplay() {
         voteChart.data.datasets[0].data = [agreeCount, disagreeCount];
         voteChart.update();
-        document.getElementById('voteCount').textContent = `찬성 ${agreeCount}표 | 반대 ${disagreeCount}표`;
+        //document.getElementById('voteCount').textContent = `찬성 ${agreeCount}표 | 반대 ${disagreeCount}표`;
     }
 
     // 서버에서 최신 투표 현황 가져오기

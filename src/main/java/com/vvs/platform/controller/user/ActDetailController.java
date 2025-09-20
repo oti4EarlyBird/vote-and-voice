@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,34 +84,27 @@ public class ActDetailController {
 	    vote.setResult(result);
 
 	    boolean success = voteService.doVote(vote);
-	    response.put("success", success);
-	    response.put("message", success ? "투표 성공" : "이미 투표하셨습니다.");
-	    return response;
-	}  
-	// 투표 현황만 조회하는 AJAX 메서드 추가
-	@GetMapping("/vote-stats")
-	@ResponseBody
-	public Map<String, Object> getVoteStats(@RequestParam("billId") int billId) {
-	    Map<String, Object> response = new HashMap<>();
-	    
+	   
+		//수정 : 투표 직후 최신 통계 내려주기
 	    List<VoteDTO> votes = voteService.getVoteList(billId);
 	    int agreeCount = 0;
 	    int disagreeCount = 0;
 	    
-	    for (VoteDTO vote : votes) {
-	        if ("AGREE".equals(vote.getResult())) {
+	    for (VoteDTO v : votes) {
+	        if ("AGREE".equals(v.getResult())) {
 	            agreeCount++;
-	        } else if ("DISAGREE".equals(vote.getResult())) {
+	        } else if ("DISAGREE".equals(v.getResult())) {
 	            disagreeCount++;
 	        }
 	    }
-	    
+	    response.put("success", success);
+	    response.put("message", success ? "투표 성공" : "이미 투표하셨습니다.");
 	    response.put("agreeCount", agreeCount);
 	    response.put("disagreeCount", disagreeCount);
 	    response.put("totalCount", agreeCount + disagreeCount);
 	    
 	    return response;
-	} 
+	}
 	// 댓글 작성
     @PostMapping("/comment/write")
     @ResponseBody //JSON 응답
@@ -130,12 +122,11 @@ public class ActDetailController {
         int result = commentService.insertC(cmt);
         
         if (result > 0) {
-            //방금 저장된 댓글 다시 조회해서 반환
-            CommentDTO newComment = commentService.selectById(cmt.getSeq());
+        	CommentDTO comments = commentService.getLatestCommentByUser(cmt.getBillId(), loginUser.getUserid());
 
             response.put("success", true);
             response.put("message", "댓글 작성 성공");
-            response.put("comment", newComment); 
+            response.put("comment", comments); 
         } else {
             response.put("success", false);
             response.put("message", "댓글 작성 실패");
