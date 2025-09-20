@@ -55,9 +55,6 @@
 										환영합니다 🎉</h5>
 									<p class="mb-4">Vote and voice는 편리한 정책 참여와 정보 제공을 위한
 										사이트입니다!</p>
-
-									<a href="javascript:;" class="btn btn-sm btn-outline-primary">View
-										Badges</a>
 								</div>
 							</div>
 							<div class="col-sm-5 text-center text-sm-left">

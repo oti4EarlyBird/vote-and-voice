@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.platform.dao.admin.AdminUsersDAO">
+	<select id="getAllUsers">
+		SELECT 
+			USER_SEQ as userSeq,
+			USER_ID as userId,
+			NAME as name,
+			EMAIL as email,
+			BIRTH_DATE as birthDate,
+			ACCOUNT_STATUS as accountStatus,
+			NOTIFICATION_OPT_IN as notificationOptin,
+			SIGNUP_DATE as signupDate
+		FROM
+			USERS
+		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
+		ORDER BY USER_SEQ DESC
+		OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+	</select>
+	<select id="getUserTotalCount" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
+	</select>
+	
+	<select id="getUserDetailBySeq" parameterType="int" resultType="com.vvs.platform.dto.admin.AdminUsersDTO">
+		SELECT
+			USER_SEQ as userSeq,
+			USER_ID as userId,
+			NAME as name,
+			EMAIL as email,
+			BIRTH_DATE as birthDate,
+			ACCOUNT_STATUS as accountStatus,
+			NOTIFICATION_OPT_IN as notificationOptin,
+			SIGNUP_DATE as signupDate
+		FROM
+			USERS
+		WHERE USER_SEQ = #{userSeq}
+	</select>
+	
+	<update id="deleteUserBySeq" parameterType="int">
+		UPDATE USERS SET ACCOUNT_STATUS = 'DELETED' WHERE user_seq = #{userSeq}
+	</update>
+</mapper>
