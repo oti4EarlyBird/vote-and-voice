@@ -1,5 +1,6 @@
 package com.vvs.platform.dto.user;
 
+
 import lombok.Data;
 
 @Data
@@ -10,4 +11,5 @@ public class ActListDTO {
 	private String committee; // bills의 committee
 	private String decisionResult; // bills의 decision_result
 	private String decisionDate; // bills의 decision_date
+
 }

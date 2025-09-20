@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.vvs.platform.dao.user.UserAccountDAO">
+	<update id="deleteAccount" parameterType="String">
+		UPDATE users SET account_status = 'DELETED' WHERE user_id = #{userid}
+	</update>
+
+	<!-- keyword를 Name에서 seq로 변환  -->
+	<select id="findKeywordSeqByKeywordName" parameterType="java.util.List" resultType="Int">
+		SELECT seq_keywords FROM keywords
+		WHERE keyword_content IN 
+		<foreach item="keywordName" collection="keywordNames" open="(" separator="," close=")">
+			#{keywordName}
+		</foreach>
+	</select>
+	
+	<!-- 기존에 지정한 키워드 삭제  -->
+	<delete id="deleteUserKeyword" parameterType="String">
+		delete from user_keywords where user_id = #{userId}
+	</delete>
+	
+	<!-- 프로필 수정 - 업데이트  -->
+	<update id="updateProfile" parameterType="com.vvs.platform.dto.user.LoginDTO">
+		UPDATE users SET
+            NAME = #{name},
+            PASSWORD = #{password},
+            EMAIL = #{email},
+            BIRTH_DATE = #{birthDate}
+        WHERE USER_ID = #{userid}
+	</update>
+</mapper>
