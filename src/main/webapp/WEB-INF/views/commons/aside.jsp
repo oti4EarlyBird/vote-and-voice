@@ -102,16 +102,6 @@
                 <div data-i18n="Analytics">회원 관리</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">신고 관리</div>
-              </a>
-            </li>
            	<li class="menu-header small text-uppercase"><span class="menu-header-text">레퍼런스</span></li>
           	<li class="menu-item">
              		<a href="https://github.com/oti4EarlyBird/vote-and-voice" class="menu-link">
