@@ -41,9 +41,4 @@
 	<update id="deleteUserBySeq" parameterType="int">
 		UPDATE USERS SET ACCOUNT_STATUS = 'DELETED' WHERE user_seq = #{userSeq}
 	</update>
-	<select id="getUserTotalCount" resultType="int" parameterType="map">
-		SELECT COUNT(*)
-		FROM USERS
-		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
-	</select>
 </mapper>
