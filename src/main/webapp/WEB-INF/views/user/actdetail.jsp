@@ -30,7 +30,7 @@
 						<h5 class="card-title">의안 제목</h5>
 						<p class="card-text">의안 내용 요약</p>
 						<p class="card-text">
-							<button type="button" class="btn btn-primary">원안 확인하기</button>
+							<button type="button" class="btn btn-primary">자세히 보기</button>
 						</p>
 					</div>
 				</div>
