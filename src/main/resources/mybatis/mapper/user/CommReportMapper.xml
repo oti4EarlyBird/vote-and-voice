@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vvs.platform.dao.user.CommReportDAO">
+
+    <!-- 신고 저장 -->
+    <insert id="insertReport" parameterType="com.vvs.platform.dto.user.CommReportDTO">
+        INSERT INTO comment_reports (
+            SEQ, REPORTER_ID, COMMENT_ID, REPORT_CONTENT, REPORT_DATE
+        ) VALUES (
+            seq_comment_reports.NEXTVAL, #{reporterId}, #{commentId}, #{reportContent}, SYSDATE
+        )
+    </insert>
+
+</mapper>

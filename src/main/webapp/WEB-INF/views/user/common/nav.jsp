@@ -52,4 +52,7 @@
 						</div>
 						
 					</div>
+					<c:if test="${not empty sessionScope.loginUser}">
+    					<span>${sessionScope.loginUser.userid}님 환영합니다!</span>
+					</c:if>
 				</nav>
