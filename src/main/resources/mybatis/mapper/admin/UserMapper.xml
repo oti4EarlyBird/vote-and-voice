@@ -13,11 +13,14 @@
 			SIGNUP_DATE as signupDate
 		FROM
 			USERS
+		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
 		ORDER BY USER_SEQ DESC
 		OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
 	</select>
 	<select id="getUserTotalCount" resultType="int" parameterType="map">
-		SELECT COUNT(*) FROM USERS
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
 	</select>
 	
 	<select id="getUserDetailBySeq" parameterType="int" resultType="com.vvs.platform.dto.admin.AdminUsersDTO">
@@ -35,7 +38,12 @@
 		WHERE USER_SEQ = #{userSeq}
 	</select>
 	
-	<delete id="deleteUserBySeq" parameterType="int">
-		DELETE FROM users WHERE user_seq = #{userSeq}
-	</delete>
+	<update id="deleteUserBySeq" parameterType="int">
+		UPDATE USERS SET ACCOUNT_STATUS = 'DELETED' WHERE user_seq = #{userSeq}
+	</update>
+	<select id="getUserTotalCount" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE ACCOUNT_STATUS = 'ACTIVE' AND ROLE = 'USER'
+	</select>
 </mapper>
