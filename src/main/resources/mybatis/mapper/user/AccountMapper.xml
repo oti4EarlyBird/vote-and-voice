@@ -21,4 +21,14 @@
 	<delete id="deleteUserKeyword" parameterType="String">
 		delete from user_keywords where user_id = #{userId}
 	</delete>
+	
+	<!-- 프로필 수정 - 업데이트  -->
+	<update id="updateProfile" parameterType="com.vvs.platform.dto.user.LoginDTO">
+		UPDATE users SET
+            NAME = #{name},
+            PASSWORD = #{password},
+            EMAIL = #{email},
+            BIRTH_DATE = #{birthDate}
+        WHERE USER_ID = #{userid}
+	</update>
 </mapper>

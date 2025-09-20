@@ -38,8 +38,10 @@
 								class="bx bx-link-alt me-1"></i> Connections</a></li> -->
 					</ul>
 
-
-					<div class="card mb-4">
+					<div id="profileCardContainer">
+						<jsp:include page="/WEB-INF/views/user/userAccountProfileCard.jsp"></jsp:include>
+					</div>
+					<%-- <div class="card mb-4">
 						<h5 class="card-header">프로필</h5>
 						<!-- Account -->
 						<div class="card-body">
@@ -100,7 +102,7 @@
 
 									<div class="mb-3 col-md-6">
 										<label for="email" class="form-label">이메일 (E-mail)</label> <input
-											class="form-control" type="text" id="email" name="email"
+											class="form-control" type="email" id="email" name="email"
 											value="${loginUser.email }" />
 									</div>
 									<div class="mb-3 col-md-6">
@@ -117,7 +119,7 @@
 							</form>
 						</div>
 						<!-- /Account -->
-					</div>
+					</div> --%>
 					
 					<!-- 키워드  -->
 					<div id="keywordCardContainer">
@@ -217,15 +219,50 @@
 	
 	<script type="text/javascript">
 		$(function() {
+			$('#passwordCheck').on('input', function(){
+				if($('#password').val() !== $(this).val()){
+					$('#passwordCheckHelp').show();
+				}else {
+					$('#passwordCheckHelp').hide();
+				}
+			});
+			
 			// 계정 정보 수정 버튼 클릭
 			$('#AccountBtn').click(function() {
 				alert('계정정보수정버튼 클릭');
-				
-				let data = {
-						id:,
-						name:,
-						password:,
+				if($('#password').val() === $('#passwordCheck').val()){
+					let data = {
+							id: $('#id').val(),
+							name: $('#name').val(),
+							password: $('#password').val(),
+							email: $('#email').val(),
+							birthday: $('#birthday').val(),
+					};
+					
+					$.ajax({
+						url:'${pageContext.request.contextPath}/user/mypage/updateProfile',
+						type: 'POST',
+						contentType: 'application/json',
+						data: JSON.stringify(data),
+						success: function(res) {
+							alert('프로필 업데이트 성공');
+							
+							// 프로필 카드 영역 리로드 
+							$('#profileCardContainer').load('${pageContext.request.contextPath}/user/mypage/userAccountProfileCard');
+						},
+						error: function(){
+							alert('실패');
+						},
+							
+					});
+					
+				}else {
+					alert('비밀번호가 일치하지 않습니다.');
 				}
+				
+				
+				
+				
 			});
 			
 			// 관심 키워드 수정 버튼 클릭

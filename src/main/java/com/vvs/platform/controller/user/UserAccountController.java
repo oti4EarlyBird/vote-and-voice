@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vvs.platform.dto.user.KeywordDTO;
 import com.vvs.platform.dto.user.KeywordsUpdateRequestDTO;
 import com.vvs.platform.dto.user.LoginDTO;
+import com.vvs.platform.dto.user.UserDTO;
 import com.vvs.platform.service.user.UserAccountService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +46,51 @@ public class UserAccountController {
 		return mav;
 	}
 	
+	// 프로필 업데이트
+	@PostMapping("/mypage/updateProfile")
+	@ResponseBody
+	public ResponseEntity<String> updateProfile (@RequestBody UserDTO userDTO, HttpSession session){
+		try {
+			log.info("프로필 업데이트 요청 : {}", userDTO);
+			LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
+			if (loginDTO.getUserid().equals(userDTO.getId())) {
+				loginDTO.setName(userDTO.getName());
+				loginDTO.setPassword(userDTO.getPassword());
+				loginDTO.setEmail(userDTO.getEmail());
+	            List<String> existingInterestKeyword = loginDTO.getInterestKeyword();
+	            loginDTO.setInterestKeyword(existingInterestKeyword);
+
+	            // 사용자 정보 업데이트 
+				accountService.updateProfile(loginDTO);	
+				// 업데이트 된 사용자 정보 조회 
+				LoginDTO updateUser = accountService.getUserById(loginDTO.getUserid());
+				// 세션 정보 갱신
+				// 관심키워드를 세션을 안넣어줘서 날라감;;
+				List<String> keywords = accountService.getUserKeyword(loginDTO.getUserid()); // 관심 키워드 조회
+				updateUser.setInterestKeyword(keywords);
+				
+		        session.setAttribute("loginUser", updateUser);
+				return ResponseEntity.ok("success");
+			}else {
+				log.error("프로필 업데이트 실패");
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
+			}
+		} catch (Exception e) {
+			log.error("프로필 업데이트 실패");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
+		}
+	}
+	// 프로필 업데이트 후 리로드 
+	@GetMapping("/mypage/userAccountProfileCard")
+	public String userAccountProfileCard(HttpSession session, Model model) {
+		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
+		
+		model.addAttribute("loginUser", loginDTO);
+		return "/user/userAccountProfileCard";
+	}
 	
+	
+	// 계정 탈퇴(삭제)
 	@RequestMapping(value="/mypage/deleteAccount")
 	@ResponseBody
 	public String deleteAccount(HttpSession session, HttpServletResponse response) {
@@ -72,6 +120,7 @@ public class UserAccountController {
 	}
 	
 	
+	// 관심 키워드 재설정
 	@RequestMapping("/mypage/updateKeyword")
 	public ResponseEntity<?> updateKeyword(@RequestBody KeywordsUpdateRequestDTO keywordReq, HttpSession session){
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
@@ -89,6 +138,8 @@ public class UserAccountController {
 	    }
 	}
 	
+	
+	// 관심 키워드 카드 리로딩 
 	@RequestMapping("/mypage/userAccountKeywordCard")
 	public String userAccountKeywordCard(Model model, HttpSession session) {
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
