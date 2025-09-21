@@ -15,12 +15,34 @@
 			mapperLocations: 매퍼의 위치
 		 -->
 		<property name="configLocation" value="classpath:mybatis/mapper-config.xml" />
-		<property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/mapper/**/*.xml" />
 		
 	</bean>
-	
+	<!-- 이메일 인증 관련 빈 등록 --> 
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="parkjihae698@gmail.com" />
+      <property name="password" value="pnwm aiwi dbgg zlng" />
+      <property name="javaMailProperties">
+         <props>
+            <prop key="mail.transport.protocol">smtp</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+            <prop key="mail.debug">true</prop>
+            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			<prop key="mail.smtp.starttls.required">true</prop>
+         </props>
+      </property>
+      
+   </bean>
+	<!-- MyBatis SqlSessionTemplate -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	    <constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
 	<!-- @Mapper(선언시 관리 객체로 등록됨)를 사용하기 위한 설정 -->
 	<mybatis-spring:scan 
-		base-package="edu.example.springedu.dao" 
+		base-package="com.vvs.platform.dao" 
 		annotation="org.apache.ibatis.annotations.Mapper" />
 </beans>

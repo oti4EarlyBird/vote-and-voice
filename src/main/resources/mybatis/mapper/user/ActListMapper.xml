@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.platform.dao.user.ActListDAO">
+
+    <!-- 총 게시글 수 -->
+    <select id="getActTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM bill_board bb
+        INNER JOIN bills b ON bb.bill_id = b.seq_bills
+        <if test="category != null and category != 'all'">
+            WHERE SUBSTR(b.committee,1,2) = #{category}
+        </if>
+    </select>
+
+    <!-- 페이징 목록 -->
+    <select id="getActList" resultType="com.vvs.platform.dto.user.ActListDTO">
+        SELECT *
+        FROM (
+            SELECT ROWNUM AS rn, A.*
+            FROM (
+                SELECT
+                    bb.seq_billboard_id AS billboardId,
+                    bb.title,
+                    b.bill_number AS billNumber,
+                    b.committee,
+                    b.decision_result AS decisionResult,
+                    TO_CHAR(b.decision_date, 'YYYY-MM-DD') AS decisionDate
+                FROM bill_board bb
+                INNER JOIN bills b ON bb.bill_id = b.seq_bills
+                <if test="category != null and category != 'all'">
+                    WHERE SUBSTR(b.committee,1,2) = #{category}
+                </if>
+                ORDER BY bb.seq_billboard_id ASC
+            ) A
+            WHERE ROWNUM &lt;= #{offset} + #{limit}
+        )
+        WHERE rn &gt; #{offset}
+    </select>
+
+</mapper>
