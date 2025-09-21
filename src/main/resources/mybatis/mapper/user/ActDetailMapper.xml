@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vvs.platform.dao.user.ActDetailDAO">
+
+    <!-- 특정 bill_board + bills 상세 조회 -->
+    <select id="getBillDetailById" parameterType="int" resultType="com.vvs.platform.dto.user.ActDetailDTO">
+        SELECT
+            bb.seq_billboard_id AS seqBillboardId,
+            bb.bill_id AS billId,
+            bb.title,
+            bb.content,
+            TO_CHAR(bb.startdate,'YYYY-MM-DD') AS startDate,
+            TO_CHAR(bb.enddate,'YYYY-MM-DD') AS endDate,
+            bb.viewnum AS viewNum,
+            b.bill_number AS billNumber,
+            b.committee,
+            b.decision_result AS decisionResult,
+            TO_CHAR(b.decision_date,'YYYY-MM-DD') AS decisionDate,
+            b.related_url AS relatedUrl,
+            b.pdf_link AS pdfLink,
+            b.video_link AS videoLink
+        FROM bill_board bb
+        INNER JOIN bills b ON bb.bill_id = b.seq_bills
+        WHERE bb.seq_billboard_id = #{billBoardId}
+    </select>
+
+</mapper>

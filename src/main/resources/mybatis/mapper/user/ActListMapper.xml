@@ -30,7 +30,7 @@
                 <if test="category != null and category != 'all'">
                     WHERE SUBSTR(b.committee,1,2) = #{category}
                 </if>
-                ORDER BY bb.seq_billboard_id DESC
+                ORDER BY bb.seq_billboard_id ASC
             ) A
             WHERE ROWNUM &lt;= #{offset} + #{limit}
         )

@@ -1,7 +1,5 @@
 package com.vvs.platform.dto.user;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -16,7 +14,4 @@ public class LoginDTO {
     private String accountStatus;
     private String notificationOptIn;
     private String signupDate;
-    
-    // 관심 키워드 
-    private List<String> interestKeyword;
 }	

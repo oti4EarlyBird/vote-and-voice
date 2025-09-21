@@ -8,12 +8,12 @@
     <!-- 특정 의안(billId)의 전체 댓글 조회 -->
     <select id="listAllByBillId" resultType="com.vvs.platform.dto.user.CommentDTO">
         SELECT 
-            SEQ,
-            BILL_ID,
-            USER_ID,
-            CONTENT,
-            TO_CHAR(CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_AT,
-            SIDE
+            SEQ as seq,
+            BILL_ID as billId,
+            USER_ID as userId,
+            CONTENT as content,
+            TO_CHAR(CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS createdAt,
+            SIDE as side
         FROM comments
         WHERE BILL_ID = #{billId}
         ORDER BY CREATED_AT DESC
@@ -22,12 +22,12 @@
     <!-- seq로 댓글 단건 조회 -->
     <select id="selectById" resultType="com.vvs.platform.dto.user.CommentDTO" parameterType="long">
         SELECT 
-            SEQ,
-            BILL_ID,
-            USER_ID,
-            CONTENT,
-            TO_CHAR(CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_AT,
-            SIDE
+            SEQ as seq,
+            BILL_ID as billId,
+            USER_ID as userId,
+            CONTENT as content,
+            TO_CHAR(CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS createdAt,
+            SIDE as side
         FROM comments
         WHERE SEQ = #{seq}
     </select>
@@ -43,5 +43,24 @@
             #{seq}, #{billId}, #{userId}, #{content}, SYSDATE, #{side}
         )
     </insert>
+    
+    <select id="selectLatestCommentByUser" resultType="com.vvs.platform.dto.user.CommentDTO">
+    SELECT *
+    FROM (
+        SELECT 
+            SEQ as seq,
+            BILL_ID as billId,
+            USER_ID as userId,
+            CONTENT as content,
+            TO_CHAR(CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS createdAt,
+            SIDE as side
+        FROM comments
+        WHERE BILL_ID = #{billId}
+          AND USER_ID = #{userId}
+        ORDER BY CREATED_AT DESC
+    )
+    WHERE ROWNUM = 1
+</select>
+    
 
 </mapper>
