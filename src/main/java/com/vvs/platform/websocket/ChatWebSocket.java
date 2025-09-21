@@ -44,19 +44,26 @@ public class ChatWebSocket {
 		Set<Session> sessions = roomSessions.computeIfAbsent(roomId, k -> Collections.synchronizedSet(new HashSet<Session>()));
 		sessions.add(session);
 		
-		broadcast(roomId, "📥 사용자 입장: " + session.getId(), "system");
+		broadcast(roomId, session.getId()+"님 입장", "system");
 	}
 	
 	@OnMessage
 	public void onMessage(String jsonMessage, Session session, @PathParam("roomId") String roomId) {
 		// 클라이언트에서 보낸 메시지를 수신하고 파싱
 		log.info("💬 메시지 수신 - roomId: {}, sessionId: {}, msg: {}", roomId, session.getId(), jsonMessage);
+		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, String> msgMap = mapper.readValue(jsonMessage, Map.class);
+			
 			String sender = msgMap.get("sender");
 			String message = msgMap.get("message");
 			
+			// 비로그인사용자 처리 : sender가 null이나 공백이면 sessionId의 4자리 이용
+			if(sender == null || sender.trim().isEmpty()) {
+				String sessionId = session.getId();
+				sender = sessionId.length() >= 4? sessionId.substring(sessionId.length()-4): sessionId;
+			}
 			
 			broadcast(roomId, message, sender);
 		}catch(Exception e) {

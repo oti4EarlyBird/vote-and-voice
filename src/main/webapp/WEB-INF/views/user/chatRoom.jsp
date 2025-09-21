@@ -85,6 +85,7 @@
 	}
 	ws.onmessage = function(event) {
 		const data = JSON.parse(event.data);
+		console.log("수신데이더 : ", data)
 		showMessage(data.sender, data.message, data.timestamp);
 	}
 	ws.onclose = function () {
@@ -119,21 +120,33 @@
 	function showMessage(sender, message, timestamp){
 		console.log("받은 메시지: ", sender, message, timestamp )
 		
-		const isMine = (sender === myId);
 		const timeText = timestamp || new Date().toLocalTimeString();
 		
-		const msgHTML = ```
+		if(sender === "system") {	
+			const msgHTML = `
+								<div class="chat-msg text-center text-muted" style="width:100%;">
+									\${message}
+								</div>
+							`;
+			$('#chatMessages').append(msgHTML);
+			chatBox.scrollTop(chatBox[0].scrollHeight);			
+			
+			return;
+		}
+		
+		const isMine = (sender === myId);		
+		const msgHTML = `
 							<div class="chat-msg ${isMine?'my-msg':'other-msg'}">
-								<strong>${isMine?'나':sender} :</strong> ${message}
-								<small class="text-muted">${timeText}</small>
+								<strong> \${isMine?'나':sender} :</strong> \${message}
+								<small class="text-muted"> \${timeText}</small>
 							</div>
-						```;
+						`;
 						
 		const chatBox = $('#chatMessages');
-	
-		
 		chatBox.append(msgHTML);
 		chatBox.scrollTop(chatBox[0].scrollHeight);
+		
+		
 		//chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 가장 마지막으로 내리기
 	}
 	
