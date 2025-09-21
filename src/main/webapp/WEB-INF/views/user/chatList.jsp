@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -22,7 +23,7 @@
 	<%@include file="./common/nav.jsp"%>
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<h4 class="fw-bold py-3 mb-4">
-						<span class="text-muted fw-light">Community /</span>
+						<span class="text-muted fw-light">Community /</span> 채팅
 					</h4>
 
 
@@ -61,22 +62,22 @@
 									<!-- table-bordered -->
 									<thead>
 										<tr>
-											<th>Project</th>
-											<th>Client</th>
-											<th>Date</th>
+											<th>title</th>
+											<th>startDate</th>
+											<th>endDate</th>
 											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td><span class="badge bg-primary me-2">공지</span> <strong>Angular
-													Project</strong></td>
-											<td>Albert Cook</td>
-											<td>2025.09.15 ~ 2025.09.31</td>
+											<td><span class="badge bg-primary me-2">공식</span> <strong>
+													평생교육법 일부개정법률안 ${chatRoomId}</strong></td>
+											<td>2025.09.15</td>
+											<td>2025.09.31</td>
 											<td><span class="badge bg-label-primary me-1">Active</span></td>
 											<td>
-												<a href="/user/chat/room/${chatRoomId}" class="btn btn-primary btn-sm">입장</a>
+												<a href="<c:url value='/user/chat/room/${chatRoomId}' />" class="btn btn-primary btn-sm">입장</a>
 											</td>
 										</tr>
 									</tbody>
