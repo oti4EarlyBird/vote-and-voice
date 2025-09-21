@@ -21,12 +21,11 @@
     padding: 10px;
     overflow-y: auto;
 }
-
 .chat-msg {
     margin: 10px 0;
     padding: 8px 12px;
     border-radius: 10px;
-    max-width: 60%;
+    max-width: 100%;
     clear: both;
 }
 .my-msg {
@@ -72,7 +71,26 @@
 	<%@include file="../commons/jsConf.jsp"%>
 	
 	<script>
-		const myId = '${sessionScope.loginUser.userid}';
+		// 로그인한 경우는 userid, 비로그인 JSESSIONID 마지막 4자리
+		let myId = '${sessionScope.loginUser.userid}';
+		
+		if(!myId ||myId === 'undefined'){
+			function getCookie(name){
+				const value = `; ${document.cookie}`; // ;를 붙인 이유는 파싱할때 일관된 구조로 만들려고
+				const parts = value.split(`; ${name}=`);
+				if(parts.length === 2) return  parts.pop().split(';').shift();
+			}
+			
+			let sessionId = getCookie('JSESSIONID');
+			//console.log(sessionId);
+			if(sessionId && sessionId.length >= 4){
+				myId = sessionId.slice(-4);
+			}else {
+				myId = Math.random().toString(36).substr(2, 4);
+			}
+			//console.log(myId);
+		}
+		
 		const chatRoomId = ${chatRoomId};
 	</script>
 	<script type="text/javascript">
@@ -82,12 +100,37 @@
 	// 연결,전송,종료
 	ws.onopen = function(){
 		alert("websocket 연결 성공");
+		
+		const joinMessage = {
+	        type: "join",
+	        sender: myId,
+	        message: ""
+	    };
+	    ws.send(JSON.stringify(joinMessage));
 	}
 	ws.onmessage = function(event) {
 		const data = JSON.parse(event.data);
-		console.log("수신데이더 : ", data)
-		showMessage(data.sender, data.message, data.timestamp);
+		const type = data.type || "chat"; // 기본은 chat
+		 
+		if (type === "join" || type === "leave") {
+	    	const systemMsg = `
+	            <div class="chat-msg text-center text-muted" style="width:100%;">
+	                \${data.sender}님 ${type == "join" ? "입장" : "퇴장"}
+	            </div>`;
+	        $('#chatMessages').append(systemMsg);
+	    } else if (type === "chat") {
+	        showMessage(data.sender, data.message, data.timestamp);
+	    }
+
+	    const chatBox = $('#chatMessages');
+	    chatBox.scrollTop(chatBox[0].scrollHeight);
+		 
+		 
+		//console.log("수신데이더 : ", data)
+		//showMessage(data.sender, data.message, data.timestamp);
 	}
+	
+	
 	ws.onclose = function () {
 		console.log("websocket 연결 종료"); 
 	}
@@ -107,9 +150,10 @@
 		if(msg === "") return;
 		
 		const messageObj = {
+				type: "chat",
 				sender: myId,
 				message: msg,
-				timeText: '10:10'
+				//timeText: '10:10'
 		};
 		ws.send(JSON.stringify(messageObj));
 		input.val("");		// 전송 후 초기화

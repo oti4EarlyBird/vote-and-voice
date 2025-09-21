@@ -44,7 +44,11 @@ public class ChatWebSocket {
 		Set<Session> sessions = roomSessions.computeIfAbsent(roomId, k -> Collections.synchronizedSet(new HashSet<Session>()));
 		sessions.add(session);
 		
-		broadcast(roomId, session.getId()+"님 입장", "system");
+		if (!sessions.contains(session)) {
+	        sessions.add(session);
+	    }
+		//broadcast(roomId, "", session.getId(), "join");
+		//broadcast(roomId, session.getId()+"님 입장", "system");
 	}
 	
 	@OnMessage
@@ -56,6 +60,7 @@ public class ChatWebSocket {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, String> msgMap = mapper.readValue(jsonMessage, Map.class);
 			
+			String type = msgMap.getOrDefault("type", "chat");
 			String sender = msgMap.get("sender");
 			String message = msgMap.get("message");
 			
@@ -65,7 +70,18 @@ public class ChatWebSocket {
 				sender = sessionId.length() >= 4? sessionId.substring(sessionId.length()-4): sessionId;
 			}
 			
-			broadcast(roomId, message, sender);
+			switch (type) {
+	            case "join":
+	                broadcast(roomId, "", sender, "join");
+	                break;
+	            case "chat":
+	                broadcast(roomId, message, sender, "chat");
+	                break;
+	            default:
+	                log.warn("알 수 없는 메시지 타입: {}", type);
+	        }
+			
+			//broadcast(roomId, message, sender);
 		}catch(Exception e) {
 			log.error("메시지 파싱 오료 : {}", e.getMessage());
 		}
@@ -80,7 +96,12 @@ public class ChatWebSocket {
 		Set<Session> sessions = roomSessions.get(roomId);
 		if(sessions != null) {
 			sessions.remove(session);
-			broadcast(roomId, "🚪 사용자 퇴장: " + session.getId(), "system");
+
+			String sessionId = session.getId();
+			String sender = sessionId.length() >= 4 ? sessionId.substring(sessionId.length() - 4) : sessionId;
+
+			broadcast(roomId, "", sender, "leave");
+			//broadcast(roomId, session.getId() + "님 퇴장", "system");
 		}
 	}
 	
@@ -91,7 +112,7 @@ public class ChatWebSocket {
 		
 	}
 	
-	public void broadcast(String roomId, String message, String sender) {
+	public void broadcast(String roomId, String message, String sender, String type) {
 		// 여러 세션에 JSON 메시지 전송 , 직렬화
 		log.info("📤 전송되는 메시지 JSON: {}", message);
 		
@@ -102,6 +123,7 @@ public class ChatWebSocket {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, String> messageMap = new HashMap<>();
+			messageMap.put("type", type);
 			messageMap.put("sender", sender);
 			messageMap.put("message", message);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
