@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -22,7 +25,7 @@
 	<%@include file="./common/nav.jsp"%>
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<h4 class="fw-bold py-3 mb-4">
-						<span class="text-muted fw-light">Community /</span>
+						<span class="text-muted fw-light">Community /</span> 채팅
 					</h4>
 
 
@@ -61,24 +64,37 @@
 									<!-- table-bordered -->
 									<thead>
 										<tr>
-											<th>Project</th>
-											<th>Client</th>
-											<th>Date</th>
+											<th>title</th>
+											<th>startDate</th>
+											<th>endDate</th>
 											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="room" items="${chatRooms }">
 										<tr>
-											<td><span class="badge bg-primary me-2">공지</span> <strong>Angular
-													Project</strong></td>
-											<td>Albert Cook</td>
-											<td>2025.09.15 ~ 2025.09.31</td>
-											<td><span class="badge bg-label-primary me-1">Active</span></td>
 											<td>
-												<a href="/user/chat/room/${chatRoomId}" class="btn btn-primary btn-sm">입장</a>
+												<!-- <span class="badge bg-primary me-2">공식</span> --> 
+												<strong>${room.title}</strong>
+											</td>
+											<td>
+												<fmt:formatDate value="${room.startDate}" pattern="yyyy.MM.dd"/>
+											</td>
+											<td>
+												<fmt:formatDate value="${room.endDate}" pattern="yyyy.MM.dd"/>											
+											</td>
+											<td><span class="badge bg-label-primary me-1">${room.status}</span></td>
+											<td>
+												<c:if test="${room.status == 'OPEN' }">
+													<a href="<c:url value='/user/chat/room/${room.chatRoomId}' />" class="btn btn-primary btn-sm">입장</a>
+												</c:if>
+												<c:if test="${room.status != 'OPEN'}">
+													<button class="bnt btn-sm" disabled="disabled">입장불가</button>
+												</c:if>
 											</td>
 										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
