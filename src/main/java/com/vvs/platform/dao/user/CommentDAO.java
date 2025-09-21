@@ -15,5 +15,8 @@ public interface CommentDAO {
     public int insertC(CommentDTO cmt);
     // seq로 댓글 하나를 조회하는 메소드 추가 (XML의 selectById와 매칭)
     public CommentDTO selectById(Long seq); 
-
+    //특정 사용자가 단 특정 댓글
+    public CommentDTO selectLatestCommentByUser(@Param("billId") long billId,
+            @Param("userId") String userId);
+ 
 }

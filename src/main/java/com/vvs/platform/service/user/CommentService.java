@@ -32,6 +32,6 @@ public class CommentService {
     }
     public CommentDTO getLatestCommentByUser(long billId, String userId) {
         // 특정 사용자가 특정 법안에 작성한 가장 최근 댓글을 조회
-        return reportDAO.selectLatestCommentByUser(billId, userId);
+        return commentDAO.selectLatestCommentByUser(billId, userId);
     }
 }
