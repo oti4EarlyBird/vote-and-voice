@@ -21,7 +21,26 @@
     padding: 10px;
     overflow-y: auto;
 }
+
+.chat-msg {
+    margin: 10px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 60%;
+    clear: both;
+}
+.my-msg {
+    background-color: #d1e7dd;
+    float: right;
+    text-align: right;
+}
+.other-msg {
+    background-color: #f8d7da;
+    float: left;
+    text-align: left;
+}
 </style>
+
 </head>
 <body>
 	<div class="layout-wrapper layout-content-navbar">
@@ -30,11 +49,11 @@
 				<%@include file="./common/nav.jsp"%>
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<h4 class="fw-bold py-3 mb-4">
-						<span class="text-muted fw-light">채팅방 입장 - ROOM ID : chatroomID /</span>
+						<span class="text-muted fw-light">채팅방 입장 - ROOM ID : ${chatRoomId}</span>
 					</h4>
 					<div class="card">
 						<div class="card-body">
-							<div id="chatMessages" class="mb-3">ddd</div>
+							<div id="chatMessages" class="mb-3"></div>
 						
 							<div class="input-group mt-3">
 								<input type="text" id="chatInput" class="form-control" placeholder="메시지를 입력하세요">
@@ -52,8 +71,12 @@
 	<%@include file="./common/footer.jsp"%>
 	<%@include file="../commons/jsConf.jsp"%>
 	
+	<script>
+		const myId = '${sessionScope.loginUser.userid}';
+		const chatRoomId = ${chatRoomId};
+	</script>
 	<script type="text/javascript">
-	const roomId = 1; // 채팅방 id
+	const roomId = chatRoomId; // 채팅방 id
 	const ws= new WebSocket("ws://" + location.host + "/platform/chatt/" + roomId);
 	
 	// 연결,전송,종료
@@ -82,20 +105,29 @@
 		
 		if(msg === "") return;
 		
-		ws.send(msg);
+		const messageObj = {
+				sender: myId,
+				message: msg,
+				timeText: '10:10'
+		};
+		ws.send(JSON.stringify(messageObj));
 		input.val("");		// 전송 후 초기화
 		
 	}
 	
 	// 메시지 출력
 	function showMessage(sender, message, timestamp){
+		console.log("받은 메시지: ", sender, message, timestamp )
+		
+		const isMine = (sender === myId);
 		const timeText = timestamp || new Date().toLocalTimeString();
-		const msgHTML = `
-							<div class="chat-msg">
-								<strong>보내는 사람 :</strong> 메세지입니다.
-								<small class="text-muted">2025.09.10 13:09</small>
+		
+		const msgHTML = ```
+							<div class="chat-msg ${isMine?'my-msg':'other-msg'}">
+								<strong>${isMine?'나':sender} :</strong> ${message}
+								<small class="text-muted">${timeText}</small>
 							</div>
-						`;
+						```;
 						
 		const chatBox = $('#chatMessages');
 	

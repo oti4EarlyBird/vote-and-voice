@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ChatRoomDTO {
 	private Long chatRoomId;
+	private int billBoardId; //  // bill_board.id
     private String title; // bill_board.title
     private Date startDate;
     private Date endDate;

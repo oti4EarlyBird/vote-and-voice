@@ -2,6 +2,8 @@ package com.vvs.platform.controller.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.vvs.platform.dto.admin.PageDTO;
 import com.vvs.platform.dto.user.ChatRoomDTO;
+import com.vvs.platform.dto.user.LoginDTO;
 import com.vvs.platform.service.user.UserChatService;
 
 @Controller
@@ -24,8 +27,8 @@ public class UserChatController {
 		ModelAndView mav = new ModelAndView();
 		
 		// 채팅방 목록 조회 
-		//List<ChatRoomDTO> chatRooms = chatService.getChatRoomList();
-		//mav.addObject("chatRooms", chatRooms);
+		List<ChatRoomDTO> chatRooms = chatService.getChatRoomList();
+		mav.addObject("chatRooms", chatRooms);
 		
 		
 		mav.setViewName("user/chatList");
@@ -35,10 +38,15 @@ public class UserChatController {
 	
 	
 	@RequestMapping("/chat/room/{chatRoomId}")
-	public ModelAndView chatRoom(@PathVariable("chatRoomId") Long chatRoomId) {
+	public ModelAndView chatRoom(@PathVariable("chatRoomId") Long chatRoomId, HttpSession session) {
+		// 로그인사용자 세션
+		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
+		
 		// 디베에서 채팅방 정보 조회 후 전달 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("chatRoomId",chatRoomId);
+		mav.addObject("loginUser",loginDTO);
+		
 		mav.setViewName("user/chatRoom");
 		return mav;
 	}

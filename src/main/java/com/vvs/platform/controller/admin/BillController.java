@@ -52,8 +52,12 @@ public class BillController {
 	public ModelAndView submitForm(AdminBillBoardDTO dto) {
 		ModelAndView mav = new ModelAndView();
 
-		int result = adminBillsService.insertBillBoard(dto);
+		// 원래 의안만 등록하는것 
+		//int result = adminBillsService.insertBillBoard(dto);
 
+		// 의안등록시 채팅방 생성
+		int result = adminBillsService.insertBillBoardAndCreatChatRoom(dto);
+		
 		if (result > 0) {
 			mav.setViewName("redirect:/admin/bill");
 		} else {
@@ -84,4 +88,9 @@ public class BillController {
 
 		return response;
 	}
+	
+	
+	
+	
+	
 }

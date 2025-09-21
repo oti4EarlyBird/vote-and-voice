@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -70,16 +72,29 @@
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="room" items="${chatRooms }">
 										<tr>
-											<td><span class="badge bg-primary me-2">공식</span> <strong>
-													평생교육법 일부개정법률안 ${chatRoomId}</strong></td>
-											<td>2025.09.15</td>
-											<td>2025.09.31</td>
-											<td><span class="badge bg-label-primary me-1">Active</span></td>
 											<td>
-												<a href="<c:url value='/user/chat/room/${chatRoomId}' />" class="btn btn-primary btn-sm">입장</a>
+												<!-- <span class="badge bg-primary me-2">공식</span> --> 
+												<strong>${room.title}</strong>
+											</td>
+											<td>
+												<fmt:formatDate value="${room.startDate}" pattern="yyyy.MM.dd"/>
+											</td>
+											<td>
+												<fmt:formatDate value="${room.endDate}" pattern="yyyy.MM.dd"/>											
+											</td>
+											<td><span class="badge bg-label-primary me-1">${room.status}</span></td>
+											<td>
+												<c:if test="${room.status == 'OPEN' }">
+													<a href="<c:url value='/user/chat/room/${room.chatRoomId}' />" class="btn btn-primary btn-sm">입장</a>
+												</c:if>
+												<c:if test="${room.status != 'OPEN'}">
+													<button class="bnt btn-sm" disabled="disabled">입장불가</button>
+												</c:if>
 											</td>
 										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

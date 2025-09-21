@@ -1,7 +1,10 @@
 package com.vvs.platform.websocket;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +20,8 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,10 +48,20 @@ public class ChatWebSocket {
 	}
 	
 	@OnMessage
-	public void onMessage(String message, Session session, @PathParam("roomId") String roomId) {
-		log.info("💬 메시지 수신 - roomId: {}, sessionId: {}, msg: {}", roomId, session.getId(), message);
-		
-		broadcast(roomId, message, "보내는 사람");
+	public void onMessage(String jsonMessage, Session session, @PathParam("roomId") String roomId) {
+		// 클라이언트에서 보낸 메시지를 수신하고 파싱
+		log.info("💬 메시지 수신 - roomId: {}, sessionId: {}, msg: {}", roomId, session.getId(), jsonMessage);
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String, String> msgMap = mapper.readValue(jsonMessage, Map.class);
+			String sender = msgMap.get("sender");
+			String message = msgMap.get("message");
+			
+			
+			broadcast(roomId, message, sender);
+		}catch(Exception e) {
+			log.error("메시지 파싱 오료 : {}", e.getMessage());
+		}
 	}
 	
 	@OnClose
@@ -70,21 +85,34 @@ public class ChatWebSocket {
 	}
 	
 	public void broadcast(String roomId, String message, String sender) {
+		// 여러 세션에 JSON 메시지 전송 , 직렬화
+		log.info("📤 전송되는 메시지 JSON: {}", message);
+		
 		Set<Session> sessions = roomSessions.get(roomId);
 		
 		if(sessions == null) return;
-		String jsonMessage = String.format(
-				"{\"sender\": \"%s\", \"message\": \"%s\", \"timestamp\": \"%s\"}"
-				, sender
-				, message.replace("\"", "\\\"")
-				, new Date().toString());
-	
-		for(Session s : sessions) {
-			try {
+		
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String, String> messageMap = new HashMap<>();
+			messageMap.put("sender", sender);
+			messageMap.put("message", message);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+			String timeString = LocalTime.now().format(formatter);
+			messageMap.put("timestamp", timeString);
+			
+			String jsonMessage = mapper.writeValueAsString(messageMap);
+			log.info("전송메시지 : {}", jsonMessage);
+			
+			
+			for(Session s : sessions) {
 				s.getBasicRemote().sendText(jsonMessage);
-			}catch(Exception e){
-				log.error("메시지 전송 실패 : {}", e.getMessage());
 			}
+		}catch(Exception e) {
+			log.error("메시지 전송 실패 : {}", e.getMessage());			
 		}
 	}
+	
+	
+	
 }
