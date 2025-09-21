@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
               billId: parseInt(billId),
               content: content,
               side: window.voteside
-          })
+          }) 
       })
       .then(res => {
           console.log('응답 상태:', res.status);
@@ -143,17 +143,20 @@ document.addEventListener('DOMContentLoaded', function() {
                   visibility: visible !important;
                   opacity: 1 !important;
               `;
-              
+	            const userId = comment.userId || '알 수 없음';
+	            const content = comment.content || '내용 없음';
+	            const side = comment.side || '미정';
+	            const createdAt = comment.createdAt || '날짜 없음';
+	            const seq = comment.seq || '0';
               // 기존 댓글과 동일한 HTML 구조
-              commentItem.innerHTML = `
-                  <div><strong>댓글 #NEW</strong></div>
-                  <div><strong>사용자:</strong> ${comment.userId}</div>
-                  <div><strong>측면:</strong> ${comment.side}</div>
-                  <div><strong>내용:</strong> ${comment.content}</div>
-                  <div><strong>작성일:</strong> ${comment.createdAt}</div>
-                  <div><strong>SEQ:</strong> ${comment.seq}</div>
-                  <button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id="${comment.seq}">신고</button>
-              `;
+              commentItem.innerHTML = 
+            	  '<div><strong>댓글 #NEW</strong></div>' +
+                  '<div><strong>사용자:</strong> ' + userId + '</div>' +
+                  '<div><strong>측면:</strong> ' + side + '</div>' +
+                  '<div><strong>내용:</strong> ' + content + '</div>' +
+                  '<div><strong>작성일:</strong> ' + createdAt + '</div>' +
+                  '<div><strong>SEQ:</strong> ' + seq + '</div>' +
+                  '<button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id="' + seq + '">신고</button>';
               
               console.log('=== 댓글 요소 생성 완료 ===');
               console.log('생성된 요소:', commentItem);
