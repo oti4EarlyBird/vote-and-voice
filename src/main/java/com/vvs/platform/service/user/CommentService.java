@@ -17,7 +17,7 @@ public class CommentService {
     @Autowired
     private CommReportDAO reportDAO;
     
-    public List<CommentDTO> listAllByBillId(int billId) {
+    public List<CommentDTO> listAllByBillId(long billId) {
     	return commentDAO.listAllByBillId(billId);
     }
     public int insertC(CommentDTO cmt) {
@@ -29,5 +29,9 @@ public class CommentService {
     //댓글신고
     public int insertReport(CommReportDTO crt) {
     	return reportDAO.insertReport(crt);
+    }
+    public CommentDTO getLatestCommentByUser(long billId, String userId) {
+        // 특정 사용자가 특정 법안에 작성한 가장 최근 댓글을 조회
+        return commentDAO.selectLatestCommentByUser(billId, userId);
     }
 }

@@ -24,13 +24,13 @@
 			<div class="col-md-3 mb-4">
 				<div class="card mb-3">
 					<img class="card-img-top"
-						src="${pageContext.request.contextPath}/resources/assets/img/elements/18.jpg"
+						src="${pageContext.request.contextPath}/resources/assets/img/congress.jpg"
 						alt="Card image cap" />
 					<div class="card-body">
-						<h5 class="card-title">의안 제목</h5>
-						<p class="card-text">의안 내용 요약</p>
+						<h5 class="card-title">제 22대 국회</h5>
+						<p class="card-text">여러분의 목소리가 필요합니다</p>
 						<p class="card-text">
-							<button type="button" class="btn btn-primary">원안 확인하기</button>
+							<button type="button" class="btn btn-primary">자세히 보기</button>
 						</p>
 					</div>
 				</div>
