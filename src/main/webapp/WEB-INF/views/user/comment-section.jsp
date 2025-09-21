@@ -16,34 +16,26 @@
     </div>
     <br>
     
-    <!-- 디버깅 정보 -->
-    <div style="background-color: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
-        <strong>디버깅 정보:</strong><br>
-        댓글 리스트 존재: ${not empty comments ? 'YES' : 'NO'}<br>
-        댓글 개수: ${comments.size()}<br>
-        Bill ID: ${bill.billId}<br>
-    </div>
-    
     <!-- 댓글목록 -->
-    <div id="commentList" style="border: 2px solid red; padding: 20px; min-height: 200px; background-color: #f9f9f9;">
-        <h4>댓글 목록</h4>
+    <div id="commentList">
+        <h4>댓글 목록( ${comments.size()}개 )</h4>
+        <hr>
         
         <c:choose>
             <c:when test="${empty comments}">
-                <div style="text-align: center; color: #888; padding: 50px;">
-                    아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!
+                <div style="text-align: center; color: #888; padding: 20px;">
+                    	아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!
                 </div>
             </c:when>
             <c:otherwise>
                 <c:forEach var="comment" items="${comments}" varStatus="status">
-                    <div style="border: 3px solid blue; background-color: lightyellow; padding: 20px; margin: 15px 0;">
-                        <div><strong>댓글 #${status.count}</strong></div>
-                        <div><strong>사용자:</strong> ${comment.userId}</div>
-                        <div><strong>측면:</strong> ${comment.side}</div>
-                        <div><strong>내용:</strong> ${comment.content}</div>
-                        <div><strong>작성일:</strong> ${comment.createdAt}</div>
-                        <div><strong>SEQ:</strong> ${comment.seq}</div>
+                    <div style="padding: 10px; margin: 10px 0;">
+                        <div><strong>${comment.userId}</strong> </div>
+                        <div><strong>${comment.side}</strong> </div>
+                        <div> ${comment.content}</div>
+                        <div>${comment.createdAt}</div>
                         <button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id="${comment.seq}">신고</button>
+                    	<hr>
                     </div>
                 </c:forEach>
             </c:otherwise>
@@ -58,10 +50,6 @@
 //서버 데이터를 JavaScript 변수로 전달
 const contextPath = '${pageContext.request.contextPath}';
 const billId = '${bill.billId}';
-
-console.log('=== 페이지 로딩 시 변수 확인 ===');
-console.log('contextPath:', contextPath);
-console.log('billId:', billId);
 
 document.addEventListener('DOMContentLoaded', function() {  
   const commentSubmit = document.getElementById('commentSubmit'); 
@@ -135,10 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
               // 새 댓글 요소 생성 (기존 댓글과 동일한 스타일)
               const commentItem = document.createElement('div');
               commentItem.style.cssText = `
-                  border: 3px solid blue !important;
-                  background-color: lightyellow !important;
-                  padding: 20px !important;
-                  margin: 15px 0 !important;
+                  padding: 10px !important;
+                  margin: 10px 0 !important;
                   display: block !important;
                   visibility: visible !important;
                   opacity: 1 !important;
@@ -150,12 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	            const seq = comment.seq || '0';
               // 기존 댓글과 동일한 HTML 구조
               commentItem.innerHTML = 
-            	  '<div><strong>댓글 #NEW</strong></div>' +
-                  '<div><strong>사용자:</strong> ' + userId + '</div>' +
-                  '<div><strong>측면:</strong> ' + side + '</div>' +
-                  '<div><strong>내용:</strong> ' + content + '</div>' +
-                  '<div><strong>작성일:</strong> ' + createdAt + '</div>' +
-                  '<div><strong>SEQ:</strong> ' + seq + '</div>' +
+                  '<div><strong>'+userId+'</strong></div>' +
+                  '<div><strong>'+side+'</strong></div>' +
+                  '<div>' + content + '</div>' +
+                  '<div>' + createdAt + '</div>' +
                   '<button type="button" class="btn btn-outline-danger btn-sm report-btn" data-comment-id="' + seq + '">신고</button>';
               
               console.log('=== 댓글 요소 생성 완료 ===');
