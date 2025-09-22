@@ -19,5 +19,5 @@ public class ActDetailDTO {
     private String relatedUrl;    // bills
     private String pdfLink;       // bills
     private String videoLink;     // bills
-    private String summary;		  // bills
+    private String summary;
 }
