@@ -18,7 +18,8 @@
             TO_CHAR(b.decision_date,'YYYY-MM-DD') AS decisionDate,
             b.related_url AS relatedUrl,
             b.pdf_link AS pdfLink,
-            b.video_link AS videoLink
+            b.video_link AS videoLink,
+            b.summary AS summary
         FROM bill_board bb
         INNER JOIN bills b ON bb.bill_id = b.seq_bills
         WHERE bb.seq_billboard_id = #{billBoardId}

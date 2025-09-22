@@ -32,8 +32,7 @@
         <c:out value="${bill.decisionResult}" />
     </p>
     <hr class="boldhr">
-
-    <div style="white-space: pre-line;">
+ 	<div style="white-space: pre-line;">
         <c:out value="${bill.content}" escapeXml="false"/>
     </div>
     <!-- 관련 링크 -->
@@ -49,4 +48,7 @@
         </c:if>
     </div>
     <br>
+    <div style="white-space: pre-line;">
+        <c:out value="${bill.summary}" escapeXml="false"/>
+    </div>
 </div>
