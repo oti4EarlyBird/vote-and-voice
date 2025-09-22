@@ -31,12 +31,11 @@ public class ActListController {
  		// 페이징 
  		int pageSize = 10;
  		PageDTO pageDTO = new PageDTO(page, pageSize); 	// 10개씩 보여줌 
- 		
- 		int totalCnt = actlistService.getActTotalCount(category);
- 		pageDTO.setTotalCnt(totalCnt);
- 		
  		Map<String, Object> map = new HashMap<>();
- 		map.put("category", category);		
+ 		map.put("category", category);	
+ 		int totalCnt = actlistService.getActTotalCount(map);
+ 		pageDTO.setTotalCnt(totalCnt);
+ 				
  		map.put("offset", pageDTO.getStartList());
  		map.put("limit", pageDTO.getListSize());
  		

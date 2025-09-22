@@ -16,10 +16,11 @@ public class ActListService {
 	private ActListDAO actlistDAO;
 	
 		// 카테고리에 맞춰 글 갯수를 가져옴
-		public int getActTotalCount(String category) {
-		System.out.println("Service totalCOunt : " + category);
-		System.out.println(actlistDAO.getActTotalCount(category));
-			return actlistDAO.getActTotalCount(category);
+		public int getActTotalCount(Map<String, Object> map) {
+			String category = (String) map.get("category");
+			System.out.println("Service totalCOunt : " + category);
+			System.out.println(actlistDAO.getActTotalCount(category));
+				return actlistDAO.getActTotalCount(category);
 		}
 		
 		// 카테고리에 맞춘 페이징된 글 목록 가져옴

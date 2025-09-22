@@ -43,6 +43,10 @@ public class PageDTO {
 	        if(end > endPage) {
 	        	start -= (end-endPage);
 	        	end = endPage;
+	        	
+	        	if (start < 1) {
+	                   start = 1;
+	               }
 	        }
 	        
 	        this.paginationStart = start;

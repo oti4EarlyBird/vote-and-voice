@@ -3,7 +3,7 @@
 <mapper namespace="com.vvs.platform.dao.user.ActListDAO">
 
     <!-- 총 게시글 수 -->
-    <select id="getActTotalCount" resultType="int">
+    <select id="getActTotalCount" resultType="int" parameterType="String">
         SELECT COUNT(*)
         FROM bill_board bb
         INNER JOIN bills b ON bb.bill_id = b.seq_bills
