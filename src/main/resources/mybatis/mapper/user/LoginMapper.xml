@@ -20,5 +20,11 @@
         FROM USERS
         WHERE USER_ID = #{userid}
     </select>
+    <!-- 로그인시 관심 키워드 가져오기 -->
+   <select id="getUserKeyword" parameterType="String" resultType="String">
+      SELECT keyword_content FROM user_keywords uk
+      join keywords k on uk.keyword_id = k.seq_keywords
+      WHERE user_id = #{userid}
+   </select>
 
 </mapper>
