@@ -32,9 +32,9 @@
         <c:out value="${bill.decisionResult}" />
     </p>
     <hr class="boldhr">
- 	<div style="white-space: pre-line;">
+ 	<%-- <div style="white-space: pre-line;">
         <c:out value="${bill.content}" escapeXml="false"/>
-    </div>
+    </div> --%>
     <!-- 관련 링크 -->
     <div class="mt-3">
         <c:if test="${not empty bill.relatedUrl}">
@@ -46,9 +46,10 @@
         <c:if test="${not empty bill.videoLink}">
             <a href="${bill.videoLink}" target="_blank" class="btn btn-sm btn-success">영상 보기</a>
         </c:if>
+        <div style="white-space: pre-line;">
+        	<c:out value="${bill.summary}" escapeXml="false"/>
+    	</div>
     </div>
     <br>
-    <div style="white-space: pre-line;">
-        <c:out value="${bill.summary}" escapeXml="false"/>
-    </div>
+    
 </div>
