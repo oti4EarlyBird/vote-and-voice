@@ -26,9 +26,9 @@
 		<!-- ✅ 카테고리 버튼 수정 -->
 		<div class="btn-container mb-3">
 			<a href="?category=all" class="btn rounded-pill btn-primary ${param.category eq 'all' ? 'active' : ''}">전체</a>
-			<a href="?category=청년" class="btn rounded-pill btn-primary ${param.category eq '청년' ? 'active' : ''}">청년</a>
-			<a href="?category=노인" class="btn rounded-pill btn-primary ${param.category eq '노인' ? 'active' : ''}">노인</a>
-			<a href="?category=복지" class="btn rounded-pill btn-primary ${param.category eq '복지' ? 'active' : ''}">복지</a>
+			<a href="?category=보건" class="btn rounded-pill btn-primary ${param.category eq '보건' ? 'active' : ''}">보건</a>
+			<a href="?category=행정" class="btn rounded-pill btn-primary ${param.category eq '행정' ? 'active' : ''}">행정</a>
+			<a href="?category=법제" class="btn rounded-pill btn-primary ${param.category eq '법제' ? 'active' : ''}">법제</a>
 			<a href="?category=교육" class="btn rounded-pill btn-primary ${param.category eq '교육' ? 'active' : ''}">교육</a>
 		</div>
 
