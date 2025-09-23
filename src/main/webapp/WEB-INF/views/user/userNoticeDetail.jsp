@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" class="light-style" dir="ltr" data-theme="theme-default"
 	data-assets-path="resources/assets/"
@@ -12,6 +13,12 @@
 <title>User Notice Detail</title>
 <!-- Sneat 템플릿 CSS -->
 <%@ include file="../commons/cssConf.jsp"%>
+<style type="text/css">
+table, tr, td {
+	border: 1px solid #d0d6dd;
+	text-align: center;
+}
+</style>
 </head>
 
 <body>
@@ -21,7 +28,7 @@
 			<div class="layout-page">
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<h4 class="fw-bold py-3 mb-4">
-						<span class="text-muted fw-light">공지사항 /</span> [수주] 2025년 가족관계등록 자료정비 사업 수주
+						<span class="text-muted fw-light">${requestScope.noticeSeq }공지사항 /</span>${noticeDTO.title } 
 					</h4>
 					
 					<div class="card">
@@ -29,18 +36,18 @@
 						<div class="card-header">
 							<div class="d-flex justify-content-between mb-3 border-bottom pt-3">
 								<div>
-									<strong>최고관리자</strong>
+									<strong>${noticeDTO.writer}</strong>
 								</div>
 								<div class="text-end">
-									<span>조회 : 1408회</span><br>
-									<span>작성일 : 25-01-06 12:24</span>
+									<span>조회 : ${noticeDTO.viewnum }</span><br>
+									<span>작성일 : <fmt:formatDate value="${noticeDTO.postDate}" pattern="yyyy-MM-dd hh:mm"/> </span>
 								</div>
 							</div>
 						</div>
 
 						<!-- 본문 내용 -->
 						<div class="card-body p-4">
-						hhhh
+						${noticeDTO.content }
 						</div>
 						
 						
@@ -49,10 +56,10 @@
 							<ul class="list-group rounded-0">
 								<li class="list-group-item border-start-0 border-end-0">
 									<span class=text-muted fw-light"><i class="bx bx-chevron-up"></i>이전글</span>
-									이전글의 제목입니다.</li>
+									${prevNotice.title }</li>
 								<li class="list-group-item border-start-0 border-end-0">
 									<span class=text-muted fw-light"><i class="bx bx-chevron-down"></i>다음글</span>
-									다음글의 제목입니다.
+									${nextNotice.title }
 								</li>
 							</ul>
 						</div>
