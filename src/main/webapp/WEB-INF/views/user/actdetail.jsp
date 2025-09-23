@@ -39,6 +39,7 @@
 			<!-- 우측 의안 상세 카드 -->
 			<div class="col-md-8">
 				<div class="card p-4 mb-4">
+					${loginUser }
 					<!-- 의안 상세 내용 -->
 					<jsp:include page="bill-detail.jsp" />
 					

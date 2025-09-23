@@ -1,3 +1,4 @@
+<%@page import="com.vvs.platform.dto.user.LoginDTO"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ page isELIgnored="false" %>
 
@@ -23,6 +24,14 @@
 <div id="voteCount" style="text-align: center; font-size: 1.2em; margin-top: 10px;">
 </div>
 
+
+<%
+LoginDTO loginUser = (LoginDTO) session.getAttribute("loginUser");
+String userId = loginUser != null ? loginUser.getUserid() : "";
+%>
+<script>
+const userId = "<%= userId %>";
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log('=== 투표 스크립트 시작 ===');
