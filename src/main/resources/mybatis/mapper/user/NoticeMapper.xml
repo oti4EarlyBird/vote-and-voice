@@ -29,4 +29,34 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 특정 번호의 공지사항 하나의 정보 가져옴 -->
+	<select id="getNoticeById" resultType="com.vvs.platform.dto.user.NoticeDTO" parameterType="int">
+		SELECT * FROM notices WHERE seq_notices = #{noticeSeq}
+	</select>
+	
+	<!-- 이전글 제목, 번호 -->
+	<select id="getPrevNotice" resultType="com.vvs.platform.dto.user.NoticeDTO" parameterType="int">
+		<![CDATA[
+		SELECT * FROM notices
+	    WHERE seq_notices > #{noticeSeq}
+	    ORDER BY seq_notices ASC
+	    FETCH FIRST 1 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 다음글 제목, 번호 -->
+	<select id="getNextNotice" resultType="com.vvs.platform.dto.user.NoticeDTO" parameterType="int">
+		<![CDATA[
+		SELECT * FROM notices
+	    WHERE seq_notices < #{noticeSeq}
+	    ORDER BY seq_notices DESC
+	    FETCH FIRST 1 ROWS ONLY
+	    ]]>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="incrementViewCount" parameterType="int">
+		UPDATE notices SET VIEWNUM = VIEWNUM+1 WHERE SEQ_NOTICES = #{noticeSeq}
+	</update>
 </mapper>

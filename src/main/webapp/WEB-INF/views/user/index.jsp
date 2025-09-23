@@ -25,9 +25,12 @@
 			<div class="layout-page">
 				<%@include file="./common/nav.jsp"%>
 				<div class="container-xxl flex-grow-1 container-p-y">
-					<h4 class="fw-bold py-3 mb-4">
-						<span class="text-muted fw-light">MAIN /</span>
-					</h4>
+					<!-- 
+               <h4 class="fw-bold py-3 mb-4">
+                  <span class="text-muted fw-light">MAIN /</span>
+               </h4>
+-->            
+            <jsp:include page="./mainImage.jsp"></jsp:include>
 				</div>
 				<%@include file="./common/footer.jsp"%>
 			</div>
