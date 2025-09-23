@@ -47,7 +47,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 전체 삭제
-        return "/user/";  // 메인으로 이동
+        return "/user/index";  // 메인으로 이동
     }
 
 }
