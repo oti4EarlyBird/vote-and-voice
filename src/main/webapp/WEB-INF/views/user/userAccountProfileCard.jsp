@@ -3,6 +3,7 @@
 <div class="card mb-4">
 						<h5 class="card-header">프로필</h5>
 						<!-- Account -->
+						<!-- 
 						<div class="card-body">
 							<div class="d-flex align-items-start align-items-sm-center gap-4">
 								<img src="../assets/img/avatars/1.png" alt="user-avatar"
@@ -22,8 +23,9 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> 
 						<hr class="my-0" />
+						-->
 						<div class="card-body">
 							<form id="formAccountSettings" method="POST"
 								onsubmit="return false">
