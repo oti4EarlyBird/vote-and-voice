@@ -87,7 +87,6 @@
                 <div class="d-flex justify-content-between">
                   <label class="form-label" for="password">비밀번호</label>
                   <a href="${pageContext.request.contextPath}/resetPw">
-                    <small>비밀번호 재설정</small>
                   </a>
                 </div>
                 <div class="input-group input-group-merge">
