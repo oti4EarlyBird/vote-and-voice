@@ -115,21 +115,6 @@
 											href="?page=${pageDTO.paginationEnd}&category=${param.category}"><i
 												class="tf-icon bx bx-chevron-right"></i></a></li>
 									</c:if>
-								
-								
-								
-<!-- 		
-									<li class="page-item active"><a class="page-link"
-										href="javascript:void(0);">1</a></li>
-									<li class="page-item"><a class="page-link"
-										href="javascript:void(0);">2</a></li>
-									<li class="page-item"><a class="page-link"
-										href="javascript:void(0);">3</a></li>
-									<li class="page-item"><a class="page-link"
-										href="javascript:void(0);">4</a></li>
-									<li class="page-item"><a class="page-link"
-										href="javascript:void(0);">5</a></li>
-	 -->
 								</ul>
 							</nav>
 							<!--/ Basic Pagination -->

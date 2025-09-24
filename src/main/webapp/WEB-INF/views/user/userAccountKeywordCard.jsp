@@ -13,6 +13,7 @@
 			<div class="error"></div>
 		</div>
 		<div class="table-responsive m-3">
+		${sessionScope.loginUser }
 			<table class="table table-striped table-borderless border-bottom">
 				<thead>
 					<tr>

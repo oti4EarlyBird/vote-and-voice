@@ -1,6 +1,8 @@
 package com.vvs.platform.controller.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,11 +28,25 @@ public class UserChatController {
 	public ModelAndView chatList(@RequestParam(value="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView();
 		
+		//페이징
+		PageDTO pageDTO = new PageDTO(page, 5);
+		Map<String, Object> map = new HashMap<>();
+		//map.put("category", category);	
+		
+		// 총 게시글 수 
+		int totalCnt = chatService.getNoticeTotalCount();
+		pageDTO.setTotalCnt(totalCnt);
+		map.put("offset", pageDTO.getStartList());
+		map.put("limit", pageDTO.getListSize());
+
+		
+		
 		// 채팅방 목록 조회 
-		List<ChatRoomDTO> chatRooms = chatService.getChatRoomList();
+//		List<ChatRoomDTO> chatRooms = chatService.getChatRoomList();
+		List<ChatRoomDTO> chatRooms = chatService.getChatRoomList(map);
+
+		mav.addObject("pageDTO", pageDTO);
 		mav.addObject("chatRooms", chatRooms);
-		
-		
 		mav.setViewName("user/chatList");
 		return mav;
 	}

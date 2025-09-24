@@ -43,7 +43,7 @@ public class ChatWebSocket {
 		log.info("클라이언트 입장 : roomId: {}, sessionId: {}", roomId, session.getId());
 		Set<Session> sessions = roomSessions.computeIfAbsent(roomId, k -> Collections.synchronizedSet(new HashSet<Session>()));
 		sessions.add(session);
-		
+
 		if (!sessions.contains(session)) {
 	        sessions.add(session);
 	    }

@@ -1,6 +1,7 @@
 package com.vvs.platform.dao.user;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,5 +15,10 @@ public interface UserChatDAO {
 	
 	// 채팅방 전체 목록 select 
 	List<ChatRoomDTO> selectAllChatRooms();
+
+	// 채팅방 개수
+	int getNoticeTotalCount();
+
+	List<ChatRoomDTO> selectAllChatRoomsMap(Map<String, Object> map);
 
 }

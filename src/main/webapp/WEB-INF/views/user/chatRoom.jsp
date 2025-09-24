@@ -115,7 +115,7 @@
 		if (type === "join" || type === "leave") {
 	    	const systemMsg = `
 	            <div class="chat-msg text-center text-muted" style="width:100%;">
-	                \${data.sender}님 ${type == "join" ? "입장" : "퇴장"}
+	                \${data.sender}님 \${type == "join" ? "입장" : "퇴장"}
 	            </div>`;
 	        $('#chatMessages').append(systemMsg);
 	    } else if (type === "chat") {
