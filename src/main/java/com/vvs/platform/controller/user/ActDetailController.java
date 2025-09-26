@@ -39,21 +39,12 @@ public class ActDetailController {
     @Autowired
     private ActDetailService actDetailService;
 
-    // 의안 상세 조회
     @RequestMapping(value="/actdetail", method=RequestMethod.GET)
     public ModelAndView actdetail(@RequestParam("actnum") int actnum) {
         ModelAndView mav = new ModelAndView(); 
         
-        // DB에서 상세 조회
         ActDetailDTO bill = actDetailService.getBillDetail(actnum);
 
-        // 디버깅
-        System.out.println("=== 컨트롤러 디버깅 ===");
-        System.out.println("actnum: " + actnum);
-        System.out.println("bill: " + bill);
-        System.out.println("bill.getBillId(): " + (bill != null ? bill.getBillId() : "null"));
-
-        // 실제 투표 데이터 가져오기
         List<VoteDTO> votes = voteService.getVoteList(actnum);
         int agreeCount = 0;
         int disagreeCount = 0;
@@ -65,7 +56,6 @@ public class ActDetailController {
             }
         }
 
-        // 댓글 불러오기
         List<CommentDTO> comments = new ArrayList<>();
         if (bill != null && bill.getBillId() > 0 && bill.getBillId() > 0) {
             comments = commentService.listAllByBillId(bill.getBillId());
@@ -86,7 +76,6 @@ public class ActDetailController {
         return mav;
     }
 
-    // ✅ 투표 통계 API
     @RequestMapping(value="/vote-stats", method=RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getVoteStats(@RequestParam("billId") int billId) {
@@ -122,7 +111,6 @@ public class ActDetailController {
         return response;
     }
 
-    // 투표 처리
     @PostMapping("/vote")
     @ResponseBody
     public Map<String, Object> doVote(@RequestParam("billId") int billId,
@@ -144,7 +132,6 @@ public class ActDetailController {
 
         boolean success = voteService.doVote(vote);
 
-        // 최신 통계 조회
         List<VoteDTO> votes = voteService.getVoteList(billId);
         int agreeCount = 0;
         int disagreeCount = 0;
@@ -165,7 +152,6 @@ public class ActDetailController {
         return response;
     }
 
-    // 댓글 작성
     @PostMapping("/comment/write")
     @ResponseBody
     public Map<String, Object> writeComment(@RequestBody CommentDTO cmt, HttpSession session) {
@@ -194,7 +180,6 @@ public class ActDetailController {
         return response;
     }
 
-    // 댓글 신고
     @PostMapping("/comment/report")
     @ResponseBody
     public Map<String, Object> report(@RequestParam Long commentId, 

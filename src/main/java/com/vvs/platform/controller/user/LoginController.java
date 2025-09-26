@@ -20,7 +20,6 @@ public class LoginController {
 	@Autowired
     private LoginService loginService;
 	
-	// 로그인 페이지 표시용 GET 매핑 
     @GetMapping("/login")
     public String loginForm() {
         return "user/login";
@@ -33,11 +32,9 @@ public class LoginController {
         LoginDTO user = loginService.login(userid, password);
 
         if (user != null) {
-            // 로그인 성공 → 세션에 유저 저장
             session.setAttribute("loginUser", user);
-            mav.setViewName("user/index"); // 메인 페이지로 이동
+            mav.setViewName("user/index");
         } else {
-            // 로그인 실패 → 로그인 페이지로 이동하면서 에러 메시지 전달
             mav.addObject("error", "아이디 또는 비밀번호가 잘못되었습니다.");
             mav.setViewName("user/login");
         }
@@ -46,8 +43,8 @@ public class LoginController {
     }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // 세션 전체 삭제
-        return "/user/index";  // 메인으로 이동
+        session.invalidate(); 
+        return "/user/index";  
     }
 
 }

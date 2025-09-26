@@ -22,13 +22,11 @@ public class ActListController {
 	@Autowired 
 	private ActListService actlistService;
 
-    // 의안 목록
  	@RequestMapping("/actlist")
  	public ModelAndView notice(@RequestParam(value= "page", defaultValue="1") int page,
  								@RequestParam(value="category", defaultValue="all") String category) {
  		ModelAndView mav = new ModelAndView();
- 		
- 		// 페이징 
+
  		int pageSize = 10;
  		PageDTO pageDTO = new PageDTO(page, pageSize); 	// 10개씩 보여줌 
  		Map<String, Object> map = new HashMap<>();
@@ -40,7 +38,7 @@ public class ActListController {
  		map.put("limit", pageDTO.getListSize());
  		
  		System.out.println("UserNoticeController : " + totalCnt);
- 		// 목록 가져오기 
+ 
 	 	List<ActListDTO> list = actlistService.getActList(map);
 	
 	    mav.addObject("list", list);
