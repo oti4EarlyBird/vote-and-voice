@@ -26,7 +26,6 @@ public class UserChatController {
 	public ModelAndView chatList(@RequestParam(value="page", defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView();
 		
-		// 채팅방 목록 조회 
 		List<ChatRoomDTO> chatRooms = chatService.getChatRoomList();
 		mav.addObject("chatRooms", chatRooms);
 		
@@ -39,10 +38,9 @@ public class UserChatController {
 	
 	@RequestMapping("/chat/room/{chatRoomId}")
 	public ModelAndView chatRoom(@PathVariable("chatRoomId") Long chatRoomId, HttpSession session) {
-		// 로그인사용자 세션
+
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
 		
-		// 디베에서 채팅방 정보 조회 후 전달 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("chatRoomId",chatRoomId);
 		mav.addObject("loginUser",loginDTO);

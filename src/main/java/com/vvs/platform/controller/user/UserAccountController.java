@@ -45,8 +45,7 @@ public class UserAccountController {
 		mav.setViewName("user/userAccount");
 		return mav;
 	}
-	
-	// 프로필 업데이트
+
 	@PostMapping("/mypage/updateProfile")
 	@ResponseBody
 	public ResponseEntity<String> updateProfile (@RequestBody UserDTO userDTO, HttpSession session){
@@ -60,11 +59,10 @@ public class UserAccountController {
 	            List<String> existingInterestKeyword = loginDTO.getInterestKeyword();
 	            loginDTO.setInterestKeyword(existingInterestKeyword);
 
-	            // 사용자 정보 업데이트 
 				accountService.updateProfile(loginDTO);	
-				// 업데이트 된 사용자 정보 조회 
+	
 				LoginDTO updateUser = accountService.getUserById(loginDTO.getUserid());
-				// 세션 정보 갱신
+			
 				// 관심키워드를 세션을 안넣어줘서 날라감;;
 				List<String> keywords = accountService.getUserKeyword(loginDTO.getUserid()); // 관심 키워드 조회
 				updateUser.setInterestKeyword(keywords);
@@ -80,7 +78,7 @@ public class UserAccountController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
 		}
 	}
-	// 프로필 업데이트 후 리로드 
+
 	@GetMapping("/mypage/userAccountProfileCard")
 	public String userAccountProfileCard(HttpSession session, Model model) {
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
@@ -89,21 +87,19 @@ public class UserAccountController {
 		return "/user/userAccountProfileCard";
 	}
 	
-	
-	// 계정 탈퇴(삭제)
+
 	@RequestMapping(value="/mypage/deleteAccount")
 	@ResponseBody
 	public String deleteAccount(HttpSession session, HttpServletResponse response) {
 		try {	
-			// 로그인한 사용자의 세션 정보 가져오기
+
 			LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
-			// 계정 삭제
+
 			boolean success = accountService.deleteAccount(loginDTO.getUserid());
 			
 			if(success) {
 				session.invalidate(); // 세션 삭제
-				
-				// 쿠키 삭제 
+	
 				Cookie cookie = new Cookie("JSESSIONID", null);
 				cookie.setPath("/platform");
 				cookie.setMaxAge(0); // 즉시 만료
@@ -120,7 +116,6 @@ public class UserAccountController {
 	}
 	
 	
-	// 관심 키워드 재설정
 	@RequestMapping("/mypage/updateKeyword")
 	public ResponseEntity<?> updateKeyword(@RequestBody KeywordsUpdateRequestDTO keywordReq, HttpSession session){
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");
@@ -137,9 +132,7 @@ public class UserAccountController {
 	        return ResponseEntity.status(500).body("fail");
 	    }
 	}
-	
-	
-	// 관심 키워드 카드 리로딩 
+
 	@RequestMapping("/mypage/userAccountKeywordCard")
 	public String userAccountKeywordCard(Model model, HttpSession session) {
 		LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginUser");

@@ -25,25 +25,20 @@ public class UserNoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	// 공지사항 목록
 	@RequestMapping("/notice")
 	public ModelAndView notice(@RequestParam(value= "page", defaultValue="1") int page,
 								@RequestParam(value="category", defaultValue="all") String category) {
 		ModelAndView mav = new ModelAndView();
 		
-		// 페이징 
 		PageDTO pageDTO = new PageDTO(page, 5); 	// 10개씩 보여줌 
 		Map<String, Object> map = new HashMap<>();
 		map.put("category", category);		
 		
-		// 총 게시글 수 
 		int totalCnt = noticeService.getNoticeTotalCount(map);
 		pageDTO.setTotalCnt(totalCnt);
 		map.put("offset", pageDTO.getStartList());
 		map.put("limit", pageDTO.getListSize());
 		
-		// 목록 가져오기 
-		//List<NoticeDTO> list = noticeService.selectNoticeList();
 		List<NoticeDTO> list = noticeService.getNoticeList(map);
 		
 		for(NoticeDTO dto : list) {
@@ -56,12 +51,9 @@ public class UserNoticeController {
 		return mav;
 	}
 	
-	
-	// 공지사항 상세보기
 	@RequestMapping(value="/notice/detail/{noticeSeq}")
 	public String noticeDetail(@PathVariable("noticeSeq") int noticeSeq, Model model, HttpSession session) {
 		
-		// 조회수 증가  (공지사항 번호, 조회수)
 		Map<Integer, Long> viewedMap  = (Map<Integer, Long>) session.getAttribute("viewedMap");
 		
 		if(viewedMap  == null) {
@@ -76,13 +68,12 @@ public class UserNoticeController {
 			viewedMap.put(noticeSeq, now);		// 세션에 저장 
 			session.setAttribute("viewedMap", viewedMap );
 		}
-		
-		//  특정 번호(현재)의 공지사항 하나의 정보 가져옴 //55
+	
 		NoticeDTO noticeDTO = noticeService.getNoticeById(noticeSeq);		
 		System.out.println(noticeDTO);
-		// 이전글 제목, 번호
+
 		NoticeDTO prevNotice = noticeService.getPrevNotice(noticeSeq); //56
-		// 다음글 제목, 번호
+
 		NoticeDTO nextNotice = noticeService.getNextNotice(noticeSeq);  //54
 			
 		

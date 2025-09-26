@@ -37,7 +37,7 @@ public class SignUpController {
         mav.addObject("keywords", userDAO.getAllKeywords());
         return mav;
     }
-    // 이메일 인증 요청
+
     @PostMapping("/sendEmailCode")
     @ResponseBody
     public String sendEmailCode(String email, HttpSession session) {
@@ -51,7 +51,6 @@ public class SignUpController {
         }
     }
 
-    // 이메일 인증 코드 확인
     @PostMapping("/verifyEmailCode")
     @ResponseBody
     public String verifyEmailCode(String email, String code, HttpSession session) {
